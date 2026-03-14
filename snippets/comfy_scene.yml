@@ -1,0 +1,50 @@
+matches:
+  - trigger: ":scene_castle"
+    word: true
+    replace: |
+      The scene takes place inside a dark gothic castle illuminated by candlelight.
+
+  - trigger: ":scene_cathedral"
+    word: true
+    replace: |
+      The scene takes place inside a massive gothic cathedral.
+
+  - trigger: ":scene_forest"
+    word: true
+    replace: |
+      The scene takes place in a misty dark forest.
+
+  - trigger: ":scene_throne"
+    word: true
+    replace: |
+      She is sitting on a dark throne surrounded by shadows.
+
+  - trigger: ":scene_altar"
+    word: true
+    replace: |
+      She stands in front of a mysterious ritual altar.
+
+  - trigger: ":scene_graveyard"
+    word: true
+    replace: |
+      The scene takes place in an ancient foggy graveyard.
+
+  - trigger: ":scene_ruins"
+    word: true
+    replace: |
+      The scene takes place in dark fantasy ruins.
+
+  - trigger: ":scene_library"
+    word: true
+    replace: |
+      The scene takes place in an ancient gothic library.
+
+  - trigger: ":scene_crypt"
+    word: true
+    replace: |
+      The scene takes place inside a dark underground crypt.
+
+  - trigger: ":scene_temple"
+    word: true
+    replace: |
+      The scene takes place in a forgotten dark temple.

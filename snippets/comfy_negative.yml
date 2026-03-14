@@ -1,0 +1,58 @@
+matches:
+  - trigger: ":neg_min"
+    word: true
+    replace: |
+      worst quality, low quality, watermark
+
+  - trigger: ":neg_base"
+    word: true
+    replace: |
+      worst quality, low quality,
+      blurry, jpeg artifacts,
+      watermark, text, logo
+
+  - trigger: ":neg_render"
+    word: true
+    replace: |
+      blurry, out of focus,
+      jpeg artifacts,
+      oversaturated, overexposed,
+      underexposed, noise, grain
+
+  - trigger: ":neg_anatomy"
+    word: true
+    replace: |
+      bad anatomy, bad proportions,
+      malformed limbs,
+      extra limbs, missing limbs,
+      duplicate body, duplicate limbs,
+      distorted body, twisted torso
+
+  - trigger: ":neg_hands"
+    word: true
+    replace: |
+      bad hands, malformed hands,
+      extra fingers, missing fingers,
+      fused fingers, mutated fingers,
+      deformed fingers
+
+  - trigger: ":neg_face"
+    word: true
+    replace: |
+      distorted face, asymmetrical face,
+      cross-eyed, deformed eyes,
+      malformed mouth, bad teeth
+
+  - trigger: ":neg_strict"
+    word: true
+    replace: |
+      worst quality, low quality,
+      blurry, jpeg artifacts,
+      bad anatomy, bad proportions,
+      deformed body, distorted face,
+      bad hands, malformed hands,
+      extra fingers, missing fingers, fused fingers,
+      extra limbs, missing limbs,
+      duplicate body, duplicate limbs,
+      cross-eyed, asymmetrical eyes,
+      watermark, text, logo, signature

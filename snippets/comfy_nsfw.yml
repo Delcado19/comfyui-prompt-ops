@@ -1,0 +1,25 @@
+matches:
+  - trigger: ":nsfw_sensual"
+    word: true
+    replace: |
+      sensual pose with seductive body language.
+
+  - trigger: ":nsfw_lingerie"
+    word: true
+    replace: |
+      wearing elegant black lingerie.
+
+  - trigger: ":nsfw_latex"
+    word: true
+    replace: |
+      wearing a glossy black latex outfit.
+
+  - trigger: ":nsfw_dominatrix"
+    word: true
+    replace: |
+      dressed as a powerful dominatrix.
+
+  - trigger: ":nsfw_seductive"
+    word: true
+    replace: |
+      seductive and provocative pose.

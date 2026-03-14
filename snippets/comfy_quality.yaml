@@ -1,0 +1,20 @@
+matches:
+  - trigger: ":qual_detail"
+    replace: |
+      Ultra detailed skin with visible pores.
+
+  - trigger: ":qual_sharp"
+    replace: |
+      Extremely sharp focus.
+
+  - trigger: ":qual_photo"
+    replace: |
+      Highly photorealistic rendering.
+
+  - trigger: ":qual_8k"
+    replace: |
+      Extremely high detail.
+
+  - trigger: ":qual_skin"
+    replace: |
+      Natural skin texture and realistic shading.

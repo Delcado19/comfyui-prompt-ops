@@ -27,9 +27,15 @@ foreach ($file in $files) {
                 Trigger = $trigger
                 Category = $category
             }
+
         }
+
     }
+
 }
+
+$totalSnippets = $rows.Count
+$totalCategories = $files.Count
 
 $header = @"
 # Espanso Snippet Registry
@@ -41,10 +47,15 @@ Automatically generated documentation of all available prompt snippets.
 "@
 
 $content = $rows | Sort-Object Trigger | ForEach-Object {
-    "| $($_.Trigger) | $($_.Category) |"
+"| $($_.Trigger) | $($_.Category) |"
 }
 
 $header + ($content -join "`n") | Out-File $outputFile
 
+Write-Host ""
 Write-Host "Snippet documentation generated:"
 Write-Host $outputFile
+
+Write-Host ""
+Write-Host "Total snippets:" $totalSnippets
+Write-Host "Categories:" $totalCategories

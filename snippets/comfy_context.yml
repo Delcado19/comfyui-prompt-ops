@@ -1,0 +1,40 @@
+matches:
+  - trigger: ":ctx_portrait"
+    word: true
+    replace: "portrait, centered composition, subject facing camera"
+
+  - trigger: ":ctx_full"
+    word: true
+    replace: "full body shot, subject standing, balanced composition"
+
+  - trigger: ":ctx_close"
+    word: true
+    replace: "close-up shot, detailed facial features, shallow depth of field"
+
+  - trigger: ":ctx_wide"
+    word: true
+    replace: "wide angle composition, environmental context, cinematic framing"
+
+  - trigger: ":ctx_hero"
+    word: true
+    replace: "hero shot, dramatic composition, subject dominant in frame"
+
+  - trigger: ":ctx_studio"
+    word: true
+    replace: "studio setup, neutral background, controlled lighting"
+
+  - trigger: ":ctx_street"
+    word: true
+    replace: "urban street environment, natural lighting, candid composition"
+
+  - trigger: ":ctx_nature"
+    word: true
+    replace: "natural environment, outdoor scenery, organic atmosphere"
+
+  - trigger: ":ctx_cinematic"
+    word: true
+    replace: "cinematic composition, dramatic lighting, film still aesthetic"
+
+  - trigger: ":ctx_dramatic"
+    word: true
+    replace: "dramatic scene composition, strong contrast, intense atmosphere"

@@ -1,0 +1,19 @@
+matches:
+  - trigger: ":prompt"
+    word: true
+    replace: |
+      CHARACTER
+
+      SCENE
+
+      LIGHTING
+
+      CAMERA
+
+      DETAILS
+
+      STYLE
+
+      NSFW (optional)
+
+      NEGATIVE PROMPT

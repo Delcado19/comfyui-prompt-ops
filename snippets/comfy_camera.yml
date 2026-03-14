@@ -1,0 +1,50 @@
+matches:
+  - trigger: ":cam_portrait"
+    word: true
+    replace: |
+      Cinematic portrait photography.
+
+  - trigger: ":cam_close"
+    word: true
+    replace: |
+      Close-up shot focusing on the face.
+
+  - trigger: ":cam_wide"
+    word: true
+    replace: |
+      Wide cinematic shot showing the environment.
+
+  - trigger: ":cam_low"
+    word: true
+    replace: |
+      Low angle shot emphasizing dominance.
+
+  - trigger: ":cam_high"
+    word: true
+    replace: |
+      High angle shot looking down at the character.
+
+  - trigger: ":cam_35mm"
+    word: true
+    replace: |
+      Shot on a 35mm cinematic lens.
+
+  - trigger: ":cam_85mm"
+    word: true
+    replace: |
+      Shot on an 85mm portrait lens.
+
+  - trigger: ":cam_film"
+    word: true
+    replace: |
+      Film photography aesthetic.
+
+  - trigger: ":cam_bokeh"
+    word: true
+    replace: |
+      Beautiful cinematic bokeh in the background.
+
+  - trigger: ":cam_depth"
+    word: true
+    replace: |
+      Shallow depth of field.

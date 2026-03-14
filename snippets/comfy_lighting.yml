@@ -1,0 +1,50 @@
+matches:
+  - trigger: ":light_cinematic"
+    word: true
+    replace: |
+      Cinematic lighting with dramatic shadows.
+
+  - trigger: ":light_rim"
+    word: true
+    replace: |
+      Subtle rim lighting outlines the character.
+
+  - trigger: ":light_volumetric"
+    word: true
+    replace: |
+      Volumetric lighting with visible light rays.
+
+  - trigger: ":light_candle"
+    word: true
+    replace: |
+      Warm candlelight illuminates the scene.
+
+  - trigger: ":light_moon"
+    word: true
+    replace: |
+      Cold moonlight creates a mysterious atmosphere.
+
+  - trigger: ":light_dramatic"
+    word: true
+    replace: |
+      Dramatic high contrast lighting.
+
+  - trigger: ":light_soft"
+    word: true
+    replace: |
+      Soft cinematic lighting.
+
+  - trigger: ":light_shadow"
+    word: true
+    replace: |
+      Deep shadows enhance the dark fantasy mood.
+
+  - trigger: ":light_mist"
+    word: true
+    replace: |
+      Atmospheric mist catches the light.
+
+  - trigger: ":light_glow"
+    word: true
+    replace: |
+      Subtle supernatural glow around the character.

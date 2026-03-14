@@ -1,0 +1,80 @@
+matches:
+  - trigger: ":style_realistic"
+    word: true
+    replace: "ultra realistic, highly detailed, photorealistic, natural skin texture"
+
+  - trigger: ":style_photo"
+    word: true
+    replace: "professional photography, high dynamic range, sharp focus"
+
+  - trigger: ":style_cinematic"
+    word: true
+    replace: "cinematic style, film still, dramatic color grading, movie lighting"
+
+  - trigger: ":style_film"
+    word: true
+    replace: "35mm film photography, analog film grain, cinematic tones"
+
+  - trigger: ":style_noir"
+    word: true
+    replace: "film noir style, high contrast, dramatic shadows, black and white"
+
+  - trigger: ":style_fantasy"
+    word: true
+    replace: "fantasy art style, magical atmosphere, epic composition"
+
+  - trigger: ":style_darkfantasy"
+    word: true
+    replace: "dark fantasy, gothic atmosphere, dramatic lighting"
+
+  - trigger: ":style_scifi"
+    word: true
+    replace: "science fiction aesthetic, futuristic environment, neon accents"
+
+  - trigger: ":style_cyberpunk"
+    word: true
+    replace: "cyberpunk style, neon lights, futuristic city, dystopian atmosphere"
+
+  - trigger: ":style_anime"
+    word: true
+    replace: "anime style illustration, vibrant colors, clean line art"
+
+  - trigger: ":style_manga"
+    word: true
+    replace: "manga style illustration, black ink line art, expressive shading"
+
+  - trigger: ":style_comic"
+    word: true
+    replace: "comic book illustration, bold outlines, dynamic shading"
+
+  - trigger: ":style_painterly"
+    word: true
+    replace: "painterly style, visible brush strokes, digital painting"
+
+  - trigger: ":style_oil"
+    word: true
+    replace: "oil painting style, rich textures, classical painting"
+
+  - trigger: ":style_watercolor"
+    word: true
+    replace: "watercolor painting, soft color blending, artistic texture"
+
+  - trigger: ":style_concept"
+    word: true
+    replace: "concept art, highly detailed environment design, cinematic composition"
+
+  - trigger: ":style_illustration"
+    word: true
+    replace: "digital illustration, polished artwork, detailed shading"
+
+  - trigger: ":style_minimal"
+    word: true
+    replace: "minimalist style, clean composition, simple shapes"
+
+  - trigger: ":style_surreal"
+    word: true
+    replace: "surreal art style, dreamlike atmosphere, abstract elements"
+
+  - trigger: ":style_vintage"
+    word: true
+    replace: "vintage aesthetic, retro color palette, nostalgic atmosphere"
