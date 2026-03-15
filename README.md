@@ -2,6 +2,14 @@
 
 **Composable prompt engineering for ComfyUI using Espanso.**
 
+## ⚡ Quick Start
+
+```bash
+git clone https://github.com/Delcado19/comfyui-prompt-ops.git
+cd comfyui-prompt-ops
+pwsh .\installer\install.ps1
+```
+
 ComfyUI Prompt Ops transforms **Espanso snippets** into a **modular prompt-building system**.
 Instead of manually typing long prompts, you compose them using small reusable building blocks.
 
@@ -14,7 +22,7 @@ This makes prompts:
 
 ---
 
-# ✨ What This Project Does
+## ✨ What This Project Does
 
 ComfyUI Prompt Ops turns Espanso into a **prompt composition engine**.
 
@@ -34,7 +42,7 @@ Espanso automatically expands the snippets into the full prompt.
 
 ---
 
-# 🧠 Concept
+## 🧠 Concept
 
 Prompt Ops follows a **modular architecture**:
 
@@ -52,7 +60,7 @@ Which becomes a complete prompt.
 
 ---
 
-# ⚙️ Features
+## ⚙️ Features
 
 ✔ Modular prompt snippets
 ✔ Espanso-powered text expansion
@@ -65,7 +73,7 @@ Which becomes a complete prompt.
 
 ---
 
-# 🧰 Tech Stack
+## 🧰 Tech Stack
 
 | Tool             | Purpose               |
 | ---------------- | --------------------- |
@@ -77,16 +85,16 @@ Which becomes a complete prompt.
 
 ---
 
-# 📦 Installation
+## 📦 Installation
 
-## 1️⃣ Clone the repository
+### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/yourname/comfyui-prompt-ops.git
+git clone https://github.com/Delcado19/comfyui-prompt-ops.git
 cd comfyui-prompt-ops
 ```
 
-## 2️⃣ Run the installer
+### 2️⃣ Run the installer
 
 ```powershell
 .\installer\install.ps1
@@ -104,7 +112,7 @@ The installer automatically:
 
 ---
 
-# 🧪 Dry Run
+## 🧪 Dry Run
 
 Simulate the install process without making changes:
 
@@ -114,7 +122,7 @@ Simulate the install process without making changes:
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```
 comfyui-prompt-ops
@@ -153,7 +161,7 @@ comfyui-prompt-ops
 
 ---
 
-# 🧩 Snippet Architecture
+## 🧩 Snippet Architecture
 
 Prompt elements are grouped by **prefix category**.
 
@@ -170,7 +178,7 @@ Prompt elements are grouped by **prefix category**.
 
 ---
 
-# 🧪 Example Workflow
+## 🧪 Example Workflow
 
 Typing:
 
@@ -192,7 +200,7 @@ A full prompt build might look like:
 
 ---
 
-# 🧑‍💻 Development
+## 🧑‍💻 Development
 
 Run the development pipeline:
 
@@ -209,7 +217,7 @@ This runs:
 
 ---
 
-# 📄 Generated Documentation
+## 📄 Generated Documentation
 
 Snippet docs are generated automatically:
 
@@ -225,7 +233,7 @@ Run:
 
 ---
 
-# ➕ Adding New Snippets
+## ➕ Adding New Snippets
 
 Create a new file in:
 
@@ -250,7 +258,7 @@ Then run:
 
 ---
 
-# 🛠 Dev Utilities
+## 🛠 Dev Utilities
 
 | Script                         | Function                   |
 | ------------------------------ | -------------------------- |
@@ -263,7 +271,7 @@ Then run:
 
 ---
 
-# 🧭 Roadmap
+## 🧭 Roadmap
 
 Planned improvements:
 
@@ -277,7 +285,7 @@ Planned improvements:
 
 ---
 
-# 🧑‍🎨 Use Cases
+## 🧑‍🎨 Use Cases
 
 Perfect for:
 
@@ -289,7 +297,7 @@ Perfect for:
 
 ---
 
-# 🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome.
 
@@ -302,13 +310,13 @@ Ideas:
 
 ---
 
-# 📜 License
+## 📜 License
 
 MIT License
 
 ---
 
-# ⭐ If You Like This Project
+## ⭐ If You Like This Project
 
 Consider giving it a star on GitHub.
 It helps others discover the project.
