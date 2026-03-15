@@ -11,6 +11,27 @@
 
 **Composable prompt engineering for ComfyUI using Espanso.**
 
+## 📑 Table of Contents
+
+- [Quick Start](#-quick-start)
+- [What This Project Does](#-what-this-project-does)
+- [Concept](#-concept)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Installation](#-installation)
+- [Dry Run](#-dry-run)
+- [Project Structure](#-project-structure)
+- [Snippet Architecture](#-snippet-architecture)
+- [Example Workflow](#-example-workflow)
+- [Development](#-development)
+- [Generated Documentation](#-generated-documentation)
+- [Adding New Snippets](#-adding-new-snippets)
+- [Dev Utilities](#-dev-utilities)
+- [Roadmap](#-roadmap)
+- [Use Cases](#-use-cases)
+- [Contributing](#-contributing)
+- [License](#-license)
+
 ## ⚡ Quick Start
 
 ```bash
