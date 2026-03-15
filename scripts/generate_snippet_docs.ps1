@@ -1,61 +1,87 @@
-param()
+$ErrorActionPreference = "Stop"
 
-Write-Host ""
-Write-Host "Generating snippet documentation..."
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$repoRoot  = Split-Path -Parent $scriptDir
 
-$root = Resolve-Path "$PSScriptRoot\.."
-$snippetDir = "$root\snippets"
-$outputFile = "$root\docs\snippets.md"
+$snippetDir = Join-Path $repoRoot "snippets"
+$docsDir    = Join-Path $repoRoot "docs"
+$outFile    = Join-Path $docsDir "snippets.md"
 
-$files = Get-ChildItem $snippetDir -Filter *.yml
+if (!(Test-Path $docsDir)) {
+    New-Item -ItemType Directory -Path $docsDir | Out-Null
+}
 
 $rows = @()
 
-foreach ($file in $files) {
+Get-ChildItem $snippetDir -Filter *.yml | ForEach-Object {
 
-    $category = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+    $fileName = $_.Name
+    $lines = Get-Content $_.FullName
 
-    $lines = Get-Content $file.FullName
+    $trigger = $null
+    $replace = ""
+    $collectMultiline = $false
 
     foreach ($line in $lines) {
 
-        if ($line -match "trigger:\s*""([^""]+)""") {
-
-            $trigger = $matches[1]
-
-            $rows += [PSCustomObject]@{
-                Trigger = $trigger
-                Category = $category
-            }
-
+        if ($line -match 'trigger:\s*"?(.+?)"?\s*$') {
+            $trigger = $Matches[1]
+            $replace = ""
+            $collectMultiline = $false
+            continue
         }
 
+        if ($line -match 'replace:\s*"(.*)"\s*$') {
+            $replace = $Matches[1].Trim()
+
+            if ($trigger) {
+                $rows += "| $trigger | $replace | $fileName |"
+                $trigger = $null
+                $replace = ""
+            }
+
+            continue
+        }
+
+        if ($line -match 'replace:\s*\|') {
+            $replace = ""
+            $collectMultiline = $true
+            continue
+        }
+
+        if ($collectMultiline) {
+
+            if ($line -match '^\s+(.+)$') {
+                $replace += " " + $Matches[1].Trim()
+                continue
+            }
+            else {
+                $collectMultiline = $false
+
+                if ($trigger) {
+                    $rows += "| $trigger | $($replace.Trim()) | $fileName |"
+                    $trigger = $null
+                    $replace = ""
+                }
+            }
+        }
     }
 
+    if ($collectMultiline -and $trigger) {
+        $rows += "| $trigger | $($replace.Trim()) | $fileName |"
+        $trigger = $null
+        $replace = ""
+        $collectMultiline = $false
+    }
 }
 
-$totalSnippets = $rows.Count
-$totalCategories = $files.Count
+$md = @()
+$md += "| Trigger | Replace | File |"
+$md += "|--------|---------|------|"
 
-$header = @"
-# Espanso Snippet Registry
+$md += $rows
 
-Automatically generated documentation of all available prompt snippets.
+$md | Set-Content $outFile -Encoding UTF8
 
-| Trigger | Category |
-|--------|---------|
-"@
-
-$content = $rows | Sort-Object Trigger | ForEach-Object {
-"| $($_.Trigger) | $($_.Category) |"
-}
-
-$header + ($content -join "`n") | Out-File $outputFile
-
-Write-Host ""
-Write-Host "Snippet documentation generated:"
-Write-Host $outputFile
-
-Write-Host ""
-Write-Host "Total snippets:" $totalSnippets
-Write-Host "Categories:" $totalCategories
+Write-Host "Snippets written:" $rows.Count
+Write-Host "Output file:" $outFile

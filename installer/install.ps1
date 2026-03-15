@@ -1,292 +1,230 @@
-param(
-    [switch]$dryrun
-)
+# ComfyUI Prompt Ops Installer
+# installer/install.ps1
 
+$ErrorActionPreference = "Stop"
 
-# --------------------------------
-# AUTO ADMIN ELEVATION
-# --------------------------------
+$repoRoot = Resolve-Path "$PSScriptRoot\.."
+$statusFile = Join-Path $env:TEMP "comfyui_prompt_ops_install.status"
+$logFile = Join-Path $repoRoot "install.log"
 
-$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-$principal = New-Object Security.Principal.WindowsPrincipal($identity)
+function Write-Info {
+    param($msg)
+    Write-Host "[INFO] $msg" -ForegroundColor Cyan
+}
 
-$isAdmin = $principal.IsInRole(
-    [Security.Principal.WindowsBuiltInRole]::Administrator
-)
+function Write-Warn {
+    param($msg)
+    Write-Host "[WARN] $msg" -ForegroundColor Yellow
+}
 
-if (-not $isAdmin -and -not $dryrun) {
+function Write-Ok {
+    param($msg)
+    Write-Host "[ OK ] $msg" -ForegroundColor Green
+}
 
+function Write-Err {
+    param($msg)
+    Write-Host "[FAIL] $msg" -ForegroundColor Red
+}
+
+function Test-IsAdmin {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal($identity)
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+# --------------------------------------------------
+# Parent Process
+# --------------------------------------------------
+
+if (-not (Test-IsAdmin)) {
+
+    Write-Warn "Administrator privileges required"
+    Write-Host "Opening elevated installer..."
     Write-Host ""
-    Write-Host "Administrator privileges required."
-    Write-Host "Restarting installer with elevation..."
-    Write-Host ""
 
-    $script = $MyInvocation.MyCommand.Path
-
-    $args = @()
-    if ($dryrun) { $args += "-dryrun" }
+    if (Test-Path $statusFile) {
+        Remove-Item $statusFile -Force
+    }
 
     Start-Process pwsh `
-        -ArgumentList "-ExecutionPolicy Bypass -File `"$script`" $args" `
+        -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" `
         -Verb RunAs
+
+    Write-Host "Waiting for installer to finish..."
+    Write-Host ""
+
+    while (-not (Test-Path $statusFile)) {
+        Start-Sleep -Seconds 1
+    }
+
+    $status = Get-Content $statusFile
+
+    if ($status -eq "SUCCESS") {
+        Write-Host ""
+        Write-Ok "Installation completed successfully."
+    }
+    else {
+        Write-Host ""
+        Write-Err "Installation FAILED."
+    }
 
     exit
 }
 
+# --------------------------------------------------
+# Elevated Installer
+# --------------------------------------------------
 
-$installerVersion = "1.1.0"
-
-$root = (Resolve-Path "$PSScriptRoot\..").Path
-$restartServices = Join-Path $root "scripts\restart_services.ps1"
-$installSnippets = Join-Path $root "scripts\install_snippets.ps1"
-$snippetDir = Join-Path $root "snippets"
-
-Start-Transcript -Path "$root\install.log" -Append | Out-Null
-
-Write-Host ""
-Write-Host "================================="
-Write-Host " ComfyUI Prompt Ops Installer"
-Write-Host " Version $installerVersion"
-Write-Host "================================="
-Write-Host ""
-
-if ($dryrun) {
-    Write-Host "MODE: DRY RUN (no changes will be made)"
-    Write-Host ""
-}
-
-# --------------------------------
-# ADMIN CHECK
-# --------------------------------
-
-Write-Host "Checking administrator privileges..."
-
-$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-$principal = New-Object Security.Principal.WindowsPrincipal($identity)
-
-$isAdmin = $principal.IsInRole(
-    [Security.Principal.WindowsBuiltInRole]::Administrator
-)
-
-if (!$isAdmin -and !$dryrun) {
+try {
 
     Write-Host ""
-    Write-Host "ERROR: Installer must be run as Administrator."
+    Write-Host "====================================="
+    Write-Host " ComfyUI Prompt Ops Installer"
+    Write-Host "====================================="
     Write-Host ""
-    Write-Host "Please restart PowerShell with:"
-    Write-Host "Run as Administrator"
 
-    Stop-Transcript | Out-Null
-    exit 1
-}
+    Start-Transcript -Path $logFile -Append | Out-Null
 
-if (!$isAdmin -and $dryrun) {
-    Write-Host "WARNING: Not running as Administrator."
-    Write-Host "DryRun will continue."
-}
+    # --------------------------------------------------
+    # PowerShell Version Check
+    # --------------------------------------------------
 
-# --------------------------------
-# POWERSHELL VERSION
-# --------------------------------
+    Write-Info "Checking PowerShell version..."
 
-Write-Host ""
-Write-Host "Checking PowerShell version..."
-
-$psVersion = $PSVersionTable.PSVersion.Major
-
-if ($psVersion -lt 7) {
-
-    Write-Host ""
-    Write-Host "ERROR: PowerShell 7 or higher required."
-    Stop-Transcript | Out-Null
-    exit 1
-}
-
-Write-Host "PowerShell version OK:" $PSVersionTable.PSVersion
-
-# --------------------------------
-# CHOCOLATEY CHECK
-# --------------------------------
-
-Write-Host ""
-Write-Host "Checking Chocolatey..."
-
-$choco = Get-Command choco -ErrorAction SilentlyContinue
-
-if (!$choco) {
-
-    Write-Host "ERROR: Chocolatey not installed."
-    Write-Host "Install from https://chocolatey.org/install"
-
-    Stop-Transcript | Out-Null
-    exit 1
-}
-
-Write-Host "Chocolatey found."
-
-# --------------------------------
-# REQUIRED TOOLS
-# --------------------------------
-
-Write-Host ""
-Write-Host "Checking required tools..."
-
-function Install-ChocoPackage {
-    param($name)
-
-    if ($dryrun) {
-        Write-Host "[DRYRUN] Would install $name via Chocolatey"
-        return
+    if ($PSVersionTable.PSVersion.Major -lt 7) {
+        throw "PowerShell 7 or higher is required."
     }
 
-    choco install $name -y
+    Write-Ok "PowerShell $($PSVersionTable.PSVersion)"
 
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "ERROR: Failed to install $name"
-        Stop-Transcript | Out-Null
-        exit 1
-    }
-}
+    # --------------------------------------------------
+    # Chocolatey Check / Install
+    # --------------------------------------------------
 
-$espanso = Get-Command espanso -ErrorAction SilentlyContinue
-$copyq = Get-Command copyq -ErrorAction SilentlyContinue
+    Write-Info "Checking Chocolatey..."
 
-if (!$espanso) {
-    Write-Host "Espanso not found."
-    Install-ChocoPackage "espanso"
-}
-else {
-    Write-Host "Espanso found."
-}
+    $choco = Get-Command choco -ErrorAction SilentlyContinue
 
-if (!$copyq) {
-    Write-Host "CopyQ not found."
-    Install-ChocoPackage "copyq"
-}
-else {
-    Write-Host "CopyQ found."
-}
+    if (-not $choco) {
 
-# --------------------------------
-# ESPANSO CONFIG
-# --------------------------------
+        Write-Warn "Chocolatey not found. Installing..."
 
-Write-Host ""
-Write-Host "Checking Espanso config..."
+        Set-ExecutionPolicy Bypass -Scope Process -Force
 
-$espansoConfig = Join-Path $env:APPDATA "espanso"
+        [System.Net.ServicePointManager]::SecurityProtocol =
+            [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 
-if (!(Test-Path $espansoConfig)) {
+        Invoke-Expression (
+            (New-Object System.Net.WebClient).DownloadString(
+                "https://community.chocolatey.org/install.ps1"
+            )
+        )
 
-    if ($dryrun) {
-        Write-Host "[DRYRUN] Would create Espanso config directory"
+        Write-Ok "Chocolatey installed"
     }
     else {
-        New-Item -ItemType Directory -Path $espansoConfig | Out-Null
-        Write-Host "Espanso config directory created."
+        Write-Ok "Chocolatey detected"
     }
 
-}
-else {
-    Write-Host "Espanso config directory found."
-}
+    # --------------------------------------------------
+    # Espanso
+    # --------------------------------------------------
 
-# --------------------------------
-# SNIPPET DIRECTORY
-# --------------------------------
+    Write-Info "Checking Espanso..."
 
-Write-Host ""
-Write-Host "Checking snippet directory..."
+    $espanso = Get-Command espanso -ErrorAction SilentlyContinue
 
-if (!(Test-Path $snippetDir)) {
+    if (-not $espanso) {
+        Write-Warn "Installing Espanso via Chocolatey..."
+        choco install espanso -y
+    }
+    else {
+        Write-Ok "Espanso detected"
+    }
+
+    # --------------------------------------------------
+    # CopyQ
+    # --------------------------------------------------
+
+    Write-Info "Checking CopyQ..."
+
+    $copyq = Get-Command copyq -ErrorAction SilentlyContinue
+
+    if (-not $copyq) {
+        Write-Warn "Installing CopyQ via Chocolatey..."
+        choco install copyq -y
+    }
+    else {
+        Write-Ok "CopyQ detected"
+    }
+
+    # --------------------------------------------------
+    # Install Snippets
+    # --------------------------------------------------
+
+    Write-Info "Installing snippets..."
+
+    $snippetScript = Join-Path $repoRoot "scripts\install_snippets.ps1"
+
+    if (-not (Test-Path $snippetScript)) {
+        throw "install_snippets.ps1 not found"
+    }
+
+    & $snippetScript
+
+    Write-Ok "Snippets installed"
+
+    # --------------------------------------------------
+    # Generate Docs
+    # --------------------------------------------------
+
+    Write-Info "Generating snippet documentation..."
+
+    $docScript = Join-Path $repoRoot "scripts\generate_snippet_docs.ps1"
+
+    if (-not (Test-Path $docScript)) {
+        throw "generate_snippet_docs.ps1 not found"
+    }
+
+    & $docScript
+
+    Write-Ok "Snippet docs generated"
+
+    # --------------------------------------------------
+    # Restart Services
+    # --------------------------------------------------
+
+    Write-Info "Restarting services..."
+
+    $serviceScript = Join-Path $repoRoot "scripts\restart_services.ps1"
+
+    if (-not (Test-Path $serviceScript)) {
+        throw "restart_services.ps1 not found"
+    }
+
+    & $serviceScript
+
+    Write-Ok "Services restarted"
+
+    # --------------------------------------------------
+    # Done
+    # --------------------------------------------------
 
     Write-Host ""
-    Write-Host "ERROR: Snippet directory missing:"
-    Write-Host $snippetDir
+    Write-Ok "Setup completed"
+    Write-Host ""
+
+    "SUCCESS" | Out-File $statusFile -Encoding ascii
+
+}
+catch {
+
+    Write-Err $_
+
+    "FAILED" | Out-File $statusFile -Encoding ascii
+}
+finally {
 
     Stop-Transcript | Out-Null
-    exit 1
 }
-
-$snippetFiles = Get-ChildItem $snippetDir -Filter *.yml
-
-if ($snippetFiles.Count -eq 0) {
-    Write-Host "WARNING: No snippet files found."
-}
-else {
-    Write-Host "Snippet directory found. Files:" $snippetFiles.Count
-}
-
-# --------------------------------
-# SCRIPT DEPENDENCIES
-# --------------------------------
-
-if (!(Test-Path $installSnippets)) {
-
-    Write-Host "ERROR: Missing script:"
-    Write-Host $installSnippets
-
-    Stop-Transcript | Out-Null
-    exit 1
-}
-
-if (!(Test-Path $restartServices)) {
-
-    Write-Host "ERROR: Missing script:"
-    Write-Host $restartServices
-
-    Stop-Transcript | Out-Null
-    exit 1
-}
-
-# --------------------------------
-# INSTALL STEPS
-# --------------------------------
-
-Write-Host ""
-Write-Host "Repo Root:"
-Write-Host $root
-
-Write-Host ""
-Write-Host "Step 1: Environment Check"
-
-Write-Host ""
-Write-Host "Step 2: Dependency Installation"
-
-Write-Host ""
-Write-Host "Step 3: Config Validation"
-
-Write-Host ""
-Write-Host "Step 4: Snippet Installation"
-
-& $installSnippets -dryrun:$dryrun
-
-Write-Host ""
-Write-Host "Step 5: Service Restart"
-
-& $restartServices -dryrun:$dryrun
-
-Write-Host ""
-Write-Host "Reloading Espanso..."
-
-if ($dryrun) {
-    Write-Host "[DRYRUN] Would reload Espanso"
-}
-else {
-
-    try {
-        espanso restart
-    }
-    catch {
-        Write-Host "Espanso restart failed, attempting start..."
-        espanso start
-    }
-
-}
-
-Write-Host ""
-Write-Host "================================="
-Write-Host " Setup completed"
-Write-Host "================================="
-
-Stop-Transcript | Out-Null
