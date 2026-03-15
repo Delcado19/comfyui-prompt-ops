@@ -1,3 +1,7 @@
+# Espanso Snippet Reference
+
+Auto-generated documentation of available snippets.
+
 | Trigger | Replace | File |
 |--------|---------|------|
 | :espanso | Hi there! | base.yml |

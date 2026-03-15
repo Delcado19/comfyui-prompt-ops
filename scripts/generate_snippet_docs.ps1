@@ -1,87 +1,122 @@
 $ErrorActionPreference = "Stop"
 
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$repoRoot  = Split-Path -Parent $scriptDir
+Write-Host "[docs] Generating snippet documentation..."
 
+# ---------------------------------------------------
+# Paths
+# ---------------------------------------------------
+
+$scriptDir  = $PSScriptRoot
+$repoRoot   = Split-Path -Parent $scriptDir
 $snippetDir = Join-Path $repoRoot "snippets"
 $docsDir    = Join-Path $repoRoot "docs"
 $outFile    = Join-Path $docsDir "snippets.md"
 
-if (!(Test-Path $docsDir)) {
+if (-not (Test-Path $snippetDir)) {
+    throw "Snippet directory not found: $snippetDir"
+}
+
+if (-not (Test-Path $docsDir)) {
     New-Item -ItemType Directory -Path $docsDir | Out-Null
 }
 
-$rows = @()
+# ---------------------------------------------------
+# Collect snippet rows
+# ---------------------------------------------------
 
-Get-ChildItem $snippetDir -Filter *.yml | ForEach-Object {
+$rows = [System.Collections.Generic.List[string]]::new()
+
+Get-ChildItem $snippetDir -Filter *.yml | Sort-Object Name | ForEach-Object {
 
     $fileName = $_.Name
     $lines = Get-Content $_.FullName
 
     $trigger = $null
-    $replace = ""
+    $replace = $null
+
     $collectMultiline = $false
+    $buffer = @()
 
     foreach ($line in $lines) {
 
-        if ($line -match 'trigger:\s*"?(.+?)"?\s*$') {
-            $trigger = $Matches[1]
-            $replace = ""
-            $collectMultiline = $false
-            continue
+        if ($line -match 'trigger:\s*"(.*?)"') {
+            $trigger = $matches[1]
         }
 
-        if ($line -match 'replace:\s*"(.*)"\s*$') {
-            $replace = $Matches[1].Trim()
+        if ($line -match 'replace:\s*"(.*?)"') {
+            $replace = $matches[1]
 
             if ($trigger) {
-                $rows += "| $trigger | $replace | $fileName |"
+
+                $replace = $replace.Replace('|','\|')
+
+                $rows.Add("| $trigger | $replace | $fileName |")
+
                 $trigger = $null
-                $replace = ""
+                $replace = $null
             }
-
-            continue
         }
 
-        if ($line -match 'replace:\s*\|') {
-            $replace = ""
+        elseif ($line -match 'replace:\s*\|') {
             $collectMultiline = $true
+            $buffer = @()
             continue
         }
 
-        if ($collectMultiline) {
+        elseif ($collectMultiline) {
 
-            if ($line -match '^\s+(.+)$') {
-                $replace += " " + $Matches[1].Trim()
-                continue
+            if ($line -match '^\s{2,}(.*)') {
+                $buffer += $matches[1]
             }
             else {
+
                 $collectMultiline = $false
 
+                $replace = ($buffer -join " ").Trim()
+
                 if ($trigger) {
-                    $rows += "| $trigger | $($replace.Trim()) | $fileName |"
+
+                    $replace = $replace.Replace('|','\|')
+
+                    $rows.Add("| $trigger | $replace | $fileName |")
+
                     $trigger = $null
-                    $replace = ""
                 }
             }
         }
     }
 
+    # Catch multiline replace at file end
     if ($collectMultiline -and $trigger) {
-        $rows += "| $trigger | $($replace.Trim()) | $fileName |"
-        $trigger = $null
-        $replace = ""
-        $collectMultiline = $false
+
+        $replace = ($buffer -join " ").Trim()
+        $replace = $replace.Replace('|','\|')
+
+        $rows.Add("| $trigger | $replace | $fileName |")
     }
 }
 
+# ---------------------------------------------------
+# Generate Markdown
+# ---------------------------------------------------
+
 $md = @()
+
+$md += "# Espanso Snippet Reference"
+$md += ""
+$md += "Auto-generated documentation of available snippets."
+$md += ""
 $md += "| Trigger | Replace | File |"
 $md += "|--------|---------|------|"
 
 $md += $rows
 
-$md | Set-Content $outFile -Encoding UTF8
+# ---------------------------------------------------
+# Write file
+# ---------------------------------------------------
 
-Write-Host "Snippets written:" $rows.Count
-Write-Host "Output file:" $outFile
+$md | Set-Content $outFile -Encoding utf8NoBOM
+
+Write-Host "[docs] Snippets written:" $rows.Count
+Write-Host "[docs] Output file:" $outFile
+Write-Host "[docs] Documentation generation complete."
