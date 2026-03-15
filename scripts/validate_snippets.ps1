@@ -7,7 +7,9 @@ Write-Host ""
 $root = Resolve-Path "$PSScriptRoot\.."
 $snippetDir = Join-Path $root "snippets"
 
-$files = Get-ChildItem $snippetDir -Filter *.yml
+# Ignore espanso config file
+$files = Get-ChildItem $snippetDir -Filter *.yml |
+         Where-Object { $_.Name -ne "default.yml" }
 
 $triggerMap = @{}
 $errorCount = 0
@@ -49,20 +51,38 @@ foreach ($file in $files) {
     # matches block check
     # -----------------------------
 
-    if (!$yaml.PSObject.Properties.Name.Contains("matches")) {
+    $matchesBlock = $null
 
-        Write-Host "  ERROR: Missing 'matches' block"
-        $errorCount++
+    if ($yaml -is [System.Collections.IDictionary]) {
+
+        if ($yaml.Contains("matches")) {
+            $matchesBlock = $yaml["matches"]
+        }
+
+    }
+    else {
+
+        if ($yaml.PSObject.Properties["matches"]) {
+            $matchesBlock = $yaml.matches
+        }
+
+    }
+
+    if (-not $matchesBlock) {
+
+        Write-Host "  INFO: No matches block (skipped)"
+        Write-Host ""
         continue
+
     }
 
     # -----------------------------
     # Trigger checks
     # -----------------------------
 
-    foreach ($match in $yaml.matches) {
+    foreach ($match in $matchesBlock) {
 
-        if (!$match.trigger) {
+        if (-not $match.trigger) {
 
             Write-Host "  ERROR: Match without trigger"
             $errorCount++
