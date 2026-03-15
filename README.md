@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/banner.png" width="650">
+</p>
+
 # 🚀 ComfyUI Prompt Ops
 
 ![ComfyUI](https://img.shields.io/badge/ComfyUI-compatible-purple)
@@ -5,11 +9,10 @@
 ![PowerShell](https://img.shields.io/badge/PowerShell-7+-5391FE?logo=powershell&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 ![Espanso](https://img.shields.io/badge/espanso-supported-orange)
-![ComfyUI](https://img.shields.io/badge/ComfyUI-workflow-purple)
 ![Stars](https://img.shields.io/github/stars/delcado19/comfyui-prompt-ops?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/delcado19/comfyui-prompt-ops)
 
-**Composable prompt engineering for ComfyUI using Espanso.**
+**Composable prompt engineering system for ComfyUI powered by Espanso snippets.**
 
 ## 📑 Table of Contents
 
