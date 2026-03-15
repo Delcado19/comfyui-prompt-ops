@@ -1,1 +1,0 @@
-.\scripts\generate_snippet_docs.ps1

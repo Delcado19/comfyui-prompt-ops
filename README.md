@@ -171,7 +171,6 @@ comfyui-prompt-ops
 │  ├─ validate_yaml.ps1
 │  ├─ check_duplicate_triggers.ps1
 │  ├─ generate_snippet_docs.ps1
-│  ├─ dev_generate_docs.ps1
 │  ├─ dev.ps1
 │  └─ export_existing_snippets.ps1
 │
