@@ -1,9 +1,9 @@
-backend: Clipboard
+backend: Auto
 
-# verhindert viele Probleme mit Browsern, Electron Apps und Terminal
 paste_shortcut: CTRL+V
 
-# Expansion nur wenn ein Wort beendet ist
+undo_backspace: false
+
 word_separators:
   - " "
   - "."
@@ -12,8 +12,6 @@ word_separators:
   - "?"
   - "\n"
 
-# erlaubt :trigger Format
 search_shortcut: ALT+SPACE
 
-# Log-Level (für Debugging)
 log_level: warn
