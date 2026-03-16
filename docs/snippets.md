@@ -4,9 +4,6 @@ Auto-generated documentation of available snippets.
 
 | Trigger | Replace | File |
 |--------|---------|------|
-| :espanso | Hi there! | base.yml |
-| :date | {{mydate}} | base.yml |
-| :shell | {{output}} | base.yml |
 | :cam_portrait | Cinematic portrait photography. | comfy_camera.yml |
 | :cam_close | Close-up shot focusing on the face. | comfy_camera.yml |
 | :cam_wide | Wide cinematic shot showing the environment. | comfy_camera.yml |
@@ -47,7 +44,6 @@ Auto-generated documentation of available snippets.
 | :light_shadow | Deep shadows enhance the dark fantasy mood. | comfy_lighting.yml |
 | :light_mist | Atmospheric mist catches the light. | comfy_lighting.yml |
 | :light_glow | Subtle supernatural glow around the character. | comfy_lighting.yml |
-| :prompt | CHARACTER | comfy_master.yml |
 | :neg_min | worst quality, low quality, watermark | comfy_negative.yml |
 | :neg_base | worst quality, low quality, blurry, jpeg artifacts, watermark, text, logo | comfy_negative.yml |
 | :neg_render | blurry, out of focus, jpeg artifacts, oversaturated, overexposed, underexposed, noise, grain | comfy_negative.yml |
@@ -60,6 +56,11 @@ Auto-generated documentation of available snippets.
 | :nsfw_latex | wearing a glossy black latex outfit. | comfy_nsfw.yml |
 | :nsfw_dominatrix | dressed as a powerful dominatrix. | comfy_nsfw.yml |
 | :nsfw_seductive | seductive and provocative pose. | comfy_nsfw.yml |
+| :qual_detail | Ultra detailed skin with visible pores. | comfy_quality.yml |
+| :qual_sharp | Extremely sharp focus. | comfy_quality.yml |
+| :qual_photo | Highly photorealistic rendering. | comfy_quality.yml |
+| :qual_8k | Extremely high detail. | comfy_quality.yml |
+| :qual_skin | Natural skin texture and realistic shading. | comfy_quality.yml |
 | :scene_castle | The scene takes place inside a dark gothic castle illuminated by candlelight. | comfy_scene.yml |
 | :scene_cathedral | The scene takes place inside a massive gothic cathedral. | comfy_scene.yml |
 | :scene_forest | The scene takes place in a misty dark forest. | comfy_scene.yml |
@@ -90,3 +91,4 @@ Auto-generated documentation of available snippets.
 | :style_minimal | minimalist style, clean composition, simple shapes | comfy_style.yml |
 | :style_surreal | surreal art style, dreamlike atmosphere, abstract elements | comfy_style.yml |
 | :style_vintage | vintage aesthetic, retro color palette, nostalgic atmosphere | comfy_style.yml |
+| :prompt | {{prompt.context}} {{prompt.characters}} {{prompt.scene}} {{prompt.camera}} {{prompt.lighting}} {{prompt.style}} {{prompt.quality}} {{prompt.negative}} {{prompt.nsfw}} | zz_prompt_builder.yml |

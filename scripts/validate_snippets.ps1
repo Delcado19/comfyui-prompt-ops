@@ -1,135 +1,90 @@
-param()
+# validate_snippets.ps1
+# validates all snippet YAML files and detects duplicate triggers
+
+$repoRoot = Resolve-Path "$PSScriptRoot\.."
+$snippetDir = Join-Path $repoRoot "snippets"
+
+$files = Get-ChildItem $snippetDir -Filter "*.yml"
+
+$allTriggers = @{}
+$duplicateFound = $false
 
 Write-Host ""
-Write-Host "Running snippet linter..."
+Write-Host "Validating snippet YAML files..."
 Write-Host ""
-
-$root = Resolve-Path "$PSScriptRoot\.."
-$snippetDir = Join-Path $root "snippets"
-
-# Ignore espanso config file
-$files = Get-ChildItem $snippetDir -Filter *.yml |
-         Where-Object { $_.Name -ne "default.yml" }
-
-$triggerMap = @{}
-$errorCount = 0
 
 foreach ($file in $files) {
 
     Write-Host "Checking:" $file.Name
 
-    $content = Get-Content $file.FullName -Raw
-
-    # -----------------------------
-    # Empty file check
-    # -----------------------------
-
-    if ([string]::IsNullOrWhiteSpace($content)) {
-
-        Write-Host "  ERROR: Empty file"
-        $errorCount++
-        continue
-    }
-
-    # -----------------------------
-    # YAML validation
-    # -----------------------------
-
     try {
 
+        $content = Get-Content $file.FullName -Raw
         $yaml = $content | ConvertFrom-Yaml
 
-    }
-    catch {
+        if ($null -ne $yaml["matches"]) {
 
-        Write-Host "  ERROR: Invalid YAML"
-        $errorCount++
-        continue
-    }
+            $matches = $yaml["matches"]
+            $count = $matches.Count
 
-    # -----------------------------
-    # matches block check
-    # -----------------------------
+            if ($count -eq 0) {
 
-    $matchesBlock = $null
+                Write-Host "  WARN: matches block empty" -ForegroundColor Yellow
 
-    if ($yaml -is [System.Collections.IDictionary]) {
+            }
+            else {
 
-        if ($yaml.Contains("matches")) {
-            $matchesBlock = $yaml["matches"]
-        }
+                Write-Host "  OK: $count matches detected" -ForegroundColor Green
 
-    }
-    else {
+                foreach ($match in $matches) {
 
-        if ($yaml.PSObject.Properties["matches"]) {
-            $matchesBlock = $yaml.matches
-        }
+                    $trigger = $match["trigger"]
 
-    }
+                    if ($null -ne $trigger) {
 
-    if (-not $matchesBlock) {
+                        if ($allTriggers.ContainsKey($trigger)) {
 
-        Write-Host "  INFO: No matches block (skipped)"
-        Write-Host ""
-        continue
+                            Write-Host "  ERROR: duplicate trigger detected -> $trigger" -ForegroundColor Red
+                            Write-Host "         first defined in: $($allTriggers[$trigger])"
+                            Write-Host "         again in:        $($file.Name)"
 
-    }
+                            $duplicateFound = $true
 
-    # -----------------------------
-    # Trigger checks
-    # -----------------------------
+                        }
+                        else {
 
-    foreach ($match in $matchesBlock) {
+                            $allTriggers[$trigger] = $file.Name
 
-        if (-not $match.trigger) {
-
-            Write-Host "  ERROR: Match without trigger"
-            $errorCount++
-            continue
-        }
-
-        $trigger = $match.trigger
-
-        if ($triggerMap.ContainsKey($trigger)) {
-
-            Write-Host "  ERROR: Duplicate trigger: $trigger"
-            Write-Host "    first:  $($triggerMap[$trigger])"
-            Write-Host "    second: $($file.Name)"
-
-            $errorCount++
+                        }
+                    }
+                }
+            }
 
         }
         else {
 
-            $triggerMap[$trigger] = $file.Name
+            Write-Host "  INFO: No matches block (skipped)" -ForegroundColor DarkGray
 
         }
 
     }
+    catch {
 
-    Write-Host "  OK"
+        Write-Host "  ERROR: Invalid YAML" -ForegroundColor Red
+        Write-Host "  $($_.Exception.Message)"
+        exit 1
+
+    }
+
     Write-Host ""
-
 }
 
-Write-Host "---------------------------------"
-Write-Host "Linter summary"
-Write-Host "---------------------------------"
+if ($duplicateFound) {
 
-Write-Host "Files checked:" $files.Count
-Write-Host "Triggers found:" $triggerMap.Count
-Write-Host "Errors:" $errorCount
-Write-Host ""
-
-if ($errorCount -gt 0) {
-
-    Write-Host "Linter FAILED"
+    Write-Host ""
+    Write-Host "Duplicate triggers detected. Validation failed." -ForegroundColor Red
     exit 1
 
 }
-else {
 
-    Write-Host "Linter PASSED"
-
-}
+Write-Host "Validation finished."

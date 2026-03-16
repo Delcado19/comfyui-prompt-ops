@@ -1,0 +1,142 @@
+matches:
+  - trigger: ":prompt"
+    replace: "{{prompt.context}} {{prompt.characters}} {{prompt.scene}} {{prompt.camera}} {{prompt.lighting}} {{prompt.style}} {{prompt.quality}} {{prompt.negative}} {{prompt.nsfw}}"
+    vars:
+      - name: prompt
+        type: form
+        params:
+          layout: |
+            Context: [[context]]
+            Characters: [[characters]]
+            Scene: [[scene]]
+            Camera: [[camera]]
+            Lighting: [[lighting]]
+            Style: [[style]]
+            Quality: [[quality]]
+            Negative: [[negative]]
+            Nsfw: [[nsfw]]
+
+          fields:
+            context:
+              type: choice
+              values:
+                - "none"
+                - "cinematic composition, dramatic lighting, film still aesthetic"
+                - "close-up shot, detailed facial features, shallow depth of field"
+                - "dramatic scene composition, strong contrast, intense atmosphere"
+                - "full body shot, subject standing, balanced composition"
+                - "hero shot, dramatic composition, subject dominant in frame"
+                - "natural environment, outdoor scenery, organic atmosphere"
+                - "portrait, centered composition, subject facing camera"
+                - "studio setup, neutral background, controlled lighting"
+                - "urban street environment, natural lighting, candid composition"
+                - "wide angle composition, environmental context, cinematic framing"
+            characters:
+              type: choice
+              values:
+                - "none"
+                - "A dark elf woman with sharp features and long silver hair."
+                - "A dark fantasy witch with long black hair and a mysterious aura."
+                - "A dark goddess radiating supernatural power."
+                - "A deadly female assassin with a cold and focused gaze."
+                - "A dominant gothic mistress with a confident and commanding posture."
+                - "A dominant gothic woman with pale skin and an intense gaze."
+                - "A mysterious demon woman with glowing eyes and an intimidating aura."
+                - "A mysterious vampire woman with porcelain skin and dark hypnotic eyes."
+                - "A powerful dark queen radiating dominance and elegance."
+                - "A seductive succubus with glowing eyes and an alluring presence."
+            scene:
+              type: choice
+              values:
+                - "none"
+                - "She is sitting on a dark throne surrounded by shadows."
+                - "She stands in front of a mysterious ritual altar."
+                - "The scene takes place in a forgotten dark temple."
+                - "The scene takes place in a misty dark forest."
+                - "The scene takes place in an ancient foggy graveyard."
+                - "The scene takes place in an ancient gothic library."
+                - "The scene takes place in dark fantasy ruins."
+                - "The scene takes place inside a dark gothic castle illuminated by candlelight."
+                - "The scene takes place inside a dark underground crypt."
+                - "The scene takes place inside a massive gothic cathedral."
+            camera:
+              type: choice
+              values:
+                - "none"
+                - "Beautiful cinematic bokeh in the background."
+                - "Cinematic portrait photography."
+                - "Close-up shot focusing on the face."
+                - "Film photography aesthetic."
+                - "High angle shot looking down at the character."
+                - "Low angle shot emphasizing dominance."
+                - "Shallow depth of field."
+                - "Shot on a 35mm cinematic lens."
+                - "Shot on an 85mm portrait lens."
+                - "Wide cinematic shot showing the environment."
+            lighting:
+              type: choice
+              values:
+                - "none"
+                - "Atmospheric mist catches the light."
+                - "Cinematic lighting with dramatic shadows."
+                - "Cold moonlight creates a mysterious atmosphere."
+                - "Deep shadows enhance the dark fantasy mood."
+                - "Dramatic high contrast lighting."
+                - "Soft cinematic lighting."
+                - "Subtle rim lighting outlines the character."
+                - "Subtle supernatural glow around the character."
+                - "Volumetric lighting with visible light rays."
+                - "Warm candlelight illuminates the scene."
+            style:
+              type: choice
+              values:
+                - "none"
+                - "35mm film photography, analog film grain, cinematic tones"
+                - "anime style illustration, vibrant colors, clean line art"
+                - "cinematic style, film still, dramatic color grading, movie lighting"
+                - "comic book illustration, bold outlines, dynamic shading"
+                - "concept art, highly detailed environment design, cinematic composition"
+                - "cyberpunk style, neon lights, futuristic city, dystopian atmosphere"
+                - "dark fantasy, gothic atmosphere, dramatic lighting"
+                - "digital illustration, polished artwork, detailed shading"
+                - "fantasy art style, magical atmosphere, epic composition"
+                - "film noir style, high contrast, dramatic shadows, black and white"
+                - "manga style illustration, black ink line art, expressive shading"
+                - "minimalist style, clean composition, simple shapes"
+                - "oil painting style, rich textures, classical painting"
+                - "painterly style, visible brush strokes, digital painting"
+                - "professional photography, high dynamic range, sharp focus"
+                - "science fiction aesthetic, futuristic environment, neon accents"
+                - "surreal art style, dreamlike atmosphere, abstract elements"
+                - "ultra realistic, highly detailed, photorealistic, natural skin texture"
+                - "vintage aesthetic, retro color palette, nostalgic atmosphere"
+                - "watercolor painting, soft color blending, artistic texture"
+            quality:
+              type: choice
+              values:
+                - "none"
+                - "Extremely high detail."
+                - "Extremely sharp focus."
+                - "Highly photorealistic rendering."
+                - "Natural skin texture and realistic shading."
+                - "Ultra detailed skin with visible pores."
+            negative:
+              type: choice
+              values:
+                - "none"
+                - "bad anatomy, bad proportions, malformed limbs, extra limbs, missing limbs, duplicate body, duplicate limbs, distorted body, twisted torso"
+                - "bad hands, malformed hands, extra fingers, missing fingers, fused fingers, mutated fingers, deformed fingers"
+                - "blurry, out of focus, jpeg artifacts, oversaturated, overexposed, underexposed, noise, grain"
+                - "distorted face, asymmetrical face, cross-eyed, deformed eyes, malformed mouth, bad teeth"
+                - "worst quality, low quality, blurry, jpeg artifacts, bad anatomy, bad proportions, deformed body, distorted face, bad hands, malformed hands, extra fingers, missing fingers, fused fingers, extra limbs, missing limbs, duplicate body, duplicate limbs, cross-eyed, asymmetrical eyes, watermark, text, logo, signature"
+                - "worst quality, low quality, blurry, jpeg artifacts, watermark, text, logo"
+                - "worst quality, low quality, watermark"
+            nsfw:
+              type: choice
+              values:
+                - "none"
+                - "dressed as a powerful dominatrix."
+                - "seductive and provocative pose."
+                - "sensual pose with seductive body language."
+                - "wearing a glossy black latex outfit."
+                - "wearing elegant black lingerie."
