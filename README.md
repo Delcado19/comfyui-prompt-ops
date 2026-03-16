@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner.png" width="800">
+  <img src="docs/banner.png" width="900">
 </p>
 
 # 🚀 ComfyUI Prompt Ops
@@ -16,7 +16,7 @@ Composable **prompt engineering toolkit for ComfyUI** powered by **Espanso**.
 
 This project turns Espanso into a **modular prompt composition engine** for AI image generation.
 
-Instead of writing long prompts manually, prompts are assembled from reusable building blocks.
+Instead of writing large prompts manually, prompts are built from **reusable components**.
 
 ---
 
@@ -26,8 +26,10 @@ Instead of writing long prompts manually, prompts are assembled from reusable bu
 - **Espanso snippet system**
 - **interactive prompt builder**
 - automatic **snippet documentation**
-- development pipeline for **validation & generation**
+- **duplicate trigger detection**
+- development pipeline for validation & generation
 - reproducible **PowerShell installer**
+- installer **logging system**
 
 ---
 
@@ -56,23 +58,29 @@ The installer automatically:
 - generates snippet documentation
 - restarts services if required
 
+Installer logs are written to:
+
+```
+logs/install.log
+```
+
 ---
 
-# 🧠 Example Prompt Workflow
+# 🧠 Prompt Workflow
 
-Manual prompt:
+### Traditional Prompt
 
 ```
 portrait photo of a woman, cinematic lighting, close-up shot, shallow depth of field
 ```
 
-Using Prompt Ops:
+### Prompt Ops
 
 ```
 :char_woman :ctx_portrait :cam_closeup :light_soft :style_cinematic
 ```
 
-Espanso expands the triggers automatically.
+Espanso expands the triggers automatically into the final prompt.
 
 ---
 
@@ -100,13 +108,13 @@ The builder allows selecting:
 
 Selections are combined into a final prompt.
 
-The prompt builder snippet is generated from the snippet library:
+The builder snippet is automatically generated from the snippet library:
 
 ```powershell
 .\scripts\generate_prompt_builder.ps1
 ```
 
-Output:
+Output file:
 
 ```
 snippets/zz_prompt_builder.yml
@@ -116,20 +124,20 @@ snippets/zz_prompt_builder.yml
 
 # 📦 Installation
 
-Clone the repository:
+Clone repository:
 
 ```bash
 git clone https://github.com/Delcado19/comfyui-prompt-ops.git
 cd comfyui-prompt-ops
 ```
 
-Run the installer:
+Run installer:
 
 ```powershell
 .\installer\install.ps1
 ```
 
-The installer performs:
+Installer pipeline:
 
 1. PowerShell version check
 2. Chocolatey installation
@@ -146,38 +154,34 @@ The installer performs:
 
 ## System
 
-- Windows 10 or Windows 11
+- Windows 10 / Windows 11
 - PowerShell 7+
 - Git
-- Internet connection (for Chocolatey)
+- Internet connection
 
 ---
 
 # 📦 YAML Support
 
-Several development scripts rely on the PowerShell command:
+Several development scripts rely on:
 
 ```
 ConvertFrom-Yaml
 ```
 
-This command provides YAML parsing functionality.
-
-The installer checks if YAML support is available.
-
-If the command is missing, the installer installs the module:
+If missing, the installer installs:
 
 ```
 powershell-yaml
 ```
 
-Manual installation (if required):
+Manual installation:
 
 ```powershell
 Install-Module powershell-yaml -Scope CurrentUser
 ```
 
-Verify installation:
+Verification:
 
 ```powershell
 Get-Command ConvertFrom-Yaml
@@ -193,55 +197,9 @@ Function        ConvertFrom-Yaml
 
 ---
 
-# 📂 Project Structure
-
-```
-comfyui-prompt-ops
-│
-├ docs
-│   architecture.md
-│   banner.png
-│   developer_workflow.md
-│   prompt_builder.md
-│   snippets.md
-│   snippet_system.md
-│
-├ installer
-│   install.ps1
-│
-├ logs
-│
-├ scripts
-│   check_duplicate_triggers.ps1
-│   dev.ps1
-│   doctor.ps1
-│   export_existing_snippets.ps1
-│   generate_prompt_builder.ps1
-│   generate_snippet_docs.ps1
-│   install_snippets.ps1
-│   restart_services.ps1
-│   validate_snippets.ps1
-│   validate_yaml.ps1
-│
-└ snippets
-    comfy_camera.yml
-    comfy_characters.yml
-    comfy_context.yml
-    comfy_lighting.yml
-    comfy_negative.yml
-    comfy_nsfw.yml
-    comfy_quality.yml
-    comfy_scene.yml
-    comfy_style.yml
-    default.yml
-    zz_prompt_builder.yml
-```
-
----
-
 # 🧩 Snippet Architecture
 
-Prompt components are organized by category.
+Prompt components are grouped by category.
 
 | Prefix      | Category         |
 | ----------- | ---------------- |
@@ -306,13 +264,13 @@ Modify snippets inside:
 snippets/
 ```
 
-Run the development pipeline:
+Run development pipeline:
 
 ```powershell
 .\scripts\dev.ps1
 ```
 
-The pipeline performs:
+Pipeline steps:
 
 1. YAML validation
 2. snippet validation
@@ -322,14 +280,14 @@ The pipeline performs:
 
 ---
 
-# 🛠 Dev Utilities
+# 🛠 Developer Utilities
 
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
 | doctor.ps1                   | environment diagnostics        |
 | validate_yaml.ps1            | YAML syntax validation         |
 | validate_snippets.ps1        | snippet validation             |
-| check_duplicate_triggers.ps1 | detect conflicting triggers    |
+| check_duplicate_triggers.ps1 | detect trigger conflicts       |
 | generate_snippet_docs.ps1    | generate snippet documentation |
 | generate_prompt_builder.ps1  | build prompt builder           |
 | install_snippets.ps1         | deploy snippets                |
@@ -337,26 +295,66 @@ The pipeline performs:
 
 ---
 
-# 📚 Documentation
+# 📂 Project Structure
 
-Detailed documentation is available in the **docs** directory:
-
-- `architecture.md`
-- `developer_workflow.md`
-- `prompt_builder.md`
-- `snippets.md`
-- `snippet_system.md`
+```
+comfyui-prompt-ops
+│
+├ docs
+│   architecture.md
+│   banner.png
+│   developer_workflow.md
+│   prompt_builder.md
+│   snippets.md
+│   snippet_system.md
+│
+├ installer
+│   install.ps1
+│
+├ logs
+│   .gitkeep
+│
+├ scripts
+│   check_duplicate_triggers.ps1
+│   dev.ps1
+│   doctor.ps1
+│   export_existing_snippets.ps1
+│   generate_prompt_builder.ps1
+│   generate_snippet_docs.ps1
+│   install_snippets.ps1
+│   restart_services.ps1
+│   validate_snippets.ps1
+│   validate_yaml.ps1
+│
+└ snippets
+    comfy_camera.yml
+    comfy_characters.yml
+    comfy_context.yml
+    comfy_lighting.yml
+    comfy_negative.yml
+    comfy_nsfw.yml
+    comfy_quality.yml
+    comfy_scene.yml
+    comfy_style.yml
+    default.yml
+    zz_prompt_builder.yml
+```
 
 ---
 
-# 🔮 Planned Improvements
+# 📚 Documentation
 
-Possible future improvements:
+Additional documentation in:
 
-- automatic **snippet documentation generation via GitHub Actions**
-- additional snippet categories
-- expanded prompt builder functionality
-- improved developer tooling
+```
+docs/
+```
+
+- architecture.md
+- developer_workflow.md
+- prompt_builder.md
+- snippets.md
+- snippet_system.md
 
 ---
 
