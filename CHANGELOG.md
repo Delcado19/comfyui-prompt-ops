@@ -6,9 +6,30 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 
 ---
 
-# [1.1.0]
+## [Unreleased]
 
-## Added
+## [1.2.0]
+
+### Added
+
+- automatic prompt builder generation
+- snippet documentation generator
+- developer utility scripts
+- logging system for installer (`logs/install.log`)
+- extended project documentation
+
+### Improved
+
+- installer dependency checks
+- developer tooling
+- repository structure
+- README documentation
+
+---
+
+## [1.1.0]
+
+### Added
 
 - automated installer
 - snippet installation system
@@ -16,7 +37,7 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 - espanso reload
 - service restart logic
 
-## Improved
+### Improved
 
 - project structure
 - developer tooling
@@ -24,9 +45,9 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 
 ---
 
-# [1.0.0]
+## [1.0.0]
 
-## Initial Release
+### Initial Release
 
 - base snippet architecture
 - modular prompt system

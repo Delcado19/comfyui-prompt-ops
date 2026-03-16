@@ -2,10 +2,19 @@
 # installer/install.ps1
 
 $ErrorActionPreference = "Stop"
+$ProgressPreference = "SilentlyContinue"
 
 $repoRoot = Resolve-Path "$PSScriptRoot\.."
 $statusFile = Join-Path $env:TEMP "comfyui_prompt_ops_install.status"
-$logFile = Join-Path $repoRoot "install.log"
+
+$logDir = Join-Path $repoRoot "logs"
+
+if (!(Test-Path $logDir)) {
+    New-Item -ItemType Directory -Path $logDir | Out-Null
+}
+
+$logFile = Join-Path $logDir "install.log"
+
 
 function Write-Info {
     param($msg)
@@ -157,6 +166,32 @@ try {
     }
     else {
         Write-Ok "CopyQ detected"
+    }
+
+    # --------------------------------------------------
+    # YAML support
+    # --------------------------------------------------
+
+    Write-Info "Checking YAML support..."
+
+    $yamlCommand = Get-Command ConvertFrom-Yaml -ErrorAction SilentlyContinue
+
+    if (-not $yamlCommand) {
+
+        Write-Warn "Installing powershell-yaml module..."
+
+        Install-Module powershell-yaml `
+            -Scope CurrentUser `
+            -Force `
+            -AllowClobber
+
+        Write-Ok "powershell-yaml installed"
+
+    }
+    else {
+
+        Write-Ok "YAML support detected"
+
     }
 
     # --------------------------------------------------

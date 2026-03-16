@@ -1,133 +1,46 @@
 <p align="center">
-  <img src="docs/banner.png" width="650">
+  <img src="docs/banner.png" width="800">
 </p>
 
 # 🚀 ComfyUI Prompt Ops
 
-![ComfyUI](https://img.shields.io/badge/ComfyUI-compatible-purple)
-![License](https://img.shields.io/github/license/delcado19/comfyui-prompt-ops)
-![PowerShell](https://img.shields.io/badge/PowerShell-7+-5391FE?logo=powershell&logoColor=white)
+![PowerShell](https://img.shields.io/badge/PowerShell-7+-5391FE?logo=powershell)
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
-![Espanso](https://img.shields.io/badge/espanso-supported-orange)
-![Stars](https://img.shields.io/github/stars/delcado19/comfyui-prompt-ops?style=social)
-![Last Commit](https://img.shields.io/github/last-commit/delcado19/comfyui-prompt-ops)
+![Espanso](https://img.shields.io/badge/Espanso-supported-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-active_development-yellow)
+![GitHub repo size](https://img.shields.io/github/repo-size/Delcado19/comfyui-prompt-ops)
+![GitHub last commit](https://img.shields.io/github/last-commit/Delcado19/comfyui-prompt-ops)
 
-**Composable prompt engineering system for ComfyUI powered by Espanso snippets.**
+Composable **prompt engineering toolkit for ComfyUI** powered by **Espanso**.
 
-## 📑 Table of Contents
+This project turns Espanso into a **modular prompt composition engine** for AI image generation.
 
-- [Quick Start](#-quick-start)
-- [What This Project Does](#-what-this-project-does)
-- [Concept](#-concept)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Installation](#-installation)
-- [Dry Run](#-dry-run)
-- [Project Structure](#-project-structure)
-- [Snippet Architecture](#-snippet-architecture)
-- [Example Workflow](#-example-workflow)
-- [Development](#-development)
-- [Generated Documentation](#-generated-documentation)
-- [Adding New Snippets](#-adding-new-snippets)
-- [Dev Utilities](#-dev-utilities)
-- [Roadmap](#-roadmap)
-- [Use Cases](#-use-cases)
-- [Contributing](#-contributing)
-- [License](#-license)
-
-## ⚡ Quick Start
-
-```bash
-git clone https://github.com/Delcado19/comfyui-prompt-ops.git
-cd comfyui-prompt-ops
-pwsh .\installer\install.ps1
-```
-
-ComfyUI Prompt Ops transforms **Espanso snippets** into a **modular prompt-building system**.
-Instead of manually typing long prompts, you compose them using small reusable building blocks.
-
-This makes prompts:
-
-- faster to write
-- easier to maintain
-- consistent across projects
-- modular and scalable
+Instead of writing long prompts manually, prompts are assembled from reusable building blocks.
 
 ---
 
-## ✨ What This Project Does
+# ✨ Features
 
-ComfyUI Prompt Ops turns Espanso into a **prompt composition engine**.
-
-Instead of writing something like:
-
-```text
-portrait photo of a woman, cinematic lighting, soft shadows, close-up camera shot, shallow depth of field, highly detailed skin, studio lighting
-```
-
-You can simply type:
-
-```text
-:char_woman :ctx_portrait :cam_closeup :light_soft :style_cinematic
-```
-
-Espanso automatically expands the snippets into the full prompt.
+- modular **prompt components**
+- **Espanso snippet system**
+- **interactive prompt builder**
+- automatic **snippet documentation**
+- development pipeline for **validation & generation**
+- reproducible **PowerShell installer**
 
 ---
 
-## 🧠 Concept
+# ⚡ Quick Start
 
-Prompt Ops follows a **modular architecture**:
-
-```
-character + context + camera + lighting + style
-```
-
-Example composition:
-
-```
-:char_woman :ctx_portrait :cam_closeup :light_soft :style_cinematic
-```
-
-Which becomes a complete prompt.
-
----
-
-## ⚙️ Features
-
-✔ Modular prompt snippets
-✔ Espanso-powered text expansion
-✔ Automated Windows installer
-✔ Dependency management via Chocolatey
-✔ Clipboard workflow via CopyQ
-✔ Developer validation tools
-✔ Auto-generated snippet documentation
-✔ Scalable prompt architecture
-
----
-
-## 🧰 Tech Stack
-
-| Tool             | Purpose               |
-| ---------------- | --------------------- |
-| **Espanso**      | Text expansion engine |
-| **CopyQ**        | Clipboard manager     |
-| **PowerShell 7** | Automation            |
-| **Chocolatey**   | Package management    |
-| **Git**          | Version control       |
-
----
-
-## 📦 Installation
-
-### 1️⃣ Clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/Delcado19/comfyui-prompt-ops.git
 cd comfyui-prompt-ops
 ```
 
-### 2️⃣ Run the installer
+Run the installer:
 
 ```powershell
 .\installer\install.ps1
@@ -135,143 +48,212 @@ cd comfyui-prompt-ops
 
 The installer automatically:
 
-- elevates to **Administrator**
-- checks **PowerShell version**
-- verifies **Chocolatey**
-- installs dependencies
-- installs snippets
-- restarts services
-- reloads Espanso
+- installs Chocolatey
+- installs Espanso
+- installs CopyQ
+- checks YAML parsing support
+- installs project snippets
+- generates snippet documentation
+- restarts services if required
 
 ---
 
-## 🧪 Dry Run
+# 🧠 Example Prompt Workflow
 
-Simulate the install process without making changes:
-
-```powershell
-.\installer\install.ps1 -dryrun
-```
-
----
-
-## 📂 Project Structure
+Manual prompt:
 
 ```
-comfyui-prompt-ops
-│
-├─ installer
-│  └─ install.ps1
-│
-├─ scripts
-│  ├─ doctor.ps1
-│  ├─ install_snippets.ps1
-│  ├─ restart_services.ps1
-│  ├─ validate_snippets.ps1
-│  ├─ validate_yaml.ps1
-│  ├─ check_duplicate_triggers.ps1
-│  ├─ generate_snippet_docs.ps1
-│  ├─ dev.ps1
-│  └─ export_existing_snippets.ps1
-│
-├─ snippets
-│  ├─ base.yml
-│  ├─ comfy_camera.yml
-│  ├─ comfy_characters.yml
-│  ├─ comfy_context.yml
-│  ├─ comfy_lighting.yml
-│  ├─ comfy_master.yml
-│  ├─ comfy_negative.yml
-│  ├─ comfy_nsfw.yml
-│  ├─ comfy_scene.yml
-│  ├─ comfy_style.yml
-│  └─ default.yml
-│
-└─ docs
-   └─ snippets.md
+portrait photo of a woman, cinematic lighting, close-up shot, shallow depth of field
 ```
 
----
-
-## 🧩 Snippet Architecture
-
-Prompt elements are grouped by **prefix category**.
-
-| Prefix     | Category         | Example            |
-| ---------- | ---------------- | ------------------ |
-| `:char_`   | Character        | `:char_woman`      |
-| `:ctx_`    | Context          | `:ctx_portrait`    |
-| `:cam_`    | Camera           | `:cam_closeup`     |
-| `:light_`  | Lighting         | `:light_soft`      |
-| `:style_`  | Style            | `:style_cinematic` |
-| `:scene_`  | Scene            | `:scene_city`      |
-| `:neg_`    | Negative prompts | `:neg_blurry`      |
-| `:master_` | Prompt presets   | `:master_portrait` |
-
----
-
-## 🧪 Example Workflow
-
-Typing:
-
-```
-:ctx_portrait
-```
-
-Expands to:
-
-```
-portrait composition, centered framing, subject facing camera
-```
-
-A full prompt build might look like:
+Using Prompt Ops:
 
 ```
 :char_woman :ctx_portrait :cam_closeup :light_soft :style_cinematic
 ```
 
+Espanso expands the triggers automatically.
+
 ---
 
-## 🧑‍💻 Development
+# 🧩 Prompt Builder
 
-Run the development pipeline:
+The project includes an **interactive prompt builder**.
+
+Trigger:
+
+```
+:prompt
+```
+
+The builder allows selecting:
+
+- Context
+- Characters
+- Scene
+- Camera
+- Lighting
+- Style
+- Quality
+- Negative prompts
+- NSFW modifiers
+
+Selections are combined into a final prompt.
+
+The prompt builder snippet is generated from the snippet library:
 
 ```powershell
-.\scripts\dev.ps1
+.\scripts\generate_prompt_builder.ps1
 ```
 
-This runs:
+Output:
 
-1️⃣ snippet validation
-2️⃣ YAML validation
-3️⃣ duplicate trigger detection
-4️⃣ snippet documentation generation
+```
+snippets/zz_prompt_builder.yml
+```
 
 ---
 
-## 📄 Generated Documentation
+# 📦 Installation
 
-Snippet docs are generated automatically:
+Clone the repository:
 
+```bash
+git clone https://github.com/Delcado19/comfyui-prompt-ops.git
+cd comfyui-prompt-ops
 ```
-docs/snippets.md
-```
 
-Run:
+Run the installer:
 
 ```powershell
-.\scripts\generate_snippet_docs.ps1
+.\installer\install.ps1
+```
+
+The installer performs:
+
+1. PowerShell version check
+2. Chocolatey installation
+3. Espanso installation
+4. CopyQ installation
+5. YAML support verification
+6. snippet installation
+7. snippet documentation generation
+8. service restart
+
+---
+
+# ⚙️ Requirements
+
+## System
+
+- Windows 10 or Windows 11
+- PowerShell 7+
+- Git
+- Internet connection (for Chocolatey)
+
+---
+
+# 📦 YAML Support
+
+Several development scripts rely on the PowerShell command:
+
+```
+ConvertFrom-Yaml
+```
+
+This command provides YAML parsing functionality.
+
+The installer checks if YAML support is available.
+
+If the command is missing, the installer installs the module:
+
+```
+powershell-yaml
+```
+
+Manual installation (if required):
+
+```powershell
+Install-Module powershell-yaml -Scope CurrentUser
+```
+
+Verify installation:
+
+```powershell
+Get-Command ConvertFrom-Yaml
+```
+
+Expected output:
+
+```
+CommandType     Name
+-----------     ----
+Function        ConvertFrom-Yaml
 ```
 
 ---
 
-## ➕ Adding New Snippets
-
-Create a new file in:
+# 📂 Project Structure
 
 ```
-snippets/
+comfyui-prompt-ops
+│
+├ docs
+│   architecture.md
+│   banner.png
+│   developer_workflow.md
+│   prompt_builder.md
+│   snippets.md
+│   snippet_system.md
+│
+├ installer
+│   install.ps1
+│
+├ logs
+│
+├ scripts
+│   check_duplicate_triggers.ps1
+│   dev.ps1
+│   doctor.ps1
+│   export_existing_snippets.ps1
+│   generate_prompt_builder.ps1
+│   generate_snippet_docs.ps1
+│   install_snippets.ps1
+│   restart_services.ps1
+│   validate_snippets.ps1
+│   validate_yaml.ps1
+│
+└ snippets
+    comfy_camera.yml
+    comfy_characters.yml
+    comfy_context.yml
+    comfy_lighting.yml
+    comfy_negative.yml
+    comfy_nsfw.yml
+    comfy_quality.yml
+    comfy_scene.yml
+    comfy_style.yml
+    default.yml
+    zz_prompt_builder.yml
 ```
+
+---
+
+# 🧩 Snippet Architecture
+
+Prompt components are organized by category.
+
+| Prefix      | Category         |
+| ----------- | ---------------- |
+| `:ctx_`     | Context          |
+| `:char_`    | Characters       |
+| `:scene_`   | Scene            |
+| `:cam_`     | Camera           |
+| `:light_`   | Lighting         |
+| `:style_`   | Style            |
+| `:quality_` | Quality          |
+| `:neg_`     | Negative prompts |
+| `:nsfw_`    | NSFW modifiers   |
 
 Example snippet:
 
@@ -279,76 +261,119 @@ Example snippet:
 matches:
   - trigger: ":ctx_portrait"
     word: true
-    replace: "portrait composition, centered framing, subject facing camera"
+    replace: "portrait, centered composition, subject facing camera"
 ```
 
-Then run:
+---
+
+# ⚠️ Snippet Deployment
+
+Snippets inside this repository are **not automatically active in Espanso**.
+
+They must be copied to the Espanso match directory.
+
+Run:
+
+```powershell
+.\scripts\install_snippets.ps1
+```
+
+This copies snippets from:
+
+```
+snippets/
+```
+
+to:
+
+```
+%APPDATA%\espanso\match
+```
+
+Example path:
+
+```
+C:\Users\<USER>\AppData\Roaming\espanso\match
+```
+
+---
+
+# 🧑‍💻 Developer Workflow
+
+Modify snippets inside:
+
+```
+snippets/
+```
+
+Run the development pipeline:
 
 ```powershell
 .\scripts\dev.ps1
 ```
 
----
+The pipeline performs:
 
-## 🛠 Dev Utilities
-
-| Script                         | Function                   |
-| ------------------------------ | -------------------------- |
-| `doctor.ps1`                   | environment diagnostics    |
-| `validate_snippets.ps1`        | snippet validation         |
-| `validate_yaml.ps1`            | YAML syntax check          |
-| `check_duplicate_triggers.ps1` | trigger conflict detection |
-| `generate_snippet_docs.ps1`    | auto documentation         |
-| `export_existing_snippets.ps1` | migrate snippets           |
+1. YAML validation
+2. snippet validation
+3. duplicate trigger detection
+4. snippet documentation generation
+5. prompt builder generation
 
 ---
 
-## 🧭 Roadmap
+# 🛠 Dev Utilities
 
-Planned improvements:
-
-- prompt builder snippets
-- advanced prompt templates
-- trigger collision prevention
-- snippet autocomplete docs
-- snippet categories
-- ComfyUI workflow presets
-- advanced prompt macros
-
----
-
-## 🧑‍🎨 Use Cases
-
-Perfect for:
-
-- Stable Diffusion prompt engineering
-- ComfyUI workflows
-- fast prompt iteration
-- reusable prompt libraries
-- AI art pipelines
+| Script                       | Purpose                        |
+| ---------------------------- | ------------------------------ |
+| doctor.ps1                   | environment diagnostics        |
+| validate_yaml.ps1            | YAML syntax validation         |
+| validate_snippets.ps1        | snippet validation             |
+| check_duplicate_triggers.ps1 | detect conflicting triggers    |
+| generate_snippet_docs.ps1    | generate snippet documentation |
+| generate_prompt_builder.ps1  | build prompt builder           |
+| install_snippets.ps1         | deploy snippets                |
+| restart_services.ps1         | restart Espanso                |
 
 ---
 
-## 🤝 Contributing
+# 📚 Documentation
+
+Detailed documentation is available in the **docs** directory:
+
+- `architecture.md`
+- `developer_workflow.md`
+- `prompt_builder.md`
+- `snippets.md`
+- `snippet_system.md`
+
+---
+
+# 🔮 Planned Improvements
+
+Possible future improvements:
+
+- automatic **snippet documentation generation via GitHub Actions**
+- additional snippet categories
+- expanded prompt builder functionality
+- improved developer tooling
+
+---
+
+# 🤝 Contributing
 
 Contributions are welcome.
 
-Ideas:
+Please read:
 
-- new prompt snippet packs
-- better documentation
-- installer improvements
-- cross-platform support
+```
+CONTRIBUTING.md
+```
+
+before submitting changes.
 
 ---
 
-## 📜 License
+# 📜 License
 
 MIT License
-
----
-
-## ⭐ If You Like This Project
-
-Consider giving it a star on GitHub.
-It helps others discover the project.
