@@ -13,32 +13,14 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
 
-    # 🔒 Nur wenn CI erfolgreich UND main branch
-    if: >
-      ${{
-        github.event.workflow_run.conclusion == 'success' &&
-        github.event.workflow_run.head_branch == 'main'
-      }}
-
     steps:
       # ----------------------------------------
-      # CHECKOUT (KORREKTER COMMIT!)
+      # CHECKOUT
       # ----------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.workflow_run.head_sha }}
-          persist-credentials: false
-
-      # ----------------------------------------
-      # DEBUG (sehr wichtig für Troubleshooting)
-      # ----------------------------------------
-      - name: Debug context
-        run: |
-          echo "Branch: ${{ github.event.workflow_run.head_branch }}"
-          echo "SHA: ${{ github.event.workflow_run.head_sha }}"
-          git log --oneline -10
 
       # ----------------------------------------
       # NODE SETUP
@@ -55,10 +37,10 @@ jobs:
         run: npm install
 
       # ----------------------------------------
-      # RUN SEMANTIC RELEASE (MIT LOGS)
+      # SEMANTIC RELEASE
       # ----------------------------------------
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEBUG: semantic-release:* # 🔥 zeigt ALLES
+          DEBUG: semantic-release:*
         run: npx semantic-release
