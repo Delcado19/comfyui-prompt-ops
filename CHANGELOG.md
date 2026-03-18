@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.6...v1.3.7) (2026-03-18)
+
+
+### Bug Fixes
+
+* test changelog final ([cd2a9d3](https://github.com/Delcado19/comfyui-prompt-ops/commit/cd2a9d33fc596c5b53415895b9721667f5f58af9))
+
 ## [1.3.6](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.5...v1.3.6) (2026-03-18)
 
 
