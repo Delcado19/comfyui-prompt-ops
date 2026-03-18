@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   validate:
     runs-on: windows-latest
@@ -71,7 +74,7 @@ jobs:
       # AUTO COMMIT (SAFE)
       # ----------------------------------------
       - name: Commit generated files
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: pwsh
         run: |
           git config user.name "github-actions"
