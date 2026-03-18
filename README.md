@@ -11,6 +11,7 @@
 ![Status](https://img.shields.io/badge/status-active_development-yellow)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Delcado19/comfyui-prompt-ops)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Delcado19/comfyui-prompt-ops)
+![CI](https://github.com/Delcado19/comfyui-prompt-ops/actions/workflows/ci.yml/badge.svg)
 
 ⭐ If you find this project useful, consider starring the repository.
 

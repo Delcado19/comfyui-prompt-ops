@@ -10,21 +10,44 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      # ----------------------------------------
+      # CHECKOUT
+      # ----------------------------------------
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ----------------------------------------
+      # POWERSHELL SETUP
+      # ----------------------------------------
       - name: Setup PowerShell
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
           Set-ExecutionPolicy RemoteSigned -Scope Process
 
+      # ----------------------------------------
+      # CACHE MODULES (FASTER CI)
+      # ----------------------------------------
+      - name: Cache PowerShell modules
+        uses: actions/cache@v4
+        with:
+          path: ~\Documents\PowerShell\Modules
+          key: ${{ runner.os }}-psmodules
+
+      # ----------------------------------------
+      # INSTALL YAML MODULE
+      # ----------------------------------------
+      - name: Install YAML module
+        shell: pwsh
+        run: |
           if (-not (Get-Module -ListAvailable -Name powershell-yaml)) {
               Install-Module powershell-yaml -Force -Scope CurrentUser -AllowClobber
           }
-
           Import-Module powershell-yaml
 
+      # ----------------------------------------
+      # VALIDATION
+      # ----------------------------------------
       - name: Validate YAML
         shell: pwsh
         run: ./scripts/validate_yaml.ps1
@@ -33,6 +56,32 @@ jobs:
         shell: pwsh
         run: ./scripts/validate_snippets.ps1
 
+      - name: Check Duplicate Triggers
+        shell: pwsh
+        run: ./scripts/check_duplicate_triggers.ps1
+
+      # ----------------------------------------
+      # BUILD
+      # ----------------------------------------
       - name: Generate Prompt Builder
         shell: pwsh
         run: ./scripts/generate_prompt_builder.ps1
+
+      # ----------------------------------------
+      # AUTO COMMIT (SAFE)
+      # ----------------------------------------
+      - name: Commit generated files
+        if: github.ref == 'refs/heads/main'
+        shell: pwsh
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add snippets/zz_prompt_builder.yml
+
+          if (git diff --cached --quiet) {
+              echo "No changes to commit"
+          } else {
+              git commit -m "ci: auto-update prompt builder"
+              git push
+          }

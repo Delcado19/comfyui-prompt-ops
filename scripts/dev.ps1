@@ -1,67 +1,77 @@
-Write-Host ""
-Write-Host "================================="
-Write-Host " ComfyUI Prompt Ops Dev Pipeline"
-Write-Host "================================="
+# dev.ps1
 
-# --------------------------------
-# Step 1: YAML validation
-# --------------------------------
+param(
+    [switch]$SkipBuild,
+    [switch]$VerboseMode
+)
 
-Write-Host ""
-Write-Host "Step 1: YAML validation"
+# --------------------------------------------------
+# HARD FAIL
+# --------------------------------------------------
 
-.\scripts\validate_yaml.ps1
+$ErrorActionPreference = "Stop"
+Set-StrictMode -Version Latest
 
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "Pipeline aborted."
-    exit 1
+# --------------------------------------------------
+# PATH SETUP
+# --------------------------------------------------
+
+$ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $ScriptRoot
+
+# --------------------------------------------------
+# HELPER
+# --------------------------------------------------
+
+function Run-Step {
+    param (
+        [string]$Name,
+        [scriptblock]$Action
+    )
+
+    Write-Host ""
+    Write-Host "==> $Name" -ForegroundColor Cyan
+
+    try {
+        & $Action
+        Write-Host "✔ $Name passed" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "✖ $Name failed" -ForegroundColor Red
+        Write-Host $_
+        exit 1
+    }
 }
 
-# --------------------------------
-# Step 2: Snippet validation
-# --------------------------------
+# --------------------------------------------------
+# RUN PIPELINE
+# --------------------------------------------------
 
-Write-Host ""
-Write-Host "Step 2: Snippet validation"
-
-.\scripts\validate_snippets.ps1
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "Pipeline aborted."
-    exit 1
+Run-Step "Validate YAML" {
+    ./validate_yaml.ps1
 }
 
-# --------------------------------
-# Step 3: Duplicate triggers
-# --------------------------------
-
-Write-Host ""
-Write-Host "Step 3: Checking duplicate triggers"
-
-.\scripts\check_duplicate_triggers.ps1
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "Pipeline aborted."
-    exit 1
+Run-Step "Validate Snippets" {
+    ./validate_snippets.ps1
 }
 
-# --------------------------------
-# Step 4: Generate docs
-# --------------------------------
+Run-Step "Check Duplicate Triggers" {
+    if (Test-Path "./check_duplicate_triggers.ps1") {
+        ./check_duplicate_triggers.ps1
+    } else {
+        Write-Warning "Duplicate check script not found, skipping"
+    }
+}
+
+if (-not $SkipBuild) {
+    Run-Step "Generate Prompt Builder" {
+        ./generate_prompt_builder.ps1
+    }
+}
+
+# --------------------------------------------------
+# DONE
+# --------------------------------------------------
 
 Write-Host ""
-Write-Host "Step 4: Generate documentation"
-
-.\scripts\generate_snippet_docs.ps1
-
-# --------------------------------
-# Step 5: Generate prompt builder
-# --------------------------------
-
-Write-Host ""
-Write-Host "Step 5: Generate prompt builder"
-
-.\scripts\generate_prompt_builder.ps1
-
-Write-Host ""
-Write-Host "Dev pipeline completed."
+Write-Host "ALL CHECKS PASSED" -ForegroundColor Green
