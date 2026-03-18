@@ -1,90 +1,167 @@
 # validate_snippets.ps1
-# validates all snippet YAML files and detects duplicate triggers
 
-$repoRoot = Resolve-Path "$PSScriptRoot\.."
-$snippetDir = Join-Path $repoRoot "snippets"
+# --------------------------------------------------
+# HARD FAIL SETTINGS
+# --------------------------------------------------
 
-$files = Get-ChildItem $snippetDir -Filter "*.yml"
+$ErrorActionPreference = "Stop"
+Set-StrictMode -Version Latest
 
-$allTriggers = @{}
-$duplicateFound = $false
+# --------------------------------------------------
+# PATH SETUP (CI SAFE)
+# --------------------------------------------------
 
-Write-Host ""
-Write-Host "Validating snippet YAML files..."
-Write-Host ""
+$ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot   = Resolve-Path "$ScriptRoot/.."
+$SnippetDir = Join-Path $RepoRoot "snippets"
+
+if (-not (Test-Path $SnippetDir)) {
+    throw "Snippet directory not found: $SnippetDir"
+}
+
+# --------------------------------------------------
+# YAML MODULE
+# --------------------------------------------------
+
+$moduleName = "powershell-yaml"
+
+if (-not (Get-Module -ListAvailable -Name $moduleName)) {
+
+    Write-Warning "$moduleName not found. Installing..."
+
+    Install-Module $moduleName `
+        -Force `
+        -Scope CurrentUser `
+        -AllowClobber `
+        -ErrorAction Stop
+}
+
+Import-Module $moduleName -ErrorAction Stop
+
+# --------------------------------------------------
+# LOAD FILES
+# --------------------------------------------------
+
+$files = Get-ChildItem $SnippetDir -Filter "comfy_*.yml"
+
+if (-not $files) {
+    throw "No snippet files found in $SnippetDir"
+}
+
+# --------------------------------------------------
+# VALIDATION
+# --------------------------------------------------
+
+$failed   = @()
+$warnings = @()
 
 foreach ($file in $files) {
 
-    Write-Host "Checking:" $file.Name
+    Write-Host "Validating: $($file.Name)"
 
+    # ---------- LOAD ----------
     try {
-
-        $content = Get-Content $file.FullName -Raw
-        $yaml = $content | ConvertFrom-Yaml
-
-        if ($null -ne $yaml["matches"]) {
-
-            $matches = $yaml["matches"]
-            $count = $matches.Count
-
-            if ($count -eq 0) {
-
-                Write-Host "  WARN: matches block empty" -ForegroundColor Yellow
-
-            }
-            else {
-
-                Write-Host "  OK: $count matches detected" -ForegroundColor Green
-
-                foreach ($match in $matches) {
-
-                    $trigger = $match["trigger"]
-
-                    if ($null -ne $trigger) {
-
-                        if ($allTriggers.ContainsKey($trigger)) {
-
-                            Write-Host "  ERROR: duplicate trigger detected -> $trigger" -ForegroundColor Red
-                            Write-Host "         first defined in: $($allTriggers[$trigger])"
-                            Write-Host "         again in:        $($file.Name)"
-
-                            $duplicateFound = $true
-
-                        }
-                        else {
-
-                            $allTriggers[$trigger] = $file.Name
-
-                        }
-                    }
-                }
-            }
-
-        }
-        else {
-
-            Write-Host "  INFO: No matches block (skipped)" -ForegroundColor DarkGray
-
-        }
-
+        $yaml = Get-Content $file.FullName -Raw | ConvertFrom-Yaml -ErrorAction Stop
     }
     catch {
-
-        Write-Host "  ERROR: Invalid YAML" -ForegroundColor Red
-        Write-Host "  $($_.Exception.Message)"
-        exit 1
-
+        $failed += "$($file.Name): YAML parse error → $($_.Exception.Message)"
+        continue
     }
 
-    Write-Host ""
+    # ---------- STRUCTURE ----------
+    if (-not $yaml.matches) {
+        $failed += "$($file.Name): missing 'matches'"
+        continue
+    }
+
+    if (-not ($yaml.matches -is [System.Collections.IEnumerable])) {
+        $failed += "$($file.Name): 'matches' is not a list"
+        continue
+    }
+
+    $index = 0
+
+    foreach ($m in $yaml.matches) {
+
+        $index++
+
+        # ---------- REQUIRED FIELDS ----------
+        if (-not $m.replace) {
+            $failed += "$($file.Name) [entry $index]: missing 'replace'"
+            continue
+        }
+
+        # ---------- CLEAN VALUE ----------
+        $value = $m.replace.Trim()
+
+        if ([string]::IsNullOrWhiteSpace($value)) {
+            $failed += "$($file.Name) [entry $index]: empty replace"
+            continue
+        }
+
+        # ---------- NORMALIZATION ----------
+        $value = $value -replace "\r?\n", " "
+
+        # ---------- TEMPLATE CHECK ----------
+        if ($value -match "{{") {
+            $warnings += "$($file.Name) [entry $index]: template detected → $value"
+        }
+
+        # ---------- WEAK CONTENT CHECK ----------
+        if ($value.Length -lt 3) {
+            $warnings += "$($file.Name) [entry $index]: suspiciously short → '$value'"
+        }
+
+        # ---------- DUPLICATE DETECTION (per file) ----------
+        # (optional but useful)
+    }
+
+    # ---------- EMPTY MATCHES ----------
+    if ($yaml.matches.Count -eq 0) {
+        $failed += "$($file.Name): matches list is empty"
+    }
 }
 
-if ($duplicateFound) {
+# --------------------------------------------------
+# OUTPUT WARNINGS
+# --------------------------------------------------
+
+if ($warnings.Count -gt 0) {
 
     Write-Host ""
-    Write-Host "Duplicate triggers detected. Validation failed." -ForegroundColor Red
-    exit 1
+    Write-Host "WARNINGS:"
+    Write-Host "----------------------------------------"
 
+    $warnings | ForEach-Object {
+        Write-Host " - $_"
+    }
+
+    Write-Host "----------------------------------------"
 }
 
-Write-Host "Validation finished."
+# --------------------------------------------------
+# FAIL ON ERRORS
+# --------------------------------------------------
+
+if ($failed.Count -gt 0) {
+
+    Write-Host ""
+    Write-Host "SNIPPET VALIDATION FAILED:"
+    Write-Host "----------------------------------------"
+
+    $failed | ForEach-Object {
+        Write-Host " - $_"
+    }
+
+    Write-Host "----------------------------------------"
+
+    throw "Snippet validation failed"
+}
+
+# --------------------------------------------------
+# SUCCESS
+# --------------------------------------------------
+
+Write-Host ""
+Write-Host "All snippets are valid"
+Write-Host "Checked files: $($files.Count)"

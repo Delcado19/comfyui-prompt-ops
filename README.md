@@ -12,6 +12,8 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Delcado19/comfyui-prompt-ops)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Delcado19/comfyui-prompt-ops)
 
+⭐ If you find this project useful, consider starring the repository.
+
 Composable **prompt engineering toolkit for ComfyUI** powered by **Espanso**.
 
 This project turns Espanso into a **modular prompt composition engine** for AI image generation.

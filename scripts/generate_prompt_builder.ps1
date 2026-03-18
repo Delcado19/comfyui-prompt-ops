@@ -1,11 +1,61 @@
 # generate_prompt_builder.ps1
-# Builds snippets/zz_prompt_builder.yml from comfy_*.yml files
 
-$repoRoot   = Resolve-Path "$PSScriptRoot\.."
-$snippetDir = Join-Path $repoRoot "snippets"
-$outputFile = Join-Path $snippetDir "zz_prompt_builder.yml"
+# --------------------------------------------------
+# HARD FAIL SETTINGS
+# --------------------------------------------------
 
-$categoryOrder = @(
+$ErrorActionPreference = "Stop"
+Set-StrictMode -Version Latest
+
+# --------------------------------------------------
+# PATH SETUP (CI SAFE)
+# --------------------------------------------------
+
+$ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot   = Resolve-Path "$ScriptRoot/.."
+$SnippetDir = Join-Path $RepoRoot "snippets"
+$OutputFile = Join-Path $SnippetDir "zz_prompt_builder.yml"
+
+if (-not (Test-Path $SnippetDir)) {
+    throw "Snippet directory not found: $SnippetDir"
+}
+
+# --------------------------------------------------
+# YAML MODULE CHECK
+# --------------------------------------------------
+
+$moduleName = "powershell-yaml"
+
+if (-not (Get-Module -ListAvailable -Name $moduleName)) {
+
+    Write-Warning "$moduleName not found. Installing..."
+
+    try {
+        Install-Module $moduleName `
+            -Force `
+            -Scope CurrentUser `
+            -AllowClobber `
+            -ErrorAction Stop
+    }
+    catch {
+        throw "Failed to install ${moduleName}: $($_.Exception.Message)"
+    }
+}
+
+try {
+    Import-Module $moduleName -ErrorAction Stop
+}
+catch {
+    throw "Failed to import ${moduleName}: $($_.Exception.Message)"
+}
+
+Import-Module powershell-yaml -ErrorAction Stop
+
+# --------------------------------------------------
+# CONFIG
+# --------------------------------------------------
+
+$CategoryOrder = @(
     "context",
     "characters",
     "scene",
@@ -17,21 +67,41 @@ $categoryOrder = @(
     "nsfw"
 )
 
-$categories = @{}
+$Categories = @{}
 
 # --------------------------------------------------
-# Read snippet files
+# READ SNIPPETS
 # --------------------------------------------------
 
-Get-ChildItem $snippetDir -Filter "comfy_*.yml" | ForEach-Object {
+$files = Get-ChildItem $SnippetDir -Filter "comfy_*.yml"
 
-    $file = $_
+if (-not $files) {
+    throw "No snippet files found in $SnippetDir"
+}
+
+foreach ($file in $files) {
+
+    Write-Host "Processing: $($file.Name)"
+
     $name = $file.BaseName -replace "^comfy_", ""
 
     $content = Get-Content $file.FullName -Raw
-    $yaml    = $content | ConvertFrom-Yaml
 
-    if (-not $yaml.matches) { return }
+    if (-not $content.Trim()) {
+        throw "File is empty: $($file.Name)"
+    }
+
+    try {
+        $yaml = $content | ConvertFrom-Yaml -ErrorAction Stop
+    }
+    catch {
+        throw "YAML parsing failed in $($file.Name): $($_.Exception.Message)"
+    }
+
+    if (-not $yaml.matches) {
+        Write-Warning "No matches found in $($file.Name)"
+        continue
+    }
 
     $values = @()
 
@@ -45,59 +115,79 @@ Get-ChildItem $snippetDir -Filter "comfy_*.yml" | ForEach-Object {
         # skip templates
         if ($value -match "{{") { continue }
 
-        $values += $value
+        if (-not [string]::IsNullOrWhiteSpace($value)) {
+            $values += $value
+        }
     }
 
     if ($values.Count -gt 0) {
-        $categories[$name] = $values | Sort-Object -Unique
+        $Categories[$name] = $values | Sort-Object -Unique
+    }
+    else {
+        Write-Warning "No usable values in $($file.Name)"
     }
 }
+
+if ($Categories.Count -eq 0) {
+    throw "No categories generated. All inputs empty or invalid."
+}
+
+# --------------------------------------------------
+# DEBUG OUTPUT
+# --------------------------------------------------
 
 Write-Host ""
 Write-Host "Detected categories:"
 
-foreach ($c in $categories.Keys) {
+foreach ($c in $Categories.Keys | Sort-Object) {
     $label = $c.Substring(0,1).ToUpper() + $c.Substring(1)
-    Write-Host " - $label ($($categories[$c].Count) entries)"
+    Write-Host " - $label ($($Categories[$c].Count) entries)"
 }
 
 # --------------------------------------------------
-# Build form parameters
+# BUILD FORM PARAMS
 # --------------------------------------------------
 
-$formParams = @{}
+$FormParams = @{}
 
-foreach ($cat in $categoryOrder) {
+foreach ($cat in $CategoryOrder) {
 
-    if ($categories.ContainsKey($cat)) {
+    if ($Categories.ContainsKey($cat)) {
 
-        $values = @("none") + $categories[$cat]
+        $values = @("none") + $Categories[$cat]
 
-        $formParams[$cat] = @{
+        $FormParams[$cat] = @{
             type   = "choice"
             values = $values
         }
     }
 }
 
+if ($FormParams.Count -eq 0) {
+    throw "No form parameters generated"
+}
+
 # --------------------------------------------------
-# Build replace string
+# BUILD REPLACE STRING
 # --------------------------------------------------
 
 $replaceParts = @()
 
-foreach ($cat in $categoryOrder) {
+foreach ($cat in $CategoryOrder) {
 
-    if ($formParams.ContainsKey($cat)) {
-
+    if ($FormParams.ContainsKey($cat)) {
         $replaceParts += "{{prompt.${cat}}}"
     }
 }
 
 $replaceString = $replaceParts -join " "
 
+if (-not $replaceString) {
+    throw "Replace string is empty"
+}
+
 # --------------------------------------------------
-# Generate YAML
+# GENERATE YAML
 # --------------------------------------------------
 
 $lines = @()
@@ -111,9 +201,9 @@ $lines += "        type: form"
 $lines += "        params:"
 $lines += "          layout: |"
 
-foreach ($cat in $categoryOrder) {
+foreach ($cat in $CategoryOrder) {
 
-    if ($formParams.ContainsKey($cat)) {
+    if ($FormParams.ContainsKey($cat)) {
 
         $label = $cat.Substring(0,1).ToUpper() + $cat.Substring(1)
         $lines += "            ${label}: [[${cat}]]"
@@ -123,15 +213,15 @@ foreach ($cat in $categoryOrder) {
 $lines += ""
 $lines += "          fields:"
 
-foreach ($cat in $categoryOrder) {
+foreach ($cat in $CategoryOrder) {
 
-    if ($formParams.ContainsKey($cat)) {
+    if ($FormParams.ContainsKey($cat)) {
 
         $lines += "            ${cat}:"
         $lines += "              type: choice"
         $lines += "              values:"
 
-        foreach ($v in $formParams[$cat].values) {
+        foreach ($v in $FormParams[$cat].values) {
 
             $escaped = $v.Replace('"','\"')
             $lines += "                - `"$escaped`""
@@ -139,31 +229,27 @@ foreach ($cat in $categoryOrder) {
     }
 }
 
-$lines | Set-Content $outputFile -Encoding UTF8
+# --------------------------------------------------
+# WRITE FILE (NO BOM!)
+# --------------------------------------------------
+
+[System.IO.File]::WriteAllLines($OutputFile, $lines, (New-Object System.Text.UTF8Encoding($false)))
 
 # --------------------------------------------------
-# Validate generated YAML
+# VALIDATE OUTPUT YAML
 # --------------------------------------------------
 
 try {
-    Get-Content $outputFile -Raw | ConvertFrom-Yaml -ErrorAction Stop | Out-Null
-    Write-Host "YAML validation successful."
+    Get-Content $OutputFile -Raw | ConvertFrom-Yaml -ErrorAction Stop | Out-Null
 }
 catch {
-    Write-Host ""
-    Write-Host "ERROR: Generated YAML is invalid!" -ForegroundColor Red
-    Write-Host $_.Exception.Message
-    Write-Host ""
-
-    if ($_.InvocationInfo) {
-        Write-Host "Location:" -ForegroundColor Yellow
-        Write-Host "Line: $($_.InvocationInfo.ScriptLineNumber)"
-        Write-Host "Code: $($_.InvocationInfo.Line)"
-    }
-
-    exit 1
+    throw "Generated YAML is invalid: $($_.Exception.Message)"
 }
 
+# --------------------------------------------------
+# DONE
+# --------------------------------------------------
+
 Write-Host ""
-Write-Host "Prompt Builder generated:"
-Write-Host $outputFile
+Write-Host "SUCCESS: Prompt Builder generated"
+Write-Host $OutputFile
