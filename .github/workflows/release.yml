@@ -8,7 +8,7 @@ on:
 permissions:
   contents: write
 
-# 🔥 verhindert parallele Releases (sehr wichtig)
+# 🔥 verhindert parallele Runs
 concurrency:
   group: release-main
   cancel-in-progress: true
@@ -20,7 +20,7 @@ jobs:
 
     steps:
       # ----------------------------------------
-      # CHECKOUT (FULL HISTORY!)
+      # CHECKOUT (volle History + Tags!)
       # ----------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,19 +36,20 @@ jobs:
           node-version: 20
 
       # ----------------------------------------
-      # INSTALL DEPENDENCIES
+      # INSTALL
       # ----------------------------------------
       - name: Install dependencies
         run: npm install
 
       # ----------------------------------------
-      # 🔥 SYNC WITH REMOTE (FIX PUSH ERROR)
+      # 🔥 GIT CONFIG (WICHTIG)
       # ----------------------------------------
-      - name: Sync branch
+      - name: Configure git
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git pull --rebase origin main
+          git config pull.rebase true
+          git config rebase.autoStash true
 
       # ----------------------------------------
       # SEMANTIC RELEASE
@@ -57,4 +58,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: semantic-release:*
+          GIT_AUTHOR_NAME: github-actions
+          GIT_AUTHOR_EMAIL: github-actions@github.com
+          GIT_COMMITTER_NAME: github-actions
+          GIT_COMMITTER_EMAIL: github-actions@github.com
         run: npx semantic-release

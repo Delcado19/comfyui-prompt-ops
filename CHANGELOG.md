@@ -1,24 +1,3 @@
-## [1.3.7](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.6...v1.3.7) (2026-03-18)
-
-
-### Bug Fixes
-
-* test changelog final ([cd2a9d3](https://github.com/Delcado19/comfyui-prompt-ops/commit/cd2a9d33fc596c5b53415895b9721667f5f58af9))
-
-## [1.3.6](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.5...v1.3.6) (2026-03-18)
-
-
-### Bug Fixes
-
-* enable changelog generation ([0082f57](https://github.com/Delcado19/comfyui-prompt-ops/commit/0082f579e568e81a65c44c77f370e7da123bf0e1))
-
-## [1.3.5](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.4...v1.3.5) (2026-03-18)
-
-
-### Bug Fixes
-
-* use correct semantic-release config filename ([e4e27ca](https://github.com/Delcado19/comfyui-prompt-ops/commit/e4e27ca3cd0a7303a102c17f07054400f93e15c4))
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -28,6 +7,32 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 ---
 
 ## [Unreleased]
+
+---
+
+## [1.3.7](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.6...v1.3.7) (2026-03-18)
+
+### Bug Fixes
+
+- test changelog final ([cd2a9d3](https://github.com/Delcado19/comfyui-prompt-ops/commit/cd2a9d33fc596c5b53415895b9721667f5f58af9))
+
+---
+
+## [1.3.6](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.5...v1.3.6) (2026-03-18)
+
+### Bug Fixes
+
+- enable changelog generation ([0082f57](https://github.com/Delcado19/comfyui-prompt-ops/commit/0082f579e568e81a65c44c77f370e7da123bf0e1))
+
+---
+
+## [1.3.5](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.4...v1.3.5) (2026-03-18)
+
+### Bug Fixes
+
+- use correct semantic-release config filename ([e4e27ca](https://github.com/Delcado19/comfyui-prompt-ops/commit/e4e27ca3cd0a7303a102c17f07054400f93e15c4))
+
+---
 
 ## [1.2.0]
 

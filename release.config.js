@@ -1,13 +1,16 @@
 module.exports = {
   branches: ["main"],
   plugins: [
+    // analysiert commits (fix:, feat:, etc.)
     "@semantic-release/commit-analyzer",
+
+    // erzeugt release notes
     "@semantic-release/release-notes-generator",
 
-    // 👉 SCHREIBT CHANGELOG.md
+    // 🔥 schreibt CHANGELOG.md
     "@semantic-release/changelog",
 
-    // 👉 COMMITTET DIE ÄNDERUNG INS REPO
+    // 🔥 committed CHANGELOG.md zurück ins repo
     [
       "@semantic-release/git",
       {
@@ -16,7 +19,7 @@ module.exports = {
       },
     ],
 
-    // 👉 ERSTELLT GITHUB RELEASE
+    // erstellt GitHub Release
     "@semantic-release/github",
   ],
 };
