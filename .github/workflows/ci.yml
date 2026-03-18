@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          Set-ExecutionPolicy RemoteSigned -Scope Process
+
+          if (-not (Get-Module -ListAvailable -Name powershell-yaml)) {
+              Install-Module powershell-yaml -Force -Scope CurrentUser -AllowClobber
+          }
+
+          Import-Module powershell-yaml
+
+      - name: Validate YAML
+        shell: pwsh
+        run: ./scripts/validate_yaml.ps1
+
+      - name: Validate Snippets
+        shell: pwsh
+        run: ./scripts/validate_snippets.ps1
+
+      - name: Generate Prompt Builder
+        shell: pwsh
+        run: ./scripts/generate_prompt_builder.ps1
