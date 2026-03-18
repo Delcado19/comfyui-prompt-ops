@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.4...v1.3.5) (2026-03-18)
+
+
+### Bug Fixes
+
+* use correct semantic-release config filename ([e4e27ca](https://github.com/Delcado19/comfyui-prompt-ops/commit/e4e27ca3cd0a7303a102c17f07054400f93e15c4))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
