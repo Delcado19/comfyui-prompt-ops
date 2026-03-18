@@ -8,6 +8,11 @@ on:
 permissions:
   contents: write
 
+# 🔥 verhindert parallele Releases (sehr wichtig)
+concurrency:
+  group: release-main
+  cancel-in-progress: true
+
 jobs:
   release:
     name: Semantic Release
@@ -15,7 +20,7 @@ jobs:
 
     steps:
       # ----------------------------------------
-      # CHECKOUT
+      # CHECKOUT (FULL HISTORY!)
       # ----------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,6 +40,15 @@ jobs:
       # ----------------------------------------
       - name: Install dependencies
         run: npm install
+
+      # ----------------------------------------
+      # 🔥 SYNC WITH REMOTE (FIX PUSH ERROR)
+      # ----------------------------------------
+      - name: Sync branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git pull --rebase origin main
 
       # ----------------------------------------
       # SEMANTIC RELEASE

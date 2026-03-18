@@ -3,7 +3,11 @@ module.exports = {
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
+
+    // 👉 SCHREIBT CHANGELOG.md
     "@semantic-release/changelog",
+
+    // 👉 COMMITTET DIE ÄNDERUNG INS REPO
     [
       "@semantic-release/git",
       {
@@ -11,6 +15,8 @@ module.exports = {
         message: "chore(release): ${nextRelease.version} [skip ci]",
       },
     ],
+
+    // 👉 ERSTELLT GITHUB RELEASE
     "@semantic-release/github",
   ],
 };
