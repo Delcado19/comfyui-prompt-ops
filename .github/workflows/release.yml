@@ -2,7 +2,7 @@ name: Release
 
 on:
   workflow_run:
-    workflows: ["CI"] # Name deiner CI aus ci.yml
+    workflows: ["CI"]
     types:
       - completed
 
@@ -11,23 +11,54 @@ permissions:
 
 jobs:
   release:
+    name: Semantic Release
     runs-on: ubuntu-latest
 
+    # 🔒 Nur wenn CI erfolgreich UND main branch
+    if: >
+      ${{
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == 'main'
+      }}
+
     steps:
-      - name: Checkout
+      # ----------------------------------------
+      # CHECKOUT (KORREKTER COMMIT!)
+      # ----------------------------------------
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 🔥 wichtig für versioning
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_branch }}
 
+      # ----------------------------------------
+      # DEBUG (sehr wichtig für Troubleshooting)
+      # ----------------------------------------
+      - name: Debug context
+        run: |
+          echo "Branch: ${{ github.event.workflow_run.head_branch }}"
+          echo "SHA: ${{ github.event.workflow_run.head_sha }}"
+          git log --oneline -10
+
+      # ----------------------------------------
+      # NODE SETUP
+      # ----------------------------------------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install deps
+      # ----------------------------------------
+      # INSTALL DEPENDENCIES
+      # ----------------------------------------
+      - name: Install dependencies
         run: npm install
 
+      # ----------------------------------------
+      # RUN SEMANTIC RELEASE (MIT LOGS)
+      # ----------------------------------------
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: semantic-release:* # 🔥 zeigt ALLES
         run: npx semantic-release
