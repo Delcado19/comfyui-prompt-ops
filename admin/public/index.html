@@ -51,24 +51,30 @@
         </div>
 
         <form id="editor-form">
-          <label>
-            Category label
-            <input id="category-label" name="categoryLabel" autocomplete="off" />
-          </label>
-          <label>
-            Category id
-            <input id="category-id" name="categoryId" autocomplete="off" />
-          </label>
-          <label>
-            Prefix
-            <input id="category-prefix" name="categoryPrefix" autocomplete="off" />
-          </label>
-          <label>
-            Order
-            <input id="category-order" name="categoryOrder" type="number" step="10" />
-          </label>
-
-          <hr />
+          <details id="category-fields" class="editor-section">
+            <summary>
+              <span>Category Settings</span>
+              <small id="category-summary">No category selected</small>
+            </summary>
+            <div class="field-grid">
+              <label>
+                Label
+                <input id="category-label" name="categoryLabel" autocomplete="off" />
+              </label>
+              <label>
+                ID
+                <input id="category-id" name="categoryId" autocomplete="off" />
+              </label>
+              <label>
+                Prefix
+                <input id="category-prefix" name="categoryPrefix" autocomplete="off" />
+              </label>
+              <label>
+                Order
+                <input id="category-order" name="categoryOrder" type="number" step="10" />
+              </label>
+            </div>
+          </details>
 
           <label>
             Snippet id
@@ -78,9 +84,9 @@
             Trigger
             <input id="snippet-trigger" name="snippetTrigger" autocomplete="off" />
           </label>
-          <label class="inline">
+          <label class="inline word-boundary-field" title="Only expand as a separate token; do not match inside longer text.">
             <input id="snippet-word" name="snippetWord" type="checkbox" />
-            Word boundary
+            Token only
           </label>
           <label class="text-field">
             Text

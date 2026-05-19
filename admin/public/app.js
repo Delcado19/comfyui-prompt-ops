@@ -21,6 +21,8 @@ const elements = {
   logCloseButton: document.querySelector("#log-close-btn"),
   log: document.querySelector("#log"),
   form: document.querySelector("#editor-form"),
+  categoryFields: document.querySelector("#category-fields"),
+  categorySummary: document.querySelector("#category-summary"),
   categoryLabel: document.querySelector("#category-label"),
   categoryId: document.querySelector("#category-id"),
   categoryPrefix: document.querySelector("#category-prefix"),
@@ -181,6 +183,10 @@ function renderEditor() {
   elements.addSnippet.disabled = !hasCategory;
   elements.deleteCategoryButton.disabled = !hasCategory;
   elements.deleteSnippetButton.disabled = !hasSnippet;
+  elements.categoryFields.open = hasCategory && !hasSnippet;
+  elements.categorySummary.textContent = category
+    ? `${category.label} - :${category.prefix}_ - ${category.snippets?.length || 0} snippets`
+    : "No category selected";
 
   elements.categoryLabel.value = category?.label || "";
   elements.categoryId.value = category?.id || "";

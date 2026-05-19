@@ -361,6 +361,49 @@ form {
   padding: var(--content-pad);
 }
 
+.editor-section {
+  grid-column: 1 / -1;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgb(255 255 255 / 3%);
+}
+
+.editor-section summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 42px;
+  padding: 0 12px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.editor-section summary::marker {
+  color: var(--muted);
+}
+
+.editor-section summary span {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.editor-section summary small {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  padding: 0 12px 12px;
+}
+
 label {
   display: grid;
   gap: 5px;
@@ -377,6 +420,11 @@ label.inline {
   color: var(--text);
   font-size: 12px;
   font-weight: 500;
+}
+
+.word-boundary-field {
+  justify-self: end;
+  white-space: nowrap;
 }
 
 input,
