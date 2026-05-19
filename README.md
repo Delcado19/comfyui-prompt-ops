@@ -168,6 +168,12 @@ docs/snippets.md
 
 Use the admin for adding, editing, deleting, and generating prompt categories and snippets.
 
+The admin header logo lives at:
+
+```text
+admin/public/logo.svg
+```
+
 ---
 
 # 📦 Installation

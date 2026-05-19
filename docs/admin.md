@@ -2,6 +2,8 @@
 
 The prompt library admin is a local web interface for editing prompt categories and snippets.
 
+The header uses `admin/public/logo.svg`, a compact puzzle-style logo inspired by the project banner in `docs/banner.png`.
+
 Start it from the repository root:
 
 ```powershell

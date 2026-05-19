@@ -24,6 +24,7 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 
 ### Added
 
+- Header logo for the local prompt library admin, inspired by the project banner artwork.
 - Local web admin for editing prompt categories and snippets through a central prompt library.
 - Central `library/prompt_library.yml` source of truth with generators for Espanso snippets, prompt builder output, and snippet documentation.
 - Import and generation scripts for migrating existing snippets into the library workflow.
