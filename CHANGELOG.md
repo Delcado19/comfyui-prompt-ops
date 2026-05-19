@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.5.2...v1.6.0) (2026-05-19)
+
+
+### Features
+
+* add admin header logo ([03ad9c6](https://github.com/Delcado19/comfyui-prompt-ops/commit/03ad9c6a5980d66f36a0bd25e7df3b20c54cda05))
+
 ## [1.5.2](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.5.1...v1.5.2) (2026-05-19)
 
 
