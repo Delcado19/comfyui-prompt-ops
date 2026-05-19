@@ -47,6 +47,12 @@ function Run-Step {
 # RUN PIPELINE
 # --------------------------------------------------
 
+if (Test-Path "../library/prompt_library.yml") {
+    Run-Step "Generate Snippets From Library" {
+        ./generate_snippets_from_library.ps1
+    }
+}
+
 Run-Step "Validate YAML" {
     ./validate_yaml.ps1
 }

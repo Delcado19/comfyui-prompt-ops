@@ -3,48 +3,71 @@ matches:
     word: true
     replace: |
       Cinematic lighting with dramatic shadows.
-
   - trigger: ":light_rim"
     word: true
     replace: |
       Subtle rim lighting outlines the character.
-
   - trigger: ":light_volumetric"
     word: true
     replace: |
       Volumetric lighting with visible light rays.
-
   - trigger: ":light_candle"
     word: true
     replace: |
       Warm candlelight illuminates the scene.
-
   - trigger: ":light_moon"
     word: true
     replace: |
       Cold moonlight creates a mysterious atmosphere.
-
   - trigger: ":light_dramatic"
     word: true
     replace: |
       Dramatic high contrast lighting.
-
   - trigger: ":light_soft"
     word: true
     replace: |
       Soft cinematic lighting.
-
   - trigger: ":light_shadow"
     word: true
     replace: |
       Deep shadows enhance the dark fantasy mood.
-
   - trigger: ":light_mist"
     word: true
     replace: |
       Atmospheric mist catches the light.
-
   - trigger: ":light_glow"
     word: true
     replace: |
       Subtle supernatural glow around the character.
+  - trigger: ":light_gloss_studio"
+    word: true
+    replace: |
+      Controlled studio strip lights creating clean glossy reflections on black wardrobe materials.
+  - trigger: ":light_lowkey_latex"
+    word: true
+    replace: |
+      Low-key fashion lighting with deep shadows and narrow bright highlights on latex surfaces.
+  - trigger: ":light_stained_glass"
+    word: true
+    replace: |
+      Colored stained-glass light spilling across stone architecture and the subject.
+  - trigger: ":light_moon_mist"
+    word: true
+    replace: |
+      Pale moonlight diffused through mist, with soft reflections and gentle blue shadows.
+  - trigger: ":light_neon_rain"
+    word: true
+    replace: |
+      Neon rain lighting with wet reflections, colored rim light, and dark urban ambience.
+  - trigger: ":light_golden_pinup"
+    word: true
+    replace: |
+      Warm golden hour glamour light with soft retro highlights and rich skin tones.
+  - trigger: ":light_cold_fantasy"
+    word: true
+    replace: |
+      Cold fantasy backlight with icy haze, pale blue shadows, and luminous atmospheric depth.
+  - trigger: ":light_gallery_softbox"
+    word: true
+    replace: |
+      Soft gallery-style lighting with smooth gradients, clean reflections, and minimal harsh shadows.

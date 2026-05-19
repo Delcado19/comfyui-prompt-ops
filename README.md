@@ -28,6 +28,7 @@ Instead of writing large prompts manually, prompts are built from **reusable com
 - modular **prompt components**
 - **Espanso snippet system**
 - **interactive prompt builder**
+- local **prompt library admin**
 - automatic **snippet documentation**
 - **duplicate trigger detection**
 - development pipeline for validation & generation
@@ -98,6 +99,7 @@ Trigger:
 
 The builder allows selecting:
 
+- Model style preset
 - Context
 - Characters
 - Scene
@@ -121,6 +123,48 @@ Output file:
 ```
 snippets/zz_prompt_builder.yml
 ```
+
+---
+
+# 🗂 Prompt Library Admin
+
+Start the local admin interface:
+
+```powershell
+npm run admin
+```
+
+Or use the platform start script:
+
+```powershell
+.\start-windows.bat
+```
+
+```bash
+sh ./start-linux.sh
+```
+
+Open:
+
+```text
+http://127.0.0.1:5177
+```
+
+The admin edits the central library:
+
+```text
+library/prompt_library.yml
+```
+
+Generated outputs:
+
+```text
+snippets/comfy_*.yml
+snippets/zz_prompt_builder.yml
+docs/snippets.md
+```
+
+Use the admin for adding, editing, deleting, and generating prompt categories and snippets.
 
 ---
 
@@ -206,6 +250,7 @@ Prompt components are grouped by category.
 
 | Prefix      | Category         |
 | ----------- | ---------------- |
+| `:model_`   | Model style      |
 | `:ctx_`     | Context          |
 | `:char_`    | Characters       |
 | `:scene_`   | Scene            |
@@ -215,6 +260,23 @@ Prompt components are grouped by category.
 | `:quality_` | Quality          |
 | `:neg_`     | Negative prompts |
 | `:nsfw_`    | NSFW modifiers   |
+
+Model style snippets describe prompt language that matches known local ComfyUI model families such as Z-Image Turbo, Flux2 Klein, SDXL Cinenauts, and wildcardXL fusion. They do not load models by themselves; they provide reusable text anchors for prompts.
+
+Naming convention:
+
+```
+:<category>_<model-or-look>_<descriptor>
+```
+
+Examples:
+
+```
+:model_zit_jibmix
+:style_zit_gothic_editorial
+:scene_moonlit_garden
+:qual_zit_material
+```
 
 Example snippet:
 
@@ -275,11 +337,11 @@ Run development pipeline:
 
 Pipeline steps:
 
-1. YAML validation
-2. PowerShell syntax validation
-3. snippet validation
-4. duplicate trigger detection
-5. snippet documentation generation
+1. snippet generation from `library/prompt_library.yml`
+2. YAML validation
+3. PowerShell syntax validation
+4. snippet validation
+5. duplicate trigger detection
 6. prompt builder generation
 
 ---
@@ -289,6 +351,8 @@ Pipeline steps:
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
 | doctor.ps1                   | environment diagnostics        |
+| import_snippets_to_library.ps1 | migrate generated snippets to the central library |
+| generate_snippets_from_library.ps1 | generate Espanso snippets from the central library |
 | test_powershell_parse.ps1    | PowerShell syntax validation   |
 | validate_yaml.ps1            | YAML syntax validation         |
 | validate_snippets.ps1        | snippet validation             |
@@ -306,6 +370,7 @@ Pipeline steps:
 comfyui-prompt-ops
 │
 ├ docs
+│   admin.md
 │   architecture.md
 │   banner.png
 │   developer_workflow.md
@@ -315,6 +380,9 @@ comfyui-prompt-ops
 │
 ├ installer
 │   install.ps1
+│
+├ library
+│   prompt_library.yml
 │
 ├ logs
 │   .gitkeep
@@ -326,6 +394,8 @@ comfyui-prompt-ops
 │   export_existing_snippets.ps1
 │   generate_prompt_builder.ps1
 │   generate_snippet_docs.ps1
+│   generate_snippets_from_library.ps1
+│   import_snippets_to_library.ps1
 │   install_snippets.ps1
 │   restart_services.ps1
 │   test_powershell_parse.ps1
@@ -337,6 +407,7 @@ comfyui-prompt-ops
     comfy_characters.yml
     comfy_context.yml
     comfy_lighting.yml
+    comfy_model.yml
     comfy_negative.yml
     comfy_nsfw.yml
     comfy_quality.yml

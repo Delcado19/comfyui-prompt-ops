@@ -1,80 +1,121 @@
 matches:
   - trigger: ":style_realistic"
     word: true
-    replace: "ultra realistic, highly detailed, photorealistic, natural skin texture"
-
+    replace: |
+      ultra realistic, highly detailed, photorealistic, natural skin texture
   - trigger: ":style_photo"
     word: true
-    replace: "professional photography, high dynamic range, sharp focus"
-
+    replace: |
+      professional photography, high dynamic range, sharp focus
   - trigger: ":style_cinematic"
     word: true
-    replace: "cinematic style, film still, dramatic color grading, movie lighting"
-
+    replace: |
+      cinematic style, film still, dramatic color grading, movie lighting
   - trigger: ":style_film"
     word: true
-    replace: "35mm film photography, analog film grain, cinematic tones"
-
+    replace: |
+      35mm film photography, analog film grain, cinematic tones
   - trigger: ":style_noir"
     word: true
-    replace: "film noir style, high contrast, dramatic shadows, black and white"
-
+    replace: |
+      film noir style, high contrast, dramatic shadows, black and white
   - trigger: ":style_fantasy"
     word: true
-    replace: "fantasy art style, magical atmosphere, epic composition"
-
+    replace: |
+      fantasy art style, magical atmosphere, epic composition
   - trigger: ":style_darkfantasy"
     word: true
-    replace: "dark fantasy, gothic atmosphere, dramatic lighting"
-
+    replace: |
+      dark fantasy, gothic atmosphere, dramatic lighting
   - trigger: ":style_scifi"
     word: true
-    replace: "science fiction aesthetic, futuristic environment, neon accents"
-
+    replace: |
+      science fiction aesthetic, futuristic environment, neon accents
   - trigger: ":style_cyberpunk"
     word: true
-    replace: "cyberpunk style, neon lights, futuristic city, dystopian atmosphere"
-
+    replace: |
+      cyberpunk style, neon lights, futuristic city, dystopian atmosphere
   - trigger: ":style_anime"
     word: true
-    replace: "anime style illustration, vibrant colors, clean line art"
-
+    replace: |
+      anime style illustration, vibrant colors, clean line art
   - trigger: ":style_manga"
     word: true
-    replace: "manga style illustration, black ink line art, expressive shading"
-
+    replace: |
+      manga style illustration, black ink line art, expressive shading
   - trigger: ":style_comic"
     word: true
-    replace: "comic book illustration, bold outlines, dynamic shading"
-
+    replace: |
+      comic book illustration, bold outlines, dynamic shading
   - trigger: ":style_painterly"
     word: true
-    replace: "painterly style, visible brush strokes, digital painting"
-
+    replace: |
+      painterly style, visible brush strokes, digital painting
   - trigger: ":style_oil"
     word: true
-    replace: "oil painting style, rich textures, classical painting"
-
+    replace: |
+      oil painting style, rich textures, classical painting
   - trigger: ":style_watercolor"
     word: true
-    replace: "watercolor painting, soft color blending, artistic texture"
-
+    replace: |
+      watercolor painting, soft color blending, artistic texture
   - trigger: ":style_concept"
     word: true
-    replace: "concept art, highly detailed environment design, cinematic composition"
-
+    replace: |
+      concept art, highly detailed environment design, cinematic composition
   - trigger: ":style_illustration"
     word: true
-    replace: "digital illustration, polished artwork, detailed shading"
-
+    replace: |
+      digital illustration, polished artwork, detailed shading
   - trigger: ":style_minimal"
     word: true
-    replace: "minimalist style, clean composition, simple shapes"
-
+    replace: |
+      minimalist style, clean composition, simple shapes
   - trigger: ":style_surreal"
     word: true
-    replace: "surreal art style, dreamlike atmosphere, abstract elements"
-
+    replace: |
+      surreal art style, dreamlike atmosphere, abstract elements
   - trigger: ":style_vintage"
     word: true
-    replace: "vintage aesthetic, retro color palette, nostalgic atmosphere"
+    replace: |
+      vintage aesthetic, retro color palette, nostalgic atmosphere
+  - trigger: ":style_zit_gothic_editorial"
+    word: true
+    replace: |
+      dark gothic editorial realism, glossy black fashion, porcelain skin contrast, controlled high contrast shadows.
+  - trigger: ":style_zit_latex_glamour"
+    word: true
+    replace: |
+      polished latex glamour photography, black reflective wardrobe, elegant adult fashion styling, smooth studio realism.
+  - trigger: ":style_zit_cyber_gloss"
+    word: true
+    replace: |
+      biomechanical cyber glamour, polished metal accents, glossy black surfaces, sharp futuristic portrait realism.
+  - trigger: ":style_zit_dark_fashion"
+    word: true
+    replace: |
+      dark fashion editorial, luxury magazine styling, strict black wardrobe, confident adult presence, cinematic realism.
+  - trigger: ":style_zbase_ink_samurai"
+    word: true
+    replace: |
+      high contrast ink samurai illustration, sweeping black brush shapes, restrained red accent, mythic graphic composition.
+  - trigger: ":style_sdxl_moonlit_fantasy"
+    word: true
+    replace: |
+      moonlit fantasy painting, misty atmosphere, ornate architecture, poetic melancholy, detailed painterly scenery.
+  - trigger: ":style_sdxl_surreal_dark"
+    word: true
+    replace: |
+      surreal dark fantasy, impossible architecture, eerie scale, dreamlike symbolic details, painterly chiaroscuro.
+  - trigger: ":style_sdxl_inkwash_xianxia"
+    word: true
+    replace: |
+      ink-wash xianxia fantasy, flowing robes, winter mist, elegant brushwork, cinematic negative space.
+  - trigger: ":style_flux_clean_editorial"
+    word: true
+    replace: |
+      clean Flux editorial realism, smooth surfaces, modern fashion pose, crisp material separation, refined studio finish.
+  - trigger: ":style_qwen_precise_edit"
+    word: true
+    replace: |
+      precise object edits, clean boundaries, preserved subject identity, realistic texture continuity.

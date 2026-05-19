@@ -3,48 +3,71 @@ matches:
     word: true
     replace: |
       A dominant gothic woman with pale skin and an intense gaze.
-
   - trigger: ":char_vamp"
     word: true
     replace: |
       A mysterious vampire woman with porcelain skin and dark hypnotic eyes.
-
   - trigger: ":char_witch"
     word: true
     replace: |
       A dark fantasy witch with long black hair and a mysterious aura.
-
   - trigger: ":char_queen"
     word: true
     replace: |
       A powerful dark queen radiating dominance and elegance.
-
   - trigger: ":char_succubus"
     word: true
     replace: |
       A seductive succubus with glowing eyes and an alluring presence.
-
   - trigger: ":char_darkelf"
     word: true
     replace: |
       A dark elf woman with sharp features and long silver hair.
-
   - trigger: ":char_assassin"
     word: true
     replace: |
       A deadly female assassin with a cold and focused gaze.
-
   - trigger: ":char_mistress"
     word: true
     replace: |
       A dominant gothic mistress with a confident and commanding posture.
-
   - trigger: ":char_goddess"
     word: true
     replace: |
       A dark goddess radiating supernatural power.
-
   - trigger: ":char_demon"
     word: true
     replace: |
       A mysterious demon woman with glowing eyes and an intimidating aura.
+  - trigger: ":char_latex_muse"
+    word: true
+    replace: |
+      An adult gothic fashion muse with jet black hair, porcelain skin, and a calm commanding gaze.
+  - trigger: ":char_porcelain_oracle"
+    word: true
+    replace: |
+      A porcelain-skinned oracle with pale hair, sharp cheekbones, and an uncanny ethereal presence.
+  - trigger: ":char_void_arcanist"
+    word: true
+    replace: |
+      A void arcanist with an otherworldly body, arcane markings, and a silent supernatural aura.
+  - trigger: ":char_xianxia_wanderer"
+    word: true
+    replace: |
+      A mysterious xianxia wanderer in flowing robes, standing alone in winter mist.
+  - trigger: ":char_ink_samurai"
+    word: true
+    replace: |
+      A lone samurai wanderer with a wide straw hat, black robes, and a restrained heroic stance.
+  - trigger: ":char_cyber_sorceress"
+    word: true
+    replace: |
+      A cyber gothic sorceress with polished metallic details, dark makeup, and intense luminous eyes.
+  - trigger: ":char_rockabilly_muse"
+    word: true
+    replace: |
+      An adult rockabilly fashion muse with classic styling, confident expression, and retro glamour attitude.
+  - trigger: ":char_dark_couture_model"
+    word: true
+    replace: |
+      A dark couture model with elegant posture, precise makeup, and severe black high-fashion styling.

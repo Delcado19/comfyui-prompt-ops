@@ -3,48 +3,79 @@ matches:
     word: true
     replace: |
       The scene takes place inside a dark gothic castle illuminated by candlelight.
-
   - trigger: ":scene_cathedral"
     word: true
     replace: |
       The scene takes place inside a massive gothic cathedral.
-
   - trigger: ":scene_forest"
     word: true
     replace: |
       The scene takes place in a misty dark forest.
-
   - trigger: ":scene_throne"
     word: true
     replace: |
       She is sitting on a dark throne surrounded by shadows.
-
   - trigger: ":scene_altar"
     word: true
     replace: |
       She stands in front of a mysterious ritual altar.
-
   - trigger: ":scene_graveyard"
     word: true
     replace: |
       The scene takes place in an ancient foggy graveyard.
-
   - trigger: ":scene_ruins"
     word: true
     replace: |
       The scene takes place in dark fantasy ruins.
-
   - trigger: ":scene_library"
     word: true
     replace: |
       The scene takes place in an ancient gothic library.
-
   - trigger: ":scene_crypt"
     word: true
     replace: |
       The scene takes place inside a dark underground crypt.
-
   - trigger: ":scene_temple"
     word: true
     replace: |
       The scene takes place in a forgotten dark temple.
+  - trigger: ":scene_latex_studio"
+    word: true
+    replace: |
+      The scene takes place in a minimal fashion studio with glossy black props and controlled reflections.
+  - trigger: ":scene_luxury_interior"
+    word: true
+    replace: |
+      The scene takes place in an elegant luxury interior with warm walls, polished furniture, and soft editorial lighting.
+  - trigger: ":scene_moonlit_garden"
+    word: true
+    replace: |
+      The scene takes place in a moonlit East Asian garden with sakura blossoms, misty water, and distant pavilions.
+  - trigger: ":scene_winter_xianxia"
+    word: true
+    replace: |
+      The scene takes place in a misty winter xianxia landscape with snow, cliffs, and a solitary wanderer.
+  - trigger: ":scene_gothic_throne_room"
+    word: true
+    replace: |
+      The scene takes place in an ornate gothic throne room with stained glass, cold stone, and dramatic symmetry.
+  - trigger: ":scene_neon_alley"
+    word: true
+    replace: |
+      The scene takes place in a rain-soaked neon alley with reflective pavement and distant city lights.
+  - trigger: ":scene_retro_gas_station"
+    word: true
+    replace: |
+      The scene takes place at a 1950s American gas station during golden hour with a polished vintage car.
+  - trigger: ":scene_arcane_library"
+    word: true
+    replace: |
+      The scene takes place in a crowded arcane library with tall shelves, occult props, and warm narrow aisle lighting.
+  - trigger: ":scene_waterfall_duel"
+    word: true
+    replace: |
+      The scene takes place near a powerful waterfall with mist, spray, and a lone warrior silhouette.
+  - trigger: ":scene_surreal_megacity"
+    word: true
+    replace: |
+      The scene takes place in a surreal futuristic megacity with impossible architecture and glowing dark structures.

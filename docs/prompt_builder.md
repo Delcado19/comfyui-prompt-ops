@@ -18,6 +18,7 @@ Typing this trigger opens an interactive selection form.
 
 The builder includes the following prompt components:
 
+- Model style preset
 - Context
 - Characters
 - Scene
@@ -29,6 +30,8 @@ The builder includes the following prompt components:
 - NSFW modifiers
 
 Each field provides predefined options.
+
+The model field inserts prompt-language presets for local model families. It is not a ComfyUI model loader; choose the matching model in ComfyUI separately, then use the preset to steer prompt wording toward that model's strongest visual behavior.
 
 ---
 
@@ -49,7 +52,13 @@ The generated prompt is inserted directly at the cursor position.
 
 # Builder Source
 
-The builder configuration is stored in:
+The source prompt library is stored in:
+
+```
+library/prompt_library.yml
+```
+
+The builder configuration is generated to:
 
 ```
 snippets/zz_prompt_builder.yml

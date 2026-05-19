@@ -1,122 +1,74 @@
+# generate_snippet_docs.ps1
+
 $ErrorActionPreference = "Stop"
+Set-StrictMode -Version Latest
 
 Write-Host "[docs] Generating snippet documentation..."
 
-# ---------------------------------------------------
-# Paths
-# ---------------------------------------------------
+$ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot = Resolve-Path "$ScriptRoot/.."
+$SnippetDir = Join-Path $RepoRoot "snippets"
+$DocsDir = Join-Path $RepoRoot "docs"
+$OutputFile = Join-Path $DocsDir "snippets.md"
 
-$scriptDir  = $PSScriptRoot
-$repoRoot   = Split-Path -Parent $scriptDir
-$snippetDir = Join-Path $repoRoot "snippets"
-$docsDir    = Join-Path $repoRoot "docs"
-$outFile    = Join-Path $docsDir "snippets.md"
+$moduleName = "powershell-yaml"
 
-if (-not (Test-Path $snippetDir)) {
-    throw "Snippet directory not found: $snippetDir"
+if (-not (Get-Module -ListAvailable -Name $moduleName)) {
+    Install-Module $moduleName -Force -Scope CurrentUser -AllowClobber -ErrorAction Stop
 }
 
-if (-not (Test-Path $docsDir)) {
-    New-Item -ItemType Directory -Path $docsDir | Out-Null
+Import-Module $moduleName -ErrorAction Stop
+
+if (-not (Test-Path $SnippetDir)) {
+    throw "Snippet directory not found: $SnippetDir"
 }
 
-# ---------------------------------------------------
-# Collect snippet rows
-# ---------------------------------------------------
+if (-not (Test-Path $DocsDir)) {
+    New-Item -ItemType Directory -Path $DocsDir | Out-Null
+}
+
+function Escape-MarkdownCell {
+    param([string]$Value)
+    return (($Value -replace "\r?\n", " ").Trim()).Replace("|", "\|")
+}
 
 $rows = [System.Collections.Generic.List[string]]::new()
 
-Get-ChildItem $snippetDir -Filter *.yml | Sort-Object Name | ForEach-Object {
-
+Get-ChildItem $SnippetDir -Filter "*.yml" | Sort-Object Name | ForEach-Object {
     $fileName = $_.Name
-    $lines = Get-Content $_.FullName
+    $yaml = Get-Content $_.FullName -Raw | ConvertFrom-Yaml -ErrorAction Stop
 
-    $trigger = $null
-    $replace = $null
+    if (-not $yaml.ContainsKey("matches")) {
+        return
+    }
 
-    $collectMultiline = $false
-    $buffer = @()
+    $matches = @($yaml["matches"])
 
-    foreach ($line in $lines) {
+    foreach ($match in $matches) {
+        $trigger = [string]$match["trigger"]
+        $replace = [string]$match["replace"]
 
-        if ($line -match 'trigger:\s*"(.*?)"') {
-            $trigger = $matches[1]
-        }
-
-        if ($line -match 'replace:\s*"(.*?)"') {
-            $replace = $matches[1]
-
-            if ($trigger) {
-
-                $replace = $replace.Replace('|','\|')
-
-                $rows.Add("| $trigger | $replace | $fileName |")
-
-                $trigger = $null
-                $replace = $null
-            }
-        }
-
-        elseif ($line -match 'replace:\s*\|') {
-            $collectMultiline = $true
-            $buffer = @()
+        if ([string]::IsNullOrWhiteSpace($trigger) -or [string]::IsNullOrWhiteSpace($replace)) {
             continue
         }
 
-        elseif ($collectMultiline) {
-
-            if ($line -match '^\s{2,}(.*)') {
-                $buffer += $matches[1]
-            }
-            else {
-
-                $collectMultiline = $false
-
-                $replace = ($buffer -join " ").Trim()
-
-                if ($trigger) {
-
-                    $replace = $replace.Replace('|','\|')
-
-                    $rows.Add("| $trigger | $replace | $fileName |")
-
-                    $trigger = $null
-                }
-            }
-        }
-    }
-
-    # Catch multiline replace at file end
-    if ($collectMultiline -and $trigger) {
-
-        $replace = ($buffer -join " ").Trim()
-        $replace = $replace.Replace('|','\|')
-
-        $rows.Add("| $trigger | $replace | $fileName |")
+        $rows.Add("| $(Escape-MarkdownCell $trigger) | $(Escape-MarkdownCell $replace) | $fileName |")
     }
 }
 
-# ---------------------------------------------------
-# Generate Markdown
-# ---------------------------------------------------
-
-$md = @()
-
-$md += "# Espanso Snippet Reference"
-$md += ""
-$md += "Auto-generated documentation of available snippets."
-$md += ""
-$md += "| Trigger | Replace | File |"
-$md += "|--------|---------|------|"
+$md = @(
+    "# Espanso Snippet Reference",
+    "",
+    "Auto-generated documentation of available snippets.",
+    "",
+    "| Trigger | Replace | File |",
+    "|--------|---------|------|"
+)
 
 $md += $rows
 
-# ---------------------------------------------------
-# Write file
-# ---------------------------------------------------
-
-$md | Set-Content $outFile -Encoding utf8NoBOM
+$md | Set-Content $OutputFile -Encoding utf8NoBOM
 
 Write-Host "[docs] Snippets written:" $rows.Count
-Write-Host "[docs] Output file:" $outFile
+Write-Host "[docs] Output file:" $OutputFile
 Write-Host "[docs] Documentation generation complete."

@@ -6,13 +6,27 @@ This document describes the workflow for developing and maintaining snippets.
 
 # 1 Edit Snippets
 
-All prompt components are stored in:
+All prompt components are maintained in the central library:
+
+```
+library/prompt_library.yml
+```
+
+The Espanso files under `snippets/` are generated output.
+
+Start the local admin UI:
+
+```powershell
+npm run admin
+```
+
+Generated snippets are written to:
 
 ```
 snippets/
 ```
 
-Example snippet file:
+Example generated snippet file:
 
 ```
 snippets/comfy_context.yml
@@ -47,6 +61,8 @@ The development pipeline runs the following scripts:
 
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
+| generate_snippets_from_library.ps1 | generate Espanso snippet files |
+| import_snippets_to_library.ps1 | migrate existing snippets into the central library |
 | test_powershell_parse.ps1    | validate PowerShell syntax     |
 | validate_yaml.ps1            | validate YAML syntax           |
 | validate_snippets.ps1        | validate snippet structure     |

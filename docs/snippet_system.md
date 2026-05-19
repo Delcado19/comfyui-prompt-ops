@@ -6,11 +6,41 @@ Snippets represent reusable prompt components.
 
 ---
 
+# Source Of Truth
+
+The central prompt library is:
+
+```text
+library/prompt_library.yml
+```
+
+Generated Espanso snippet files are written to:
+
+```text
+snippets/comfy_*.yml
+```
+
+When using the admin workflow, edit the central library and regenerate snippets instead of editing generated `comfy_*.yml` files directly.
+
+Generator:
+
+```powershell
+.\scripts\generate_snippets_from_library.ps1
+```
+
+Legacy migration from existing generated snippets:
+
+```powershell
+.\scripts\import_snippets_to_library.ps1
+```
+
+---
+
 # Snippet Format
 
-Each snippet is defined in YAML using Espanso's match format.
+Each source snippet is defined in the central library. The generator writes Espanso match YAML.
 
-Example:
+Generated Espanso example:
 
 ```yaml
 matches:
@@ -27,6 +57,7 @@ Prompt components are organized by category.
 
 | Category   | Prefix     |
 | ---------- | ---------- |
+| Model      | :model\_   |
 | Context    | :ctx\_     |
 | Characters | :char\_    |
 | Scene      | :scene\_   |
@@ -38,6 +69,24 @@ Prompt components are organized by category.
 | NSFW       | :nsfw\_    |
 
 Each category is stored in a separate YAML file.
+
+Model snippets are prompt-style anchors for local model families. They do not load a checkpoint, UNet, LoRA, VAE, or text encoder. They only add wording that fits the visual behavior observed from local ComfyUI outputs.
+
+Use this naming pattern for new triggers:
+
+```
+:<category>_<model-or-look>_<descriptor>
+```
+
+Examples:
+
+```
+:model_zit_jibmix
+:style_sdxl_inkwash_xianxia
+:scene_gothic_throne_room
+:light_lowkey_latex
+:neg_zit_photo
+```
 
 ---
 
@@ -53,6 +102,7 @@ Example:
 
 ```
 snippets/comfy_context.yml
+snippets/comfy_model.yml
 snippets/comfy_characters.yml
 snippets/comfy_scene.yml
 snippets/comfy_camera.yml

@@ -1,20 +1,53 @@
 matches:
   - trigger: ":qual_detail"
+    word: true
     replace: |
       Ultra detailed skin with visible pores.
-
   - trigger: ":qual_sharp"
+    word: true
     replace: |
       Extremely sharp focus.
-
   - trigger: ":qual_photo"
+    word: true
     replace: |
       Highly photorealistic rendering.
-
   - trigger: ":qual_8k"
+    word: true
     replace: |
       Extremely high detail.
-
   - trigger: ":qual_skin"
+    word: true
     replace: |
       Natural skin texture and realistic shading.
+  - trigger: ":qual_zit_photo"
+    word: true
+    replace: |
+      photorealistic detail, natural body proportions, symmetrical face, sharp eyes, defined cheekbones, clean glossy material highlights.
+  - trigger: ":qual_zit_material"
+    word: true
+    replace: |
+      Strong latex and leather material fidelity, believable reflections, clean seams, smooth black highlights.
+  - trigger: ":qual_sdxl_painterly"
+    word: true
+    replace: |
+      Rich painterly detail, layered atmosphere, ornate background elements, clear fantasy composition.
+  - trigger: ":qual_flux_clean"
+    word: true
+    replace: |
+      clean photoreal rendering, accurate surface separation, stable hands, refined face detail, controlled highlights.
+  - trigger: ":qual_face_priority"
+    word: true
+    replace: |
+      Face priority, symmetrical eyes, natural mouth, sharp eyelashes, realistic makeup detail.
+  - trigger: ":qual_hands_priority"
+    word: true
+    replace: |
+      Hands priority, natural fingers, relaxed hand pose, no fused fingers, no distorted wrists.
+  - trigger: ":qual_upscale_ready"
+    word: true
+    replace: |
+      Upscale-ready clean image, no noisy texture buildup, clear edges, balanced micro-detail.
+  - trigger: ":qual_gothic_detail"
+    word: true
+    replace: |
+      Detailed gothic ornament, readable lace and metal accents, crisp cathedral textures, polished dark color palette.

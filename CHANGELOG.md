@@ -8,6 +8,15 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 
 ## [Unreleased]
 
+### Added
+
+- Local web admin for editing prompt categories and snippets through a central prompt library.
+- Central `library/prompt_library.yml` source of truth with generators for Espanso snippets, prompt builder output, and snippet documentation.
+- Import and generation scripts for migrating existing snippets into the library workflow.
+- Model-aware prompt presets for Z-Image Turbo, Z-Image Base, Flux2 Klein, SDXL Cinenauts, wildcardXL fusion, and Qwen edit workflows.
+- Expanded style, context, character, scene, camera, lighting, quality, negative, and NSFW prompt components based on local ComfyUI output patterns.
+- Prompt snippet naming guidance for model-adapted triggers.
+
 ---
 
 ## [1.4.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.7...v1.4.0) (2026-05-19)

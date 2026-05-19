@@ -3,23 +3,43 @@ matches:
     word: true
     replace: |
       sensual pose with seductive body language.
-
   - trigger: ":nsfw_lingerie"
     word: true
     replace: |
       wearing elegant black lingerie.
-
   - trigger: ":nsfw_latex"
     word: true
     replace: |
       wearing a glossy black latex outfit.
-
   - trigger: ":nsfw_dominatrix"
     word: true
     replace: |
       dressed as a powerful dominatrix.
-
   - trigger: ":nsfw_seductive"
     word: true
     replace: |
       seductive and provocative pose.
+  - trigger: ":nsfw_latex_editorial"
+    word: true
+    replace: |
+      adult latex fashion editorial styling with glossy black wardrobe and confident controlled pose.
+  - trigger: ":nsfw_boudoir_gloss"
+    word: true
+    replace: |
+      adult boudoir glamour mood with polished black materials, soft skin highlights, and intimate studio framing.
+  - trigger: ":nsfw_afterdark_fashion"
+    word: true
+    replace: |
+      after-dark adult fashion look, confident expression, black high-gloss styling, tasteful seductive atmosphere.
+  - trigger: ":nsfw_pinup_retro"
+    word: true
+    replace: |
+      adult retro pinup styling with confident pose, polished makeup, and warm glamour lighting.
+  - trigger: ":nsfw_gothic_glamour"
+    word: true
+    replace: |
+      adult gothic glamour styling, dark couture wardrobe, elegant dominance, dramatic romantic mood.
+  - trigger: ":nsfw_material_focus"
+    word: true
+    replace: |
+      adult fashion material focus, glossy latex, leather straps, polished heels, clean reflective highlights.

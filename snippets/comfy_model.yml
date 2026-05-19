@@ -1,0 +1,41 @@
+matches:
+  - trigger: ":model_zit_jibmix"
+    word: true
+    replace: |
+      sharp glossy fashion realism, black latex or leather with crisp specular highlights, dramatic adult editorial mood, controlled high contrast, clear full-body silhouette.
+  - trigger: ":model_zit_biglove"
+    word: true
+    replace: |
+      polished portrait realism, elegant glossy latex fashion, warm luxury interior lighting, smooth natural skin texture, clean reflections on black clothing and furniture.
+  - trigger: ":model_zit_eventhorizon"
+    word: true
+    replace: |
+      cinematic adult glamour photography, strong pose language, high contrast black wardrobe, crisp straps and seams, moody background with controlled rim light.
+  - trigger: ":model_zit_intorealism"
+    word: true
+    replace: |
+      naturalistic skin texture, realistic body proportions, documentary studio clarity, glossy black fashion materials, believable reflections, restrained color grading.
+  - trigger: ":model_zit_zepic"
+    word: true
+    replace: |
+      high impact realistic portrait photography, sharp eyes, defined cheekbones, detailed makeup, glossy wardrobe highlights, controlled photographic sharpness.
+  - trigger: ":model_zbase_juggernaut"
+    word: true
+    replace: |
+      bold fantasy illustration, ink-like black silhouettes, mythic warrior posture, sweeping robe shapes, restrained red accents, clean graphic contrast.
+  - trigger: ":model_sdxl_wildcard"
+    word: true
+    replace: |
+      surreal fantasy illustration, elaborate environment design, ornate architecture, impossible scale, painterly detail, strange dreamlike atmosphere.
+  - trigger: ":model_sdxl_cinenauts"
+    word: true
+    replace: |
+      cinematic concept art, ink-wash fantasy atmosphere, layered mist, refined painterly composition, elegant negative space, dramatic landscape depth.
+  - trigger: ":model_flux2_klein"
+    word: true
+    replace: |
+      clean glossy realism, modern editorial fashion posing, precise latex and leather surface reflections, crisp object boundaries, minimal studio finish.
+  - trigger: ":model_qwen_edit"
+    word: true
+    replace: |
+      clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift.

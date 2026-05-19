@@ -3,14 +3,12 @@ matches:
     word: true
     replace: |
       worst quality, low quality, watermark
-
   - trigger: ":neg_base"
     word: true
     replace: |
       worst quality, low quality,
       blurry, jpeg artifacts,
       watermark, text, logo
-
   - trigger: ":neg_render"
     word: true
     replace: |
@@ -18,7 +16,6 @@ matches:
       jpeg artifacts,
       oversaturated, overexposed,
       underexposed, noise, grain
-
   - trigger: ":neg_anatomy"
     word: true
     replace: |
@@ -27,7 +24,6 @@ matches:
       extra limbs, missing limbs,
       duplicate body, duplicate limbs,
       distorted body, twisted torso
-
   - trigger: ":neg_hands"
     word: true
     replace: |
@@ -35,14 +31,12 @@ matches:
       extra fingers, missing fingers,
       fused fingers, mutated fingers,
       deformed fingers
-
   - trigger: ":neg_face"
     word: true
     replace: |
       distorted face, asymmetrical face,
       cross-eyed, deformed eyes,
       malformed mouth, bad teeth
-
   - trigger: ":neg_strict"
     word: true
     replace: |
@@ -56,3 +50,48 @@ matches:
       duplicate body, duplicate limbs,
       cross-eyed, asymmetrical eyes,
       watermark, text, logo, signature
+  - trigger: ":neg_zit_photo"
+    word: true
+    replace: |
+      low quality, blurry, flat lighting,
+      plastic skin, waxy face,
+      broken latex reflections, muddy black material,
+      bad anatomy, distorted body,
+      malformed hands, fused fingers,
+      watermark, text, logo, signature
+  - trigger: ":neg_material"
+    word: true
+    replace: |
+      dull material, dirty reflections,
+      rubber texture artifacts,
+      melted fabric, broken seams,
+      noisy highlights, muddy shadows
+  - trigger: ":neg_fashion_pose"
+    word: true
+    replace: |
+      awkward pose, broken posture,
+      twisted torso, floating limbs,
+      crossed eyes, asymmetrical face,
+      cropped feet, missing shoes
+  - trigger: ":neg_sdxl_painterly"
+    word: true
+    replace: |
+      muddy painting, unclear subject,
+      unreadable architecture,
+      oversaturated colors, flat composition,
+      watermark, text, logo, signature
+  - trigger: ":neg_cinematic_clean"
+    word: true
+    replace: |
+      noisy image, jpeg artifacts,
+      overexposed highlights,
+      crushed blacks, color banding,
+      motion blur, bad focus
+  - trigger: ":neg_face_hands_strict"
+    word: true
+    replace: |
+      distorted face, asymmetrical eyes,
+      malformed mouth, bad teeth,
+      bad hands, extra fingers,
+      missing fingers, fused fingers,
+      mutated fingers, distorted wrists

@@ -15,6 +15,7 @@ $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot   = Resolve-Path "$ScriptRoot/.."
 $SnippetDir = Join-Path $RepoRoot "snippets"
 $OutputFile = Join-Path $SnippetDir "zz_prompt_builder.yml"
+$LibraryFile = Join-Path $RepoRoot "library\prompt_library.yml"
 
 if (-not (Test-Path $SnippetDir)) {
     throw "Snippet directory not found: $SnippetDir"
@@ -55,17 +56,34 @@ Import-Module powershell-yaml -ErrorAction Stop
 # CONFIG
 # --------------------------------------------------
 
-$CategoryOrder = @(
-    "context",
-    "characters",
-    "scene",
-    "camera",
-    "lighting",
-    "style",
-    "quality",
-    "negative",
-    "nsfw"
-)
+$CategoryOrder = @()
+
+if (Test-Path $LibraryFile) {
+    try {
+        $library = Get-Content $LibraryFile -Raw | ConvertFrom-Yaml -ErrorAction Stop
+        $CategoryOrder = @($library["categories"]) |
+            Sort-Object { $_["order"] }, { $_["id"] } |
+            ForEach-Object { $_["id"] }
+    }
+    catch {
+        throw "Failed to read prompt library categories: $($_.Exception.Message)"
+    }
+}
+
+if ($CategoryOrder.Count -eq 0) {
+    $CategoryOrder = @(
+        "model",
+        "context",
+        "characters",
+        "scene",
+        "camera",
+        "lighting",
+        "style",
+        "quality",
+        "negative",
+        "nsfw"
+    )
+}
 
 $Categories = @{}
 

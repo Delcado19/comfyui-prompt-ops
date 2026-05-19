@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prompt Ops Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="Prompt Ops Admin header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <div>
+          <h1>Prompt Ops Admin</h1>
+          <p><span>Prompt Library</span><span id="status">Loading library...</span></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="save-btn" type="button">Save</button>
+        <button id="generate-btn" type="button">Generate</button>
+        <button id="install-btn" type="button">Install</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <aside class="categories">
+        <div class="panel-head">
+          <h2>Categories</h2>
+          <div class="actions compact">
+            <button id="delete-category-btn" class="danger ghost" type="button">Delete</button>
+            <button id="add-category-btn" type="button">Add</button>
+          </div>
+        </div>
+        <div id="category-list" class="list"></div>
+      </aside>
+
+      <section class="snippets">
+        <div class="panel-head">
+          <h2 id="snippet-title">Snippets</h2>
+          <button id="add-snippet-btn" type="button">Add</button>
+        </div>
+        <div id="snippet-list" class="list"></div>
+      </section>
+
+      <section class="editor">
+        <div class="panel-head">
+          <h2>Editor</h2>
+          <div class="actions compact">
+            <button id="delete-snippet-btn" class="danger" type="button">Delete Snippet</button>
+          </div>
+        </div>
+
+        <form id="editor-form">
+          <label>
+            Category label
+            <input id="category-label" name="categoryLabel" autocomplete="off" />
+          </label>
+          <label>
+            Category id
+            <input id="category-id" name="categoryId" autocomplete="off" />
+          </label>
+          <label>
+            Prefix
+            <input id="category-prefix" name="categoryPrefix" autocomplete="off" />
+          </label>
+          <label>
+            Order
+            <input id="category-order" name="categoryOrder" type="number" step="10" />
+          </label>
+
+          <hr />
+
+          <label>
+            Snippet id
+            <input id="snippet-id" name="snippetId" autocomplete="off" />
+          </label>
+          <label>
+            Trigger
+            <input id="snippet-trigger" name="snippetTrigger" autocomplete="off" />
+          </label>
+          <label class="inline">
+            <input id="snippet-word" name="snippetWord" type="checkbox" />
+            Word boundary
+          </label>
+          <label class="text-field">
+            Text
+            <textarea id="snippet-text" name="snippetText" rows="10"></textarea>
+          </label>
+        </form>
+      </section>
+    </main>
+
+    <pre id="log" class="log" hidden></pre>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

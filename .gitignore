@@ -29,6 +29,7 @@ logs/*
 # =========================
 # Temporary Files
 # =========================
+node_modules/
 *.tmp
 *.temp
 *.cache

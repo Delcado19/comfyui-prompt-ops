@@ -51,6 +51,10 @@ jobs:
       # ----------------------------------------
       # VALIDATION
       # ----------------------------------------
+      - name: Generate Snippets From Library
+        shell: pwsh
+        run: ./scripts/generate_snippets_from_library.ps1
+
       - name: Validate PowerShell Syntax
         shell: pwsh
         run: ./scripts/test_powershell_parse.ps1

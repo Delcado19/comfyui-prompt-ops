@@ -3,48 +3,71 @@ matches:
     word: true
     replace: |
       Cinematic portrait photography.
-
   - trigger: ":cam_close"
     word: true
     replace: |
       Close-up shot focusing on the face.
-
   - trigger: ":cam_wide"
     word: true
     replace: |
       Wide cinematic shot showing the environment.
-
   - trigger: ":cam_low"
     word: true
     replace: |
       Low angle shot emphasizing dominance.
-
   - trigger: ":cam_high"
     word: true
     replace: |
       High angle shot looking down at the character.
-
   - trigger: ":cam_35mm"
     word: true
     replace: |
       Shot on a 35mm cinematic lens.
-
   - trigger: ":cam_85mm"
     word: true
     replace: |
       Shot on an 85mm portrait lens.
-
   - trigger: ":cam_film"
     word: true
     replace: |
       Film photography aesthetic.
-
   - trigger: ":cam_bokeh"
     word: true
     replace: |
       Beautiful cinematic bokeh in the background.
-
   - trigger: ":cam_depth"
     word: true
     replace: |
       Shallow depth of field.
+  - trigger: ":cam_vertical_portrait"
+    word: true
+    replace: |
+      Vertical 2:3 portrait framing optimized for a full subject and clean background separation.
+  - trigger: ":cam_editorial_fullbody"
+    word: true
+    replace: |
+      Full body editorial camera angle with the complete outfit visible from head to toe.
+  - trigger: ":cam_threequarter_fashion"
+    word: true
+    replace: |
+      Three-quarter fashion portrait with the face, torso, and wardrobe silhouette clearly readable.
+  - trigger: ":cam_low_glamour"
+    word: true
+    replace: |
+      Slight low angle glamour portrait emphasizing confidence and long elegant lines.
+  - trigger: ":cam_symmetry_center"
+    word: true
+    replace: |
+      Centered symmetrical framing with balanced architecture and a stable iconic pose.
+  - trigger: ":cam_environment_scale"
+    word: true
+    replace: |
+      Wide environmental framing showing the subject as a small figure inside a vast dramatic scene.
+  - trigger: ":cam_cover_art"
+    word: true
+    replace: |
+      Cover art framing with strong silhouette, clear focal point, and readable composition at thumbnail size.
+  - trigger: ":cam_material_closeup"
+    word: true
+    replace: |
+      Close material-focused portrait showing skin texture, makeup, and glossy wardrobe highlights.
