@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.4.0...v1.5.0) (2026-05-19)
+
+
+### Features
+
+* add prompt library admin ([f5338f7](https://github.com/Delcado19/comfyui-prompt-ops/commit/f5338f7c1a7b9c721a56947ddb09756d0b623e6e))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
