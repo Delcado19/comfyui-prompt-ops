@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.5.0...v1.5.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* make admin log panel dismissible ([23339ed](https://github.com/Delcado19/comfyui-prompt-ops/commit/23339ed0a8b90b1283222f548088349fda72ddee))
+
 # [1.5.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.4.0...v1.5.0) (2026-05-19)
 
 
