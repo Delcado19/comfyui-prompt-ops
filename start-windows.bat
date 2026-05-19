@@ -21,6 +21,13 @@ if not exist "node_modules\" (
     if errorlevel 1 exit /b 1
 )
 
+title Prompt Ops Admin
 echo Starting Prompt Library Admin...
 echo Open http://127.0.0.1:5177
+echo.
+echo Keep this window open while using the admin.
+echo Close this window to stop the server.
+echo.
+
+start "" "http://127.0.0.1:5177"
 call npm run admin

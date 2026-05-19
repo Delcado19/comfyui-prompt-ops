@@ -17,6 +17,10 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 - Expanded style, context, character, scene, camera, lighting, quality, negative, and NSFW prompt components based on local ComfyUI output patterns.
 - Prompt snippet naming guidance for model-adapted triggers.
 
+### Fixed
+
+- Windows launcher now keeps the admin server logs visible and stops the server when its window is closed.
+
 ---
 
 ## [1.4.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.7...v1.4.0) (2026-05-19)

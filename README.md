@@ -140,6 +140,8 @@ Or use the platform start script:
 .\start-windows.bat
 ```
 
+On Windows, the start script opens the admin in your browser and keeps a logging window open. Close that window to stop the server.
+
 ```bash
 sh ./start-linux.sh
 ```

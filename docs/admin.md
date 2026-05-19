@@ -8,7 +8,18 @@ Start it from the repository root:
 npm run admin
 ```
 
-Then open:
+On Windows, use the launcher when you want a dedicated logging window:
+
+```powershell
+.\start-windows.bat
+```
+
+The launcher opens the admin in your browser and keeps the server logs visible. Close that window to stop the server.
+
+If the browser opens before the server is ready, refresh the page after a moment.
+
+The admin URL is:
+
 
 ```text
 http://127.0.0.1:5177

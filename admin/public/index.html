@@ -90,7 +90,13 @@
       </section>
     </main>
 
-    <pre id="log" class="log" hidden></pre>
+    <section id="log-panel" class="log-panel" hidden aria-label="Command log">
+      <div class="log-head">
+        <strong>Command Log</strong>
+        <button id="log-close-btn" class="ghost" type="button">Hide</button>
+      </div>
+      <pre id="log" class="log"></pre>
+    </section>
 
     <script src="/app.js"></script>
   </body>

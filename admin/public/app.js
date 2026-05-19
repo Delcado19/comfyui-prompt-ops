@@ -17,6 +17,8 @@ const elements = {
   saveButton: document.querySelector("#save-btn"),
   generateButton: document.querySelector("#generate-btn"),
   installButton: document.querySelector("#install-btn"),
+  logPanel: document.querySelector("#log-panel"),
+  logCloseButton: document.querySelector("#log-close-btn"),
   log: document.querySelector("#log"),
   form: document.querySelector("#editor-form"),
   categoryLabel: document.querySelector("#category-label"),
@@ -62,7 +64,11 @@ function setPersistentStatus(message) {
 
 function setLog(message, open = true) {
   elements.log.textContent = message;
-  elements.log.hidden = !open;
+  elements.logPanel.hidden = !open;
+}
+
+function hideLog() {
+  elements.logPanel.hidden = true;
 }
 
 function markDirty() {
@@ -267,6 +273,14 @@ elements.form.addEventListener("input", (event) => {
   }
 
   markDirty();
+});
+
+elements.logCloseButton.addEventListener("click", hideLog);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !elements.logPanel.hidden) {
+    hideLog();
+  }
 });
 
 elements.addCategory.addEventListener("click", () => {
