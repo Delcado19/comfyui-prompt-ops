@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.7...v1.4.0) (2026-05-19)
+
+
+### Features
+
+* prefer winget installer with scoop fallback ([c64e538](https://github.com/Delcado19/comfyui-prompt-ops/commit/c64e5380825d1c2f0b85e4aa751ed5af2713d73f))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
