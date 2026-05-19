@@ -51,6 +51,10 @@ jobs:
       # ----------------------------------------
       # VALIDATION
       # ----------------------------------------
+      - name: Validate PowerShell Syntax
+        shell: pwsh
+        run: ./scripts/test_powershell_parse.ps1
+
       - name: Validate YAML
         shell: pwsh
         run: ./scripts/validate_yaml.ps1

@@ -8,6 +8,14 @@ The format follows **Keep a Changelog** and **Semantic Versioning**.
 
 ## [Unreleased]
 
+### Added
+
+- PowerShell parser validation for local development and GitHub CI.
+
+### Changed
+
+- Installer now prefers Winget for Espanso and CopyQ, with Scoop as the fallback package manager.
+
 ---
 
 ## [1.3.7](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.3.6...v1.3.7) (2026-03-18)

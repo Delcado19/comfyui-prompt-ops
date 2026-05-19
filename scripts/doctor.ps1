@@ -29,19 +29,31 @@ else {
 }
 
 # --------------------------------------------------
-# Chocolatey
+# Package Managers
 # --------------------------------------------------
 
-$choco = Get-Command choco -ErrorAction SilentlyContinue
+$winget = Get-Command winget -ErrorAction SilentlyContinue
+$scoop = Get-Command scoop -ErrorAction SilentlyContinue
 
-if ($choco) {
+if ($winget) {
 
-    Write-Host "✔ Chocolatey installed"
+    Write-Host "✔ Winget installed"
 
 }
 else {
 
-    Write-Host "✖ Chocolatey not installed"
+    Write-Host "⚠ Winget not found"
+
+}
+
+if ($scoop) {
+
+    Write-Host "✔ Scoop fallback installed"
+
+}
+else {
+
+    Write-Host "⚠ Scoop fallback not found"
 
 }
 

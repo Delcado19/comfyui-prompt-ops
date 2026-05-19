@@ -51,6 +51,10 @@ Run-Step "Validate YAML" {
     ./validate_yaml.ps1
 }
 
+Run-Step "Validate PowerShell Syntax" {
+    ./test_powershell_parse.ps1
+}
+
 Run-Step "Validate Snippets" {
     ./validate_snippets.ps1
 }

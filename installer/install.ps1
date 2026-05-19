@@ -42,6 +42,142 @@ function Test-IsAdmin {
     return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
+function Update-SessionPath {
+    $machinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+    $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    $env:Path = "$machinePath;$userPath"
+}
+
+function Get-ScoopCommand {
+    $scoop = Get-Command scoop -ErrorAction SilentlyContinue
+
+    if ($scoop) {
+        return $scoop.Source
+    }
+
+    $candidates = @(
+        (Join-Path $env:USERPROFILE "scoop\shims\scoop.ps1"),
+        (Join-Path $env:USERPROFILE "scoop\shims\scoop.cmd")
+    )
+
+    foreach ($candidate in $candidates) {
+        if (Test-Path $candidate) {
+            return $candidate
+        }
+    }
+
+    return $null
+}
+
+function Ensure-Scoop {
+    $scoop = Get-ScoopCommand
+
+    if ($scoop) {
+        Write-Ok "Scoop detected"
+        return $scoop
+    }
+
+    Write-Warn "Scoop not found. Installing Scoop as package-manager fallback..."
+
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+    Invoke-RestMethod -Uri "https://get.scoop.sh" | Invoke-Expression
+
+    $scoop = Get-ScoopCommand
+
+    if (-not $scoop) {
+        throw "Scoop installation completed, but the scoop command was not found."
+    }
+
+    Write-Ok "Scoop installed"
+    Update-SessionPath
+    return $scoop
+}
+
+function Install-WithWinget {
+    param(
+        [string]$Name,
+        [string]$PackageId
+    )
+
+    $winget = Get-Command winget -ErrorAction SilentlyContinue
+
+    if (-not $winget) {
+        Write-Warn "Winget not found"
+        return $false
+    }
+
+    Write-Info "Installing $Name via Winget..."
+
+    & $winget.Source install `
+        --id $PackageId `
+        --exact `
+        --source winget `
+        --accept-package-agreements `
+        --accept-source-agreements `
+        --disable-interactivity
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Ok "$Name installed via Winget"
+        Update-SessionPath
+        return $true
+    }
+
+    Write-Warn "Winget failed to install $Name. Falling back to Scoop..."
+    return $false
+}
+
+function Install-WithScoop {
+    param(
+        [string]$Name,
+        [string]$Package,
+        [string]$Bucket = "extras"
+    )
+
+    $scoop = Ensure-Scoop
+
+    if ($Bucket) {
+        Write-Info "Ensuring Scoop bucket '$Bucket'..."
+        & $scoop bucket add $Bucket
+
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warn "Scoop bucket '$Bucket' may already exist or could not be added."
+        }
+    }
+
+    Write-Info "Installing $Name via Scoop..."
+    & $scoop install $Package
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Scoop failed to install $Name."
+    }
+
+    Write-Ok "$Name installed via Scoop"
+    Update-SessionPath
+}
+
+function Ensure-DesktopPackage {
+    param(
+        [string]$Name,
+        [string]$CommandName,
+        [string]$WingetId,
+        [string]$ScoopPackage,
+        [string]$ScoopBucket = "extras"
+    )
+
+    if (Get-Command $CommandName -ErrorAction SilentlyContinue) {
+        Write-Ok "$Name detected"
+        return
+    }
+
+    Write-Warn "$Name not found"
+
+    $installedWithWinget = Install-WithWinget -Name $Name -PackageId $WingetId
+
+    if (-not $installedWithWinget) {
+        Install-WithScoop -Name $Name -Package $ScoopPackage -Bucket $ScoopBucket
+    }
+}
+
 # --------------------------------------------------
 # Parent Process
 # --------------------------------------------------
@@ -108,32 +244,16 @@ try {
     Write-Ok "PowerShell $($PSVersionTable.PSVersion)"
 
     # --------------------------------------------------
-    # Chocolatey Check / Install
+    # Package Manager Preference
     # --------------------------------------------------
 
-    Write-Info "Checking Chocolatey..."
+    Write-Info "Checking package managers..."
 
-    $choco = Get-Command choco -ErrorAction SilentlyContinue
-
-    if (-not $choco) {
-
-        Write-Warn "Chocolatey not found. Installing..."
-
-        Set-ExecutionPolicy Bypass -Scope Process -Force
-
-        [System.Net.ServicePointManager]::SecurityProtocol =
-            [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-
-        Invoke-Expression (
-            (New-Object System.Net.WebClient).DownloadString(
-                "https://community.chocolatey.org/install.ps1"
-            )
-        )
-
-        Write-Ok "Chocolatey installed"
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        Write-Ok "Winget detected"
     }
     else {
-        Write-Ok "Chocolatey detected"
+        Write-Warn "Winget not found. Scoop will be used as fallback when packages are missing."
     }
 
     # --------------------------------------------------
@@ -142,15 +262,11 @@ try {
 
     Write-Info "Checking Espanso..."
 
-    $espanso = Get-Command espanso -ErrorAction SilentlyContinue
-
-    if (-not $espanso) {
-        Write-Warn "Installing Espanso via Chocolatey..."
-        choco install espanso -y
-    }
-    else {
-        Write-Ok "Espanso detected"
-    }
+    Ensure-DesktopPackage `
+        -Name "Espanso" `
+        -CommandName "espanso" `
+        -WingetId "Espanso.Espanso" `
+        -ScoopPackage "espanso"
 
     # --------------------------------------------------
     # CopyQ
@@ -158,15 +274,11 @@ try {
 
     Write-Info "Checking CopyQ..."
 
-    $copyq = Get-Command copyq -ErrorAction SilentlyContinue
-
-    if (-not $copyq) {
-        Write-Warn "Installing CopyQ via Chocolatey..."
-        choco install copyq -y
-    }
-    else {
-        Write-Ok "CopyQ detected"
-    }
+    Ensure-DesktopPackage `
+        -Name "CopyQ" `
+        -CommandName "copyq" `
+        -WingetId "hluk.CopyQ" `
+        -ScoopPackage "copyq"
 
     # --------------------------------------------------
     # YAML support

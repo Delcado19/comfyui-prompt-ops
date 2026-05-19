@@ -47,6 +47,7 @@ The development pipeline runs the following scripts:
 
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
+| test_powershell_parse.ps1    | validate PowerShell syntax     |
 | validate_yaml.ps1            | validate YAML syntax           |
 | validate_snippets.ps1        | validate snippet structure     |
 | check_duplicate_triggers.ps1 | detect duplicate triggers      |

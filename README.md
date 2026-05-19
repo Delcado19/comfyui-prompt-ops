@@ -53,9 +53,8 @@ Run the installer:
 
 The installer automatically:
 
-- installs Chocolatey
-- installs Espanso
-- installs CopyQ
+- installs Espanso with Winget, falling back to Scoop when Winget is unavailable or fails
+- installs CopyQ with Winget, falling back to Scoop when Winget is unavailable or fails
 - checks YAML parsing support
 - installs project snippets
 - generates snippet documentation
@@ -143,9 +142,9 @@ Run installer:
 Installer pipeline:
 
 1. PowerShell version check
-2. Chocolatey installation
-3. Espanso installation
-4. CopyQ installation
+2. package manager check
+3. Espanso installation via Winget with Scoop fallback
+4. CopyQ installation via Winget with Scoop fallback
 5. YAML support verification
 6. snippet installation
 7. snippet documentation generation
@@ -160,6 +159,7 @@ Installer pipeline:
 - Windows 10 / Windows 11
 - PowerShell 7+
 - Git
+- Winget, or Scoop as fallback
 - Internet connection
 
 ---
@@ -276,10 +276,11 @@ Run development pipeline:
 Pipeline steps:
 
 1. YAML validation
-2. snippet validation
-3. duplicate trigger detection
-4. snippet documentation generation
-5. prompt builder generation
+2. PowerShell syntax validation
+3. snippet validation
+4. duplicate trigger detection
+5. snippet documentation generation
+6. prompt builder generation
 
 ---
 
@@ -288,6 +289,7 @@ Pipeline steps:
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
 | doctor.ps1                   | environment diagnostics        |
+| test_powershell_parse.ps1    | PowerShell syntax validation   |
 | validate_yaml.ps1            | YAML syntax validation         |
 | validate_snippets.ps1        | snippet validation             |
 | check_duplicate_triggers.ps1 | detect trigger conflicts       |
@@ -326,6 +328,7 @@ comfyui-prompt-ops
 │   generate_snippet_docs.ps1
 │   install_snippets.ps1
 │   restart_services.ps1
+│   test_powershell_parse.ps1
 │   validate_snippets.ps1
 │   validate_yaml.ps1
 │
