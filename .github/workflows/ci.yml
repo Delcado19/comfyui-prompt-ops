@@ -86,9 +86,15 @@ jobs:
 
           git add snippets/zz_prompt_builder.yml
 
-          if (git diff --cached --quiet) {
+          git diff --cached --quiet
+          $diffExitCode = $LASTEXITCODE
+
+          if ($diffExitCode -eq 0) {
               echo "No changes to commit"
-          } else {
+          } elseif ($diffExitCode -eq 1) {
               git commit -m "ci: auto-update prompt builder"
+              git pull --rebase origin main
               git push
+          } else {
+              exit $diffExitCode
           }
