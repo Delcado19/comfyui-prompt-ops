@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.5.1...v1.5.2) (2026-05-19)
+
+
+### Bug Fixes
+
+* simplify admin editor fields ([fc835a4](https://github.com/Delcado19/comfyui-prompt-ops/commit/fc835a4f3e16a530de1385509c9f561a6e2ddc78))
+
 ## [1.5.1](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.5.0...v1.5.1) (2026-05-19)
 
 
