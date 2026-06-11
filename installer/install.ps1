@@ -69,7 +69,7 @@ function Get-ScoopCommand {
     return $null
 }
 
-function Ensure-Scoop {
+function Install-Scoop {
     $scoop = Get-ScoopCommand
 
     if ($scoop) {
@@ -133,7 +133,7 @@ function Install-WithScoop {
         [string]$Bucket = "extras"
     )
 
-    $scoop = Ensure-Scoop
+    $scoop = Install-Scoop
 
     if ($Bucket) {
         Write-Info "Ensuring Scoop bucket '$Bucket'..."
@@ -155,7 +155,7 @@ function Install-WithScoop {
     Update-SessionPath
 }
 
-function Ensure-DesktopPackage {
+function Install-DesktopPackage {
     param(
         [string]$Name,
         [string]$CommandName,
@@ -262,7 +262,7 @@ try {
 
     Write-Info "Checking Espanso..."
 
-    Ensure-DesktopPackage `
+    Install-DesktopPackage `
         -Name "Espanso" `
         -CommandName "espanso" `
         -WingetId "Espanso.Espanso" `
@@ -274,7 +274,7 @@ try {
 
     Write-Info "Checking CopyQ..."
 
-    Ensure-DesktopPackage `
+    Install-DesktopPackage `
         -Name "CopyQ" `
         -CommandName "copyq" `
         -WingetId "hluk.CopyQ" `
