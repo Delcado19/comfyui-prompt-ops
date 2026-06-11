@@ -20,4 +20,4 @@ fi
 
 echo "Starting Prompt Library Admin..."
 echo "Open http://127.0.0.1:5177"
-exec npm run admin
+exec npm run admin -- "$@"

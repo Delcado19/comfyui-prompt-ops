@@ -3,6 +3,7 @@ const state = {
   categoryIndex: 0,
   snippetIndex: 0,
   dirty: false,
+  csrfToken: null,
 };
 
 const elements = {
@@ -96,7 +97,7 @@ function ensureSelection() {
 }
 
 function renderCategories() {
-  elements.categoryList.innerHTML = "";
+  elements.categoryList.replaceChildren();
 
   state.library.categories.forEach((category, index) => {
     const button = document.createElement("button");
@@ -131,7 +132,7 @@ function renderCategories() {
 
 function renderSnippets() {
   const category = currentCategory();
-  elements.snippetList.innerHTML = "";
+  elements.snippetList.replaceChildren();
   elements.snippetTitle.textContent = category ? `${category.label} Snippets` : "Snippets";
 
   if (!category) return;
@@ -194,7 +195,7 @@ function renderEditor() {
   elements.categoryOrder.value = category?.order || "";
   elements.snippetId.value = snippet?.id || "";
   elements.snippetTrigger.value = snippet?.trigger || "";
-  elements.snippetWord.checked = snippet?.word !== false;
+  elements.snippetWord.checked = !Object.is(snippet?.word, false);
   elements.snippetText.value = snippet?.text || "";
 }
 
@@ -226,9 +227,17 @@ function saveFormToState() {
 }
 
 async function requestJson(url, options = {}) {
+  const method = String(options.method || "GET").toUpperCase();
+  const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
+
+  if (!["GET", "HEAD", "OPTIONS"].includes(method)) {
+    await ensureCsrfToken();
+    headers["X-CSRF-Token"] = state.csrfToken;
+  }
+
   const response = await fetch(url, {
-    headers: { "Content-Type": "application/json" },
     ...options,
+    headers,
   });
   const data = await response.json().catch(() => ({}));
 
@@ -237,6 +246,18 @@ async function requestJson(url, options = {}) {
   }
 
   return data;
+}
+
+async function ensureCsrfToken() {
+  if (state.csrfToken) return;
+  const response = await fetch("/api/csrf-token");
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok || !data.csrfToken) {
+    throw new Error(data.error || "Could not load CSRF token.");
+  }
+
+  state.csrfToken = data.csrfToken;
 }
 
 async function loadLibrary() {

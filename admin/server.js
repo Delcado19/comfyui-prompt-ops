@@ -1,8 +1,10 @@
 const childProcess = require("node:child_process");
+const crypto = require("node:crypto");
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
 const express = require("express");
+const helmet = require("helmet");
 const YAML = require("yaml");
 
 const repoRoot = path.resolve(__dirname, "..");
@@ -11,7 +13,23 @@ const publicDir = path.join(__dirname, "public");
 
 const app = express();
 const port = Number(process.env.PORT || 5177);
+const csrfToken = crypto.randomBytes(32).toString("hex");
 
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        baseUri: ["'self'"],
+        formAction: ["'self'"],
+        imgSrc: ["'self'", "data:"],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'"],
+      },
+    },
+  }),
+);
 app.use(express.json({ limit: "2mb" }));
 app.use(express.static(publicDir));
 
@@ -58,7 +76,7 @@ function normalizeLibrary(input) {
           const snippetId = slugify(snippet.id || snippet.trigger);
           const trigger = String(snippet.trigger || `:${prefix}_${snippetId}`).trim();
           const text = String(snippet.text || "").trim();
-          const word = snippet.word !== false;
+          const word = !Object.is(snippet.word, false);
 
           if (!snippetId) throw new Error(`Snippet id is required in category '${id}'.`);
           if (!/^:[a-z0-9_]+$/.test(trigger)) {
@@ -152,6 +170,19 @@ async function runPipeline() {
   return results;
 }
 
+function requireCsrf(request, response, next) {
+  // The local admin UI has no session layer, so a process-local token gates same-origin state changes.
+  const header = request.get("x-csrf-token") || "";
+  const headerToken = Buffer.from(header);
+  const expectedToken = Buffer.from(csrfToken);
+  if (headerToken.length !== expectedToken.length || !crypto.timingSafeEqual(headerToken, expectedToken)) {
+    response.status(403).json({ error: "Invalid CSRF token." });
+    return;
+  }
+
+  next();
+}
+
 app.get("/api/library", async (_request, response) => {
   try {
     response.json(await readLibrary());
@@ -160,7 +191,11 @@ app.get("/api/library", async (_request, response) => {
   }
 });
 
-app.put("/api/library", async (request, response) => {
+app.get("/api/csrf-token", (_request, response) => {
+  response.json({ csrfToken });
+});
+
+app.put("/api/library", requireCsrf, async (request, response) => {
   try {
     const library = await writeLibrary(request.body);
     response.json(library);
@@ -169,7 +204,7 @@ app.put("/api/library", async (request, response) => {
   }
 });
 
-app.post("/api/generate", async (_request, response) => {
+app.post("/api/generate", requireCsrf, async (_request, response) => {
   try {
     response.json({ results: await runPipeline() });
   } catch (error) {
@@ -180,7 +215,7 @@ app.post("/api/generate", async (_request, response) => {
   }
 });
 
-app.post("/api/install", async (_request, response) => {
+app.post("/api/install", requireCsrf, async (_request, response) => {
   try {
     response.json({ results: [await runPowerShell("install_snippets.ps1")] });
   } catch (error) {
