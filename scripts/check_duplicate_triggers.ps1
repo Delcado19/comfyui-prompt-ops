@@ -1,27 +1,26 @@
+$ErrorActionPreference = "Stop"
+
 Write-Host ""
 Write-Host "Checking duplicate triggers..."
 
 $root = Resolve-Path "$PSScriptRoot\.."
 $snippetDir = Join-Path $root "snippets"
 
-$files = Get-ChildItem $snippetDir -Filter *.yml
+$moduleName = "powershell-yaml"
+if (-not (Get-Module -ListAvailable -Name $moduleName)) {
+    Install-Module $moduleName -Force -Scope CurrentUser -AllowClobber -ErrorAction Stop
+}
+Import-Module $moduleName -ErrorAction Stop
 
-$triggers = @()
+$files = Get-ChildItem $snippetDir -Filter "comfy_*.yml"
 
-foreach ($file in $files) {
-
-    $lines = Get-Content $file.FullName
-
-    foreach ($line in $lines) {
-
-        if ($line -match 'trigger:\s*"([^"]+)"') {
-
-            $triggers += $matches[1]
-
-        }
-
+# Parsed via ConvertFrom-Yaml (not a "trigger:" regex over raw lines) so a
+# quoted, multi-line, or reformatted trigger value is still caught.
+$triggers = foreach ($file in $files) {
+    $yaml = Get-Content $file.FullName -Raw | ConvertFrom-Yaml -ErrorAction Stop
+    foreach ($match in @($yaml.matches)) {
+        if ($match.trigger) { [string]$match.trigger }
     }
-
 }
 
 $duplicates = $triggers | Group-Object | Where-Object { $_.Count -gt 1 }
@@ -33,9 +32,7 @@ if ($duplicates) {
     Write-Host ""
 
     foreach ($dup in $duplicates) {
-
-        Write-Host $dup.Name " (" $dup.Count "times )"
-
+        Write-Host "$($dup.Name) ($($dup.Count) times)"
     }
 
     exit 1

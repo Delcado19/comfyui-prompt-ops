@@ -79,6 +79,10 @@ if (-not $SkipBuild) {
     }
 }
 
+Run-Step "Generate Snippet Docs" {
+    ./generate_snippet_docs.ps1
+}
+
 # --------------------------------------------------
 # DONE
 # --------------------------------------------------

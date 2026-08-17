@@ -217,7 +217,11 @@ app.post("/api/generate", requireCsrf, async (_request, response) => {
 
 app.post("/api/install", requireCsrf, async (_request, response) => {
   try {
-    response.json({ results: [await runPowerShell("install_snippets.ps1")] });
+    // Regenerate before copying so Install can't deploy snippets that are
+    // stale relative to the last-saved library.
+    const results = await runPipeline();
+    results.push(await runPowerShell("install_snippets.ps1"));
+    response.json({ results });
   } catch (error) {
     response.status(500).json({
       error: error.message,

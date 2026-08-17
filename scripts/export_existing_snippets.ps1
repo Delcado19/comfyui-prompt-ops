@@ -1,5 +1,10 @@
 param()
 
+# One-off migration: pulls whatever is currently deployed in the live
+# Espanso match directory back into snippets/ (Windows-only by design,
+# since it reads a locally installed Espanso's match folder). Not part of
+# scripts/dev.ps1 or the admin pipeline.
+
 Write-Host ""
 Write-Host "Exporting existing Espanso snippets..."
 

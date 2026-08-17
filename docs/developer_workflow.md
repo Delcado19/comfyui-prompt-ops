@@ -62,13 +62,14 @@ The development pipeline runs the following scripts:
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
 | generate_snippets_from_library.ps1 | generate Espanso snippet files |
-| import_snippets_to_library.ps1 | migrate existing snippets into the central library |
-| test_powershell_parse.ps1    | validate PowerShell syntax     |
 | validate_yaml.ps1            | validate YAML syntax           |
+| test_powershell_parse.ps1    | validate PowerShell syntax     |
 | validate_snippets.ps1        | validate snippet structure     |
 | check_duplicate_triggers.ps1 | detect duplicate triggers      |
-| generate_snippet_docs.ps1    | generate snippet documentation |
 | generate_prompt_builder.ps1  | generate prompt builder        |
+| generate_snippet_docs.ps1    | generate snippet documentation |
+
+`import_snippets_to_library.ps1` and `export_existing_snippets.ps1` are one-off migration tools, not part of this pipeline — see the comment at the top of each script.
 
 ---
 

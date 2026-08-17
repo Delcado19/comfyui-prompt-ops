@@ -357,6 +357,7 @@ Pipeline steps:
 4. snippet validation
 5. duplicate trigger detection
 6. prompt builder generation
+7. snippet documentation generation
 
 ---
 
@@ -365,7 +366,6 @@ Pipeline steps:
 | Script                       | Purpose                        |
 | ---------------------------- | ------------------------------ |
 | doctor.ps1                   | environment diagnostics        |
-| import_snippets_to_library.ps1 | migrate generated snippets to the central library |
 | generate_snippets_from_library.ps1 | generate Espanso snippets from the central library |
 | test_powershell_parse.ps1    | PowerShell syntax validation   |
 | validate_yaml.ps1            | YAML syntax validation         |
@@ -375,6 +375,8 @@ Pipeline steps:
 | generate_prompt_builder.ps1  | build prompt builder           |
 | install_snippets.ps1         | deploy snippets                |
 | restart_services.ps1         | restart Espanso                |
+| import_snippets_to_library.ps1 | one-off migration: rebuild the library from generated snippets, not part of `dev.ps1` |
+| export_existing_snippets.ps1 | one-off migration: pull a live Espanso install's snippets into the repo, not part of `dev.ps1` |
 
 ---
 

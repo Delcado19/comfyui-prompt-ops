@@ -47,9 +47,9 @@ Do not manually edit generated `snippets/comfy_*.yml` files when using the admin
 
 ## Actions
 
-- `Save` writes `library/prompt_library.yml`.
+- `Save` writes `library/prompt_library.yml`. It re-serializes the whole file, so any hand-written `#` comments (model-family notes, per-snippet rationale) are stripped. Add explanatory context to `label`/doc files instead of comments if it must survive an admin edit.
 - `Generate` writes Espanso snippets, validates them, regenerates the prompt builder, and updates snippet documentation.
-- `Install` copies generated snippets to the Espanso match directory.
+- `Install` regenerates from the library first, then copies the resulting snippets to the Espanso match directory, so it can't deploy output that's stale relative to the last save.
 
 ## Naming
 

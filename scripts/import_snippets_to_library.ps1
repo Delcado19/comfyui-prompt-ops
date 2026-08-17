@@ -1,4 +1,9 @@
 # import_snippets_to_library.ps1
+#
+# One-off migration: rebuilds library/prompt_library.yml from generated
+# snippets/comfy_*.yml. Not part of scripts/dev.ps1 or the admin pipeline —
+# library/prompt_library.yml is the source of truth going forward, so this
+# only matters if the generated files and the library have diverged.
 
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
@@ -23,7 +28,6 @@ function Get-CategoryMeta {
     $known = @{
         model      = @{ label = "Model"; prefix = "model"; order = 10 }
         context    = @{ label = "Context"; prefix = "ctx"; order = 20 }
-        characters = @{ label = "Characters"; prefix = "char"; order = 30 }
         scene      = @{ label = "Scene"; prefix = "scene"; order = 40 }
         camera     = @{ label = "Camera"; prefix = "cam"; order = 50 }
         lighting   = @{ label = "Lighting"; prefix = "light"; order = 60 }
