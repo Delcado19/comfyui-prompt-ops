@@ -54,9 +54,14 @@ function Write-Err {
 }
 
 function Update-SessionPath {
+    # Merge in the latest Machine/User PATH instead of overwriting $env:Path:
+    # a plain overwrite wiped out FallbackPathDir entries Install-DesktopPackage
+    # had added earlier in the same run (e.g. Espanso's install dir), because
+    # every subsequent package install calls this again.
     $machinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
     $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-    $env:Path = "$machinePath;$userPath"
+    $combined = @($env:Path, $machinePath, $userPath) -join ';'
+    $env:Path = ($combined -split ';' | Where-Object { $_ } | Select-Object -Unique) -join ';'
 }
 
 function Get-ScoopCommand {
@@ -119,16 +124,24 @@ function Install-WithWinget {
 
     Write-Info "Installing $Name via Winget..."
 
+    # Pipe through Out-Host: winget's own console output otherwise lands in
+    # PowerShell's success stream and gets bundled into this function's
+    # return value (e.g. a non-empty array with $false at the end), which
+    # is always truthy - silently defeating the "-not $installedWithWinget"
+    # check in Install-DesktopPackage and skipping the Scoop fallback.
     & $winget.Source install `
         --id $PackageId `
         --exact `
         --source winget `
         --accept-package-agreements `
         --accept-source-agreements `
-        --disable-interactivity
+        --disable-interactivity | Out-Host
 
-    if ($LASTEXITCODE -eq 0) {
-        Write-Ok "$Name installed via Winget"
+    # 0x8A15002B / -1978335189: APPINSTALLER_CLI_ERROR_UPDATE_NOT_APPLICABLE.
+    # Winget found the package already installed with no newer version -
+    # that's success, not a failure that should trigger the Scoop fallback.
+    if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq -1978335189) {
+        Write-Ok "$Name is installed via Winget"
         Update-SessionPath
         return $true
     }
@@ -172,7 +185,12 @@ function Install-DesktopPackage {
         [string]$CommandName,
         [string]$WingetId,
         [string]$ScoopPackage,
-        [string]$ScoopBucket = "extras"
+        [string]$ScoopBucket = "extras",
+        # Known per-user install directory to add to PATH if the command
+        # still can't be found afterwards. Some Winget per-user installs
+        # (e.g. Espanso under %LOCALAPPDATA%\Programs) never touch the
+        # registry PATH that Update-SessionPath reads from.
+        [string]$FallbackPathDir = $null
     )
 
     if (Get-Command $CommandName -ErrorAction SilentlyContinue) {
@@ -186,6 +204,22 @@ function Install-DesktopPackage {
 
     if (-not $installedWithWinget) {
         Install-WithScoop -Name $Name -Package $ScoopPackage -Bucket $ScoopBucket
+    }
+
+    if ((Get-Command $CommandName -ErrorAction SilentlyContinue)) {
+        return
+    }
+
+    if ($FallbackPathDir -and (Test-Path $FallbackPathDir)) {
+        Write-Warn "$Name installed but not on PATH. Adding $FallbackPathDir for this session."
+        $env:Path = "$env:Path;$FallbackPathDir"
+    }
+
+    if (Get-Command $CommandName -ErrorAction SilentlyContinue) {
+        Write-Ok "$Name is now available"
+    }
+    else {
+        Write-Warn "$Name was installed but is still not resolvable on PATH. You may need to restart your terminal."
     }
 }
 
@@ -231,7 +265,8 @@ try {
         -Name "Espanso" `
         -CommandName "espanso" `
         -WingetId "Espanso.Espanso" `
-        -ScoopPackage "espanso"
+        -ScoopPackage "espanso" `
+        -FallbackPathDir (Join-Path $env:LOCALAPPDATA "Programs\Espanso")
 
     # --------------------------------------------------
     # CopyQ
@@ -243,7 +278,8 @@ try {
         -Name "CopyQ" `
         -CommandName "copyq" `
         -WingetId "hluk.CopyQ" `
-        -ScoopPackage "copyq"
+        -ScoopPackage "copyq" `
+        -FallbackPathDir "$env:ProgramFiles\CopyQ"
 
     # --------------------------------------------------
     # YAML support
