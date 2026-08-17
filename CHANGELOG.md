@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.6.0...v1.6.1) (2026-08-17)
+
+
+### Bug Fixes
+
+* installer misdetects Winget failures and loses PATH additions ([0fd3eb5](https://github.com/Delcado19/comfyui-prompt-ops/commit/0fd3eb5b378b13d5ed1292440b89ceccfb12beb7))
+
 # [1.6.0](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.5.2...v1.6.0) (2026-05-19)
 
 
