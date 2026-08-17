@@ -5,7 +5,7 @@
 # 🚀 ComfyUI Prompt Ops
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-7+-5391FE?logo=powershell)
-![Platform](https://img.shields.io/badge/platform-Windows-blue)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-blue)
 ![Espanso](https://img.shields.io/badge/Espanso-supported-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active_development-yellow)
@@ -52,10 +52,16 @@ Run the installer:
 .\installer\install.ps1
 ```
 
+On Linux:
+
+```bash
+./installer/install.sh
+```
+
 The installer automatically:
 
-- installs Espanso with Winget, falling back to Scoop when Winget is unavailable or fails
-- installs CopyQ with Winget, falling back to Scoop when Winget is unavailable or fails
+- installs Espanso with Winget, falling back to Scoop when Winget is unavailable or fails (Linux: via the distro package manager)
+- installs CopyQ with Winget, falling back to Scoop when Winget is unavailable or fails (Linux: via the distro package manager)
 - checks YAML parsing support
 - installs project snippets
 - generates snippet documentation
@@ -185,16 +191,24 @@ Run installer:
 .\installer\install.ps1
 ```
 
+On Linux:
+
+```bash
+./installer/install.sh
+```
+
 Installer pipeline:
 
 1. PowerShell version check
 2. package manager check
-3. Espanso installation via Winget with Scoop fallback
-4. CopyQ installation via Winget with Scoop fallback
+3. Espanso installation via Winget with Scoop fallback (Linux: apt/dnf/pacman/zypper)
+4. CopyQ installation via Winget with Scoop fallback (Linux: apt/dnf/pacman/zypper)
 5. YAML support verification
 6. snippet installation
 7. snippet documentation generation
 8. service restart
+
+Neither installer requires admin/root privileges for the pipeline itself — only individual Linux package installs may prompt for `sudo`.
 
 ---
 
@@ -202,10 +216,10 @@ Installer pipeline:
 
 ## System
 
-- Windows 10 / Windows 11
-- PowerShell 7+
+- Windows 10 / Windows 11, or a Linux distro with apt/dnf/pacman/zypper
+- PowerShell 7+ (`pwsh`) — on Linux, also used to run the snippet install/doc-generation scripts
 - Git
-- Winget, or Scoop as fallback
+- Windows: Winget, or Scoop as fallback
 - Internet connection
 
 ---
@@ -382,6 +396,7 @@ comfyui-prompt-ops
 │
 ├ installer
 │   install.ps1
+│   install.sh
 │
 ├ library
 │   prompt_library.yml
