@@ -5,20 +5,36 @@ param(
 Write-Host ""
 Write-Host "Restarting services..."
 
-$espanso = Get-Process espanso -ErrorAction SilentlyContinue
 $copyq = Get-Process copyq -ErrorAction SilentlyContinue
 
 # Espanso
+#
+# Espanso's daemon process is named "espansod", not "espanso" (the espanso
+# command is just the CLI front-end), so a Get-Process espanso check never
+# matches - ask espanso itself via its status exit code (0 = running)
+# instead. Starting it also needs the 'service start' subcommand: a bare
+# invocation only prints usage help and exits in Espanso 2.x.
 
-if (!$espanso) {
+$espansoCmd = Get-Command espanso -ErrorAction SilentlyContinue
+$espansoRunning = $false
+
+if ($espansoCmd) {
+    & $espansoCmd.Source status *> $null
+    $espansoRunning = ($LASTEXITCODE -eq 0)
+}
+
+if (!$espansoRunning) {
 
     Write-Host "Espanso not running."
 
     if ($dryrun) {
         Write-Host "[DRYRUN] Would start Espanso"
     }
+    elseif ($espansoCmd) {
+        Start-Process $espansoCmd.Source -ArgumentList "service", "start"
+    }
     else {
-        Start-Process espanso
+        Write-Host "Espanso command not found, skipping."
     }
 
 }
