@@ -1,6 +1,6 @@
 matches:
   - trigger: ":prompt"
-    replace: "{{prompt.model}} {{prompt.context}} {{prompt.characters}} {{prompt.scene}} {{prompt.camera}} {{prompt.lighting}} {{prompt.style}} {{prompt.quality}} {{prompt.negative}} {{prompt.nsfw}}"
+    replace: "{{prompt.model}} {{prompt.context}} {{prompt.scene}} {{prompt.camera}} {{prompt.lighting}} {{prompt.style}} {{prompt.quality}} {{prompt.negative}} {{prompt.nsfw}}"
     vars:
       - name: prompt
         type: form
@@ -8,7 +8,6 @@ matches:
           layout: |
             Model: [[model]]
             Context: [[context]]
-            Characters: [[characters]]
             Scene: [[scene]]
             Camera: [[camera]]
             Lighting: [[lighting]]
@@ -22,16 +21,14 @@ matches:
               type: choice
               values:
                 - "none"
-                - "bold fantasy illustration, ink-like black silhouettes, mythic warrior posture, sweeping robe shapes, restrained red accents, clean graphic contrast."
-                - "cinematic adult glamour photography, strong pose language, high contrast black wardrobe, crisp straps and seams, moody background with controlled rim light."
-                - "cinematic concept art, ink-wash fantasy atmosphere, layered mist, refined painterly composition, elegant negative space, dramatic landscape depth."
-                - "clean glossy realism, modern editorial fashion posing, precise latex and leather surface reflections, crisp object boundaries, minimal studio finish."
+                - "balanced photorealistic rendering, natural color science, accurate skin and material detail, strong prompt adherence."
+                - "classic photorealistic SDXL rendering, natural skin texture, accurate proportions, believable studio-grade lighting."
+                - "clean glossy realism, modern editorial posing, precise material reflections, crisp object boundaries, refined studio finish."
                 - "clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift."
-                - "high impact realistic portrait photography, sharp eyes, defined cheekbones, detailed makeup, glossy wardrobe highlights, controlled photographic sharpness."
-                - "naturalistic skin texture, realistic body proportions, documentary studio clarity, glossy black fashion materials, believable reflections, restrained color grading."
-                - "polished portrait realism, elegant glossy latex fashion, warm luxury interior lighting, smooth natural skin texture, clean reflections on black clothing and furniture."
-                - "sharp glossy fashion realism, black latex or leather with crisp specular highlights, dramatic adult editorial mood, controlled high contrast, clear full-body silhouette."
-                - "surreal fantasy illustration, elaborate environment design, ornate architecture, impossible scale, painterly detail, strange dreamlike atmosphere."
+                - "fast photorealistic rendering, natural skin and lighting response, clean editorial detail, efficient high-fidelity output."
+                - "high-fidelity photorealistic baseline, refined detail retention, stable proportions, rich tonal range."
+                - "highly photographic realism, natural camera-like light falloff, accurate skin micro-detail, clean high-fidelity output."
+                - "smooth coherent motion, consistent subject identity across frames, natural temporal continuity, stable video-native detail."
             context:
               type: choice
               values:
@@ -54,28 +51,6 @@ matches:
                 - "urban street environment, natural lighting, candid composition"
                 - "vertical full body editorial composition, subject centered, clean readable silhouette, strong fashion posture."
                 - "wide angle composition, environmental context, cinematic framing"
-            characters:
-              type: choice
-              values:
-                - "none"
-                - "A cyber gothic sorceress with polished metallic details, dark makeup, and intense luminous eyes."
-                - "A dark couture model with elegant posture, precise makeup, and severe black high-fashion styling."
-                - "A dark elf woman with sharp features and long silver hair."
-                - "A dark fantasy witch with long black hair and a mysterious aura."
-                - "A dark goddess radiating supernatural power."
-                - "A deadly female assassin with a cold and focused gaze."
-                - "A dominant gothic mistress with a confident and commanding posture."
-                - "A dominant gothic woman with pale skin and an intense gaze."
-                - "A lone samurai wanderer with a wide straw hat, black robes, and a restrained heroic stance."
-                - "A mysterious demon woman with glowing eyes and an intimidating aura."
-                - "A mysterious vampire woman with porcelain skin and dark hypnotic eyes."
-                - "A mysterious xianxia wanderer in flowing robes, standing alone in winter mist."
-                - "A porcelain-skinned oracle with pale hair, sharp cheekbones, and an uncanny ethereal presence."
-                - "A powerful dark queen radiating dominance and elegance."
-                - "A seductive succubus with glowing eyes and an alluring presence."
-                - "A void arcanist with an otherworldly body, arcane markings, and a silent supernatural aura."
-                - "An adult gothic fashion muse with jet black hair, porcelain skin, and a calm commanding gaze."
-                - "An adult rockabilly fashion muse with classic styling, confident expression, and retro glamour attitude."
             scene:
               type: choice
               values:
@@ -187,7 +162,7 @@ matches:
                 - "Extremely high detail."
                 - "Extremely sharp focus."
                 - "Face priority, symmetrical eyes, natural mouth, sharp eyelashes, realistic makeup detail."
-                - "Hands priority, natural fingers, relaxed hand pose, no fused fingers, no distorted wrists."
+                - "Hands priority, five fingers per hand, naturally curled and bent fingers, anatomically correct hand proportions, no deformities, no fused fingers, no distorted wrists."
                 - "Highly photorealistic rendering."
                 - "Natural skin texture and realistic shading."
                 - "photorealistic detail, natural body proportions, symmetrical face, sharp eyes, defined cheekbones, clean glossy material highlights."
@@ -203,12 +178,15 @@ matches:
                 - "bad anatomy, bad proportions, malformed limbs, extra limbs, missing limbs, duplicate body, duplicate limbs, distorted body, twisted torso"
                 - "bad hands, malformed hands, extra fingers, missing fingers, fused fingers, mutated fingers, deformed fingers"
                 - "blurry, out of focus, jpeg artifacts, oversaturated, overexposed, underexposed, noise, grain"
+                - "child-like body proportions, underage-coded appearance, immature physique, youthful facial structure inconsistent with an adult figure."
                 - "distorted face, asymmetrical eyes, malformed mouth, bad teeth, bad hands, extra fingers, missing fingers, fused fingers, mutated fingers, distorted wrists"
                 - "distorted face, asymmetrical face, cross-eyed, deformed eyes, malformed mouth, bad teeth"
                 - "dull material, dirty reflections, rubber texture artifacts, melted fabric, broken seams, noisy highlights, muddy shadows"
                 - "low quality, blurry, flat lighting, plastic skin, waxy face, broken latex reflections, muddy black material, bad anatomy, distorted body, malformed hands, fused fingers, watermark, text, logo, signature"
                 - "muddy painting, unclear subject, unreadable architecture, oversaturated colors, flat composition, watermark, text, logo, signature"
                 - "noisy image, jpeg artifacts, overexposed highlights, crushed blacks, color banding, motion blur, bad focus"
+                - "nudity, exposed genitals, explicit sexual content."
+                - "unwanted wet skin, water droplets, excessive oily sheen, sweat-slicked skin."
                 - "worst quality, low quality, blurry, jpeg artifacts, bad anatomy, bad proportions, deformed body, distorted face, bad hands, malformed hands, extra fingers, missing fingers, fused fingers, extra limbs, missing limbs, duplicate body, duplicate limbs, cross-eyed, asymmetrical eyes, watermark, text, logo, signature"
                 - "worst quality, low quality, blurry, jpeg artifacts, watermark, text, logo"
                 - "worst quality, low quality, watermark"
@@ -223,6 +201,7 @@ matches:
                 - "adult retro pinup styling with confident pose, polished makeup, and warm glamour lighting."
                 - "after-dark adult fashion look, confident expression, black high-gloss styling, tasteful seductive atmosphere."
                 - "dressed as a powerful dominatrix."
+                - "explicit adult content, nudity, sexually explicit detail."
                 - "seductive and provocative pose."
                 - "sensual pose with seductive body language."
                 - "wearing a glossy black latex outfit."

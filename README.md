@@ -86,7 +86,7 @@ portrait photo of a woman, cinematic lighting, close-up shot, shallow depth of f
 ### Prompt Ops
 
 ```
-:char_woman :ctx_portrait :cam_closeup :light_soft :style_cinematic
+:ctx_portrait :cam_close :light_soft :style_cinematic
 ```
 
 Espanso expands the triggers automatically into the final prompt.
@@ -105,9 +105,8 @@ Trigger:
 
 The builder allows selecting:
 
-- Model style preset
+- Model family preset
 - Context
-- Characters
 - Scene
 - Camera
 - Lighting
@@ -266,18 +265,17 @@ Prompt components are grouped by category.
 
 | Prefix      | Category         |
 | ----------- | ---------------- |
-| `:model_`   | Model style      |
+| `:model_`   | Model family     |
 | `:ctx_`     | Context          |
-| `:char_`    | Characters       |
 | `:scene_`   | Scene            |
 | `:cam_`     | Camera           |
 | `:light_`   | Lighting         |
 | `:style_`   | Style            |
-| `:quality_` | Quality          |
+| `:qual_`    | Quality          |
 | `:neg_`     | Negative prompts |
 | `:nsfw_`    | NSFW modifiers   |
 
-Model style snippets describe prompt language that matches known local ComfyUI model families such as Z-Image Turbo, Flux2 Klein, SDXL Cinenauts, and wildcardXL fusion. They do not load models by themselves; they provide reusable text anchors for prompts.
+Model snippets describe prompt language that matches known local ComfyUI model families such as Z-Image Turbo, Z-Image Base, SDXL, Flux2, Qwen Image Edit, Wan, HiDream, and Krea2. One snippet per base architecture, not per specific checkpoint/finetune, so swapping checkpoints within a family doesn't require new snippets. They do not load models by themselves; they provide reusable text anchors for prompts.
 
 Naming convention:
 
@@ -288,7 +286,7 @@ Naming convention:
 Examples:
 
 ```
-:model_zit_jibmix
+:model_zit
 :style_zit_gothic_editorial
 :scene_moonlit_garden
 :qual_zit_material
@@ -421,7 +419,6 @@ comfyui-prompt-ops
 │
 └ snippets
     comfy_camera.yml
-    comfy_characters.yml
     comfy_context.yml
     comfy_lighting.yml
     comfy_model.yml

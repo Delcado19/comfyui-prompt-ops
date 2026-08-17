@@ -61,16 +61,17 @@ Guidelines:
 
 # Prefix System
 
-| Prefix    | Purpose          |
-| --------- | ---------------- |
-| :char\_   | characters       |
-| :ctx\_    | context          |
-| :cam\_    | camera           |
-| :light\_  | lighting         |
-| :style\_  | visual style     |
-| :scene\_  | environment      |
-| :neg\_    | negative prompts |
-| :master\_ | prompt presets   |
+| Prefix   | Purpose          |
+| -------- | ---------------- |
+| :model\_ | model family     |
+| :ctx\_   | context          |
+| :cam\_   | camera           |
+| :light\_ | lighting         |
+| :style\_ | visual style     |
+| :scene\_ | environment      |
+| :qual\_  | quality          |
+| :neg\_   | negative prompts |
+| :nsfw\_  | NSFW modifiers   |
 
 ---
 

@@ -5,46 +5,41 @@ categories:
     prefix: model
     order: 10
     snippets:
-      - id: zit_jibmix
-        trigger: :model_zit_jibmix
+      # Model-family triggers, not per-checkpoint: one entry per installed
+      # base architecture/family instead of one per specific finetune, so
+      # swapping checkpoints within a family doesn't require new snippets.
+      - id: zit
+        trigger: :model_zit
         word: true
-        text: sharp glossy fashion realism, black latex or leather with crisp specular highlights, dramatic adult editorial mood, controlled high contrast, clear full-body silhouette.
-      - id: zit_biglove
-        trigger: :model_zit_biglove
+        text: fast photorealistic rendering, natural skin and lighting response, clean editorial detail, efficient high-fidelity output.
+      - id: zbase
+        trigger: :model_zbase
         word: true
-        text: polished portrait realism, elegant glossy latex fashion, warm luxury interior lighting, smooth natural skin texture, clean reflections on black clothing and furniture.
-      - id: zit_eventhorizon
-        trigger: :model_zit_eventhorizon
+        text: high-fidelity photorealistic baseline, refined detail retention, stable proportions, rich tonal range.
+      - id: sdxl
+        trigger: :model_sdxl
         word: true
-        text: cinematic adult glamour photography, strong pose language, high contrast black wardrobe, crisp straps and seams, moody background with controlled rim light.
-      - id: zit_intorealism
-        trigger: :model_zit_intorealism
+        text: classic photorealistic SDXL rendering, natural skin texture, accurate proportions, believable studio-grade lighting.
+      - id: flux2
+        trigger: :model_flux2
         word: true
-        text: naturalistic skin texture, realistic body proportions, documentary studio clarity, glossy black fashion materials, believable reflections, restrained color grading.
-      - id: zit_zepic
-        trigger: :model_zit_zepic
-        word: true
-        text: high impact realistic portrait photography, sharp eyes, defined cheekbones, detailed makeup, glossy wardrobe highlights, controlled photographic sharpness.
-      - id: zbase_juggernaut
-        trigger: :model_zbase_juggernaut
-        word: true
-        text: bold fantasy illustration, ink-like black silhouettes, mythic warrior posture, sweeping robe shapes, restrained red accents, clean graphic contrast.
-      - id: sdxl_wildcard
-        trigger: :model_sdxl_wildcard
-        word: true
-        text: surreal fantasy illustration, elaborate environment design, ornate architecture, impossible scale, painterly detail, strange dreamlike atmosphere.
-      - id: sdxl_cinenauts
-        trigger: :model_sdxl_cinenauts
-        word: true
-        text: cinematic concept art, ink-wash fantasy atmosphere, layered mist, refined painterly composition, elegant negative space, dramatic landscape depth.
-      - id: flux2_klein
-        trigger: :model_flux2_klein
-        word: true
-        text: clean glossy realism, modern editorial fashion posing, precise latex and leather surface reflections, crisp object boundaries, minimal studio finish.
+        text: clean glossy realism, modern editorial posing, precise material reflections, crisp object boundaries, refined studio finish.
       - id: qwen_edit
         trigger: :model_qwen_edit
         word: true
         text: clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift.
+      - id: wan
+        trigger: :model_wan
+        word: true
+        text: smooth coherent motion, consistent subject identity across frames, natural temporal continuity, stable video-native detail.
+      - id: hidream
+        trigger: :model_hidream
+        word: true
+        text: balanced photorealistic rendering, natural color science, accurate skin and material detail, strong prompt adherence.
+      - id: krea2
+        trigger: :model_krea2
+        word: true
+        text: highly photographic realism, natural camera-like light falloff, accurate skin micro-detail, clean high-fidelity output.
   - id: context
     label: Context
     prefix: ctx
@@ -122,83 +117,6 @@ categories:
         trigger: :ctx_close_material
         word: true
         text: close portrait with visible makeup, skin texture, and glossy wardrobe reflections, shallow depth of field.
-  - id: characters
-    label: Characters
-    prefix: char
-    order: 30
-    snippets:
-      - id: goth
-        trigger: :char_goth
-        word: true
-        text: A dominant gothic woman with pale skin and an intense gaze.
-      - id: vamp
-        trigger: :char_vamp
-        word: true
-        text: A mysterious vampire woman with porcelain skin and dark hypnotic eyes.
-      - id: witch
-        trigger: :char_witch
-        word: true
-        text: A dark fantasy witch with long black hair and a mysterious aura.
-      - id: queen
-        trigger: :char_queen
-        word: true
-        text: A powerful dark queen radiating dominance and elegance.
-      - id: succubus
-        trigger: :char_succubus
-        word: true
-        text: A seductive succubus with glowing eyes and an alluring presence.
-      - id: darkelf
-        trigger: :char_darkelf
-        word: true
-        text: A dark elf woman with sharp features and long silver hair.
-      - id: assassin
-        trigger: :char_assassin
-        word: true
-        text: A deadly female assassin with a cold and focused gaze.
-      - id: mistress
-        trigger: :char_mistress
-        word: true
-        text: A dominant gothic mistress with a confident and commanding posture.
-      - id: goddess
-        trigger: :char_goddess
-        word: true
-        text: A dark goddess radiating supernatural power.
-      - id: demon
-        trigger: :char_demon
-        word: true
-        text: A mysterious demon woman with glowing eyes and an intimidating aura.
-      - id: latex_muse
-        trigger: :char_latex_muse
-        word: true
-        text: An adult gothic fashion muse with jet black hair, porcelain skin, and a calm commanding gaze.
-      - id: porcelain_oracle
-        trigger: :char_porcelain_oracle
-        word: true
-        text: A porcelain-skinned oracle with pale hair, sharp cheekbones, and an uncanny ethereal presence.
-      - id: void_arcanist
-        trigger: :char_void_arcanist
-        word: true
-        text: A void arcanist with an otherworldly body, arcane markings, and a silent supernatural aura.
-      - id: xianxia_wanderer
-        trigger: :char_xianxia_wanderer
-        word: true
-        text: A mysterious xianxia wanderer in flowing robes, standing alone in winter mist.
-      - id: ink_samurai
-        trigger: :char_ink_samurai
-        word: true
-        text: A lone samurai wanderer with a wide straw hat, black robes, and a restrained heroic stance.
-      - id: cyber_sorceress
-        trigger: :char_cyber_sorceress
-        word: true
-        text: A cyber gothic sorceress with polished metallic details, dark makeup, and intense luminous eyes.
-      - id: rockabilly_muse
-        trigger: :char_rockabilly_muse
-        word: true
-        text: An adult rockabilly fashion muse with classic styling, confident expression, and retro glamour attitude.
-      - id: dark_couture_model
-        trigger: :char_dark_couture_model
-        word: true
-        text: A dark couture model with elegant posture, precise makeup, and severe black high-fashion styling.
   - id: scene
     label: Scene
     prefix: scene
@@ -611,7 +529,7 @@ categories:
       - id: hands_priority
         trigger: :qual_hands_priority
         word: true
-        text: Hands priority, natural fingers, relaxed hand pose, no fused fingers, no distorted wrists.
+        text: Hands priority, five fingers per hand, naturally curled and bent fingers, anatomically correct hand proportions, no deformities, no fused fingers, no distorted wrists.
       - id: upscale_ready
         trigger: :qual_upscale_ready
         word: true
@@ -733,6 +651,21 @@ categories:
           bad hands, extra fingers,
           missing fingers, fused fingers,
           mutated fingers, distorted wrists
+      - id: wet_skin
+        trigger: :neg_wet_skin
+        word: true
+        text: unwanted wet skin, water droplets, excessive oily sheen, sweat-slicked skin.
+      # Ethical/legal safety guard: excludes underage-coded appearance
+      # regardless of the requested subject, adapted from the Lazy
+      # Embeddings pack's lazyloli negative embedding.
+      - id: safe_minors
+        trigger: :neg_safe_minors
+        word: true
+        text: child-like body proportions, underage-coded appearance, immature physique, youthful facial structure inconsistent with an adult figure.
+      - id: sfw_guard
+        trigger: :neg_sfw_guard
+        word: true
+        text: nudity, exposed genitals, explicit sexual content.
   - id: nsfw
     label: NSFW
     prefix: nsfw
@@ -782,3 +715,7 @@ categories:
         trigger: :nsfw_material_focus
         word: true
         text: adult fashion material focus, glossy latex, leather straps, polished heels, clean reflective highlights.
+      - id: explicit
+        trigger: :nsfw_explicit
+        word: true
+        text: explicit adult content, nudity, sexually explicit detail.

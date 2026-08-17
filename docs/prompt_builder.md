@@ -18,9 +18,8 @@ Typing this trigger opens an interactive selection form.
 
 The builder includes the following prompt components:
 
-- Model style preset
+- Model family preset
 - Context
-- Characters
 - Scene
 - Camera
 - Lighting

@@ -55,18 +55,17 @@ matches:
 
 Prompt components are organized by category.
 
-| Category   | Prefix     |
-| ---------- | ---------- |
-| Model      | :model\_   |
-| Context    | :ctx\_     |
-| Characters | :char\_    |
-| Scene      | :scene\_   |
-| Camera     | :cam\_     |
-| Lighting   | :light\_   |
-| Style      | :style\_   |
-| Quality    | :quality\_ |
-| Negative   | :neg\_     |
-| NSFW       | :nsfw\_    |
+| Category | Prefix   |
+| -------- | -------- |
+| Model    | :model\_ |
+| Context  | :ctx\_   |
+| Scene    | :scene\_ |
+| Camera   | :cam\_   |
+| Lighting | :light\_ |
+| Style    | :style\_ |
+| Quality  | :qual\_  |
+| Negative | :neg\_   |
+| NSFW     | :nsfw\_  |
 
 Each category is stored in a separate YAML file.
 
@@ -81,7 +80,7 @@ Use this naming pattern for new triggers:
 Examples:
 
 ```
-:model_zit_jibmix
+:model_zit
 :style_sdxl_inkwash_xianxia
 :scene_gothic_throne_room
 :light_lowkey_latex
@@ -103,7 +102,6 @@ Example:
 ```
 snippets/comfy_context.yml
 snippets/comfy_model.yml
-snippets/comfy_characters.yml
 snippets/comfy_scene.yml
 snippets/comfy_camera.yml
 snippets/comfy_lighting.yml

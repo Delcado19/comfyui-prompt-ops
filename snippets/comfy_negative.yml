@@ -95,3 +95,15 @@ matches:
       bad hands, extra fingers,
       missing fingers, fused fingers,
       mutated fingers, distorted wrists
+  - trigger: ":neg_wet_skin"
+    word: true
+    replace: |
+      unwanted wet skin, water droplets, excessive oily sheen, sweat-slicked skin.
+  - trigger: ":neg_safe_minors"
+    word: true
+    replace: |
+      child-like body proportions, underage-coded appearance, immature physique, youthful facial structure inconsistent with an adult figure.
+  - trigger: ":neg_sfw_guard"
+    word: true
+    replace: |
+      nudity, exposed genitals, explicit sexual content.

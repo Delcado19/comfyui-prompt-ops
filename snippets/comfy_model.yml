@@ -1,41 +1,33 @@
 matches:
-  - trigger: ":model_zit_jibmix"
+  - trigger: ":model_zit"
     word: true
     replace: |
-      sharp glossy fashion realism, black latex or leather with crisp specular highlights, dramatic adult editorial mood, controlled high contrast, clear full-body silhouette.
-  - trigger: ":model_zit_biglove"
+      fast photorealistic rendering, natural skin and lighting response, clean editorial detail, efficient high-fidelity output.
+  - trigger: ":model_zbase"
     word: true
     replace: |
-      polished portrait realism, elegant glossy latex fashion, warm luxury interior lighting, smooth natural skin texture, clean reflections on black clothing and furniture.
-  - trigger: ":model_zit_eventhorizon"
+      high-fidelity photorealistic baseline, refined detail retention, stable proportions, rich tonal range.
+  - trigger: ":model_sdxl"
     word: true
     replace: |
-      cinematic adult glamour photography, strong pose language, high contrast black wardrobe, crisp straps and seams, moody background with controlled rim light.
-  - trigger: ":model_zit_intorealism"
+      classic photorealistic SDXL rendering, natural skin texture, accurate proportions, believable studio-grade lighting.
+  - trigger: ":model_flux2"
     word: true
     replace: |
-      naturalistic skin texture, realistic body proportions, documentary studio clarity, glossy black fashion materials, believable reflections, restrained color grading.
-  - trigger: ":model_zit_zepic"
-    word: true
-    replace: |
-      high impact realistic portrait photography, sharp eyes, defined cheekbones, detailed makeup, glossy wardrobe highlights, controlled photographic sharpness.
-  - trigger: ":model_zbase_juggernaut"
-    word: true
-    replace: |
-      bold fantasy illustration, ink-like black silhouettes, mythic warrior posture, sweeping robe shapes, restrained red accents, clean graphic contrast.
-  - trigger: ":model_sdxl_wildcard"
-    word: true
-    replace: |
-      surreal fantasy illustration, elaborate environment design, ornate architecture, impossible scale, painterly detail, strange dreamlike atmosphere.
-  - trigger: ":model_sdxl_cinenauts"
-    word: true
-    replace: |
-      cinematic concept art, ink-wash fantasy atmosphere, layered mist, refined painterly composition, elegant negative space, dramatic landscape depth.
-  - trigger: ":model_flux2_klein"
-    word: true
-    replace: |
-      clean glossy realism, modern editorial fashion posing, precise latex and leather surface reflections, crisp object boundaries, minimal studio finish.
+      clean glossy realism, modern editorial posing, precise material reflections, crisp object boundaries, refined studio finish.
   - trigger: ":model_qwen_edit"
     word: true
     replace: |
       clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift.
+  - trigger: ":model_wan"
+    word: true
+    replace: |
+      smooth coherent motion, consistent subject identity across frames, natural temporal continuity, stable video-native detail.
+  - trigger: ":model_hidream"
+    word: true
+    replace: |
+      balanced photorealistic rendering, natural color science, accurate skin and material detail, strong prompt adherence.
+  - trigger: ":model_krea2"
+    word: true
+    replace: |
+      highly photographic realism, natural camera-like light falloff, accurate skin micro-detail, clean high-fidelity output.

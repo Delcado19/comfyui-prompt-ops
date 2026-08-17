@@ -43,3 +43,7 @@ matches:
     word: true
     replace: |
       adult fashion material focus, glossy latex, leather straps, polished heels, clean reflective highlights.
+  - trigger: ":nsfw_explicit"
+    word: true
+    replace: |
+      explicit adult content, nudity, sexually explicit detail.

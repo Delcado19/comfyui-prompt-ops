@@ -56,7 +56,7 @@ Do not manually edit generated `snippets/comfy_*.yml` files when using the admin
 Use lowercase ids with underscores:
 
 ```text
-model_zit_jibmix
+model_zit
 moonlit_garden
 lowkey_latex
 ```
@@ -64,7 +64,7 @@ lowkey_latex
 Triggers use the category prefix:
 
 ```text
-:model_zit_jibmix
+:model_zit
 :scene_moonlit_garden
 :light_lowkey_latex
 ```

@@ -22,24 +22,6 @@ Auto-generated documentation of available snippets.
 | :cam_environment_scale | Wide environmental framing showing the subject as a small figure inside a vast dramatic scene. | comfy_camera.yml |
 | :cam_cover_art | Cover art framing with strong silhouette, clear focal point, and readable composition at thumbnail size. | comfy_camera.yml |
 | :cam_material_closeup | Close material-focused portrait showing skin texture, makeup, and glossy wardrobe highlights. | comfy_camera.yml |
-| :char_goth | A dominant gothic woman with pale skin and an intense gaze. | comfy_characters.yml |
-| :char_vamp | A mysterious vampire woman with porcelain skin and dark hypnotic eyes. | comfy_characters.yml |
-| :char_witch | A dark fantasy witch with long black hair and a mysterious aura. | comfy_characters.yml |
-| :char_queen | A powerful dark queen radiating dominance and elegance. | comfy_characters.yml |
-| :char_succubus | A seductive succubus with glowing eyes and an alluring presence. | comfy_characters.yml |
-| :char_darkelf | A dark elf woman with sharp features and long silver hair. | comfy_characters.yml |
-| :char_assassin | A deadly female assassin with a cold and focused gaze. | comfy_characters.yml |
-| :char_mistress | A dominant gothic mistress with a confident and commanding posture. | comfy_characters.yml |
-| :char_goddess | A dark goddess radiating supernatural power. | comfy_characters.yml |
-| :char_demon | A mysterious demon woman with glowing eyes and an intimidating aura. | comfy_characters.yml |
-| :char_latex_muse | An adult gothic fashion muse with jet black hair, porcelain skin, and a calm commanding gaze. | comfy_characters.yml |
-| :char_porcelain_oracle | A porcelain-skinned oracle with pale hair, sharp cheekbones, and an uncanny ethereal presence. | comfy_characters.yml |
-| :char_void_arcanist | A void arcanist with an otherworldly body, arcane markings, and a silent supernatural aura. | comfy_characters.yml |
-| :char_xianxia_wanderer | A mysterious xianxia wanderer in flowing robes, standing alone in winter mist. | comfy_characters.yml |
-| :char_ink_samurai | A lone samurai wanderer with a wide straw hat, black robes, and a restrained heroic stance. | comfy_characters.yml |
-| :char_cyber_sorceress | A cyber gothic sorceress with polished metallic details, dark makeup, and intense luminous eyes. | comfy_characters.yml |
-| :char_rockabilly_muse | An adult rockabilly fashion muse with classic styling, confident expression, and retro glamour attitude. | comfy_characters.yml |
-| :char_dark_couture_model | A dark couture model with elegant posture, precise makeup, and severe black high-fashion styling. | comfy_characters.yml |
 | :ctx_portrait | portrait, centered composition, subject facing camera | comfy_context.yml |
 | :ctx_full | full body shot, subject standing, balanced composition | comfy_context.yml |
 | :ctx_close | close-up shot, detailed facial features, shallow depth of field | comfy_context.yml |
@@ -76,16 +58,14 @@ Auto-generated documentation of available snippets.
 | :light_golden_pinup | Warm golden hour glamour light with soft retro highlights and rich skin tones. | comfy_lighting.yml |
 | :light_cold_fantasy | Cold fantasy backlight with icy haze, pale blue shadows, and luminous atmospheric depth. | comfy_lighting.yml |
 | :light_gallery_softbox | Soft gallery-style lighting with smooth gradients, clean reflections, and minimal harsh shadows. | comfy_lighting.yml |
-| :model_zit_jibmix | sharp glossy fashion realism, black latex or leather with crisp specular highlights, dramatic adult editorial mood, controlled high contrast, clear full-body silhouette. | comfy_model.yml |
-| :model_zit_biglove | polished portrait realism, elegant glossy latex fashion, warm luxury interior lighting, smooth natural skin texture, clean reflections on black clothing and furniture. | comfy_model.yml |
-| :model_zit_eventhorizon | cinematic adult glamour photography, strong pose language, high contrast black wardrobe, crisp straps and seams, moody background with controlled rim light. | comfy_model.yml |
-| :model_zit_intorealism | naturalistic skin texture, realistic body proportions, documentary studio clarity, glossy black fashion materials, believable reflections, restrained color grading. | comfy_model.yml |
-| :model_zit_zepic | high impact realistic portrait photography, sharp eyes, defined cheekbones, detailed makeup, glossy wardrobe highlights, controlled photographic sharpness. | comfy_model.yml |
-| :model_zbase_juggernaut | bold fantasy illustration, ink-like black silhouettes, mythic warrior posture, sweeping robe shapes, restrained red accents, clean graphic contrast. | comfy_model.yml |
-| :model_sdxl_wildcard | surreal fantasy illustration, elaborate environment design, ornate architecture, impossible scale, painterly detail, strange dreamlike atmosphere. | comfy_model.yml |
-| :model_sdxl_cinenauts | cinematic concept art, ink-wash fantasy atmosphere, layered mist, refined painterly composition, elegant negative space, dramatic landscape depth. | comfy_model.yml |
-| :model_flux2_klein | clean glossy realism, modern editorial fashion posing, precise latex and leather surface reflections, crisp object boundaries, minimal studio finish. | comfy_model.yml |
+| :model_zit | fast photorealistic rendering, natural skin and lighting response, clean editorial detail, efficient high-fidelity output. | comfy_model.yml |
+| :model_zbase | high-fidelity photorealistic baseline, refined detail retention, stable proportions, rich tonal range. | comfy_model.yml |
+| :model_sdxl | classic photorealistic SDXL rendering, natural skin texture, accurate proportions, believable studio-grade lighting. | comfy_model.yml |
+| :model_flux2 | clean glossy realism, modern editorial posing, precise material reflections, crisp object boundaries, refined studio finish. | comfy_model.yml |
 | :model_qwen_edit | clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift. | comfy_model.yml |
+| :model_wan | smooth coherent motion, consistent subject identity across frames, natural temporal continuity, stable video-native detail. | comfy_model.yml |
+| :model_hidream | balanced photorealistic rendering, natural color science, accurate skin and material detail, strong prompt adherence. | comfy_model.yml |
+| :model_krea2 | highly photographic realism, natural camera-like light falloff, accurate skin micro-detail, clean high-fidelity output. | comfy_model.yml |
 | :neg_min | worst quality, low quality, watermark | comfy_negative.yml |
 | :neg_base | worst quality, low quality, blurry, jpeg artifacts, watermark, text, logo | comfy_negative.yml |
 | :neg_render | blurry, out of focus, jpeg artifacts, oversaturated, overexposed, underexposed, noise, grain | comfy_negative.yml |
@@ -99,6 +79,9 @@ Auto-generated documentation of available snippets.
 | :neg_sdxl_painterly | muddy painting, unclear subject, unreadable architecture, oversaturated colors, flat composition, watermark, text, logo, signature | comfy_negative.yml |
 | :neg_cinematic_clean | noisy image, jpeg artifacts, overexposed highlights, crushed blacks, color banding, motion blur, bad focus | comfy_negative.yml |
 | :neg_face_hands_strict | distorted face, asymmetrical eyes, malformed mouth, bad teeth, bad hands, extra fingers, missing fingers, fused fingers, mutated fingers, distorted wrists | comfy_negative.yml |
+| :neg_wet_skin | unwanted wet skin, water droplets, excessive oily sheen, sweat-slicked skin. | comfy_negative.yml |
+| :neg_safe_minors | child-like body proportions, underage-coded appearance, immature physique, youthful facial structure inconsistent with an adult figure. | comfy_negative.yml |
+| :neg_sfw_guard | nudity, exposed genitals, explicit sexual content. | comfy_negative.yml |
 | :nsfw_sensual | sensual pose with seductive body language. | comfy_nsfw.yml |
 | :nsfw_lingerie | wearing elegant black lingerie. | comfy_nsfw.yml |
 | :nsfw_latex | wearing a glossy black latex outfit. | comfy_nsfw.yml |
@@ -110,6 +93,7 @@ Auto-generated documentation of available snippets.
 | :nsfw_pinup_retro | adult retro pinup styling with confident pose, polished makeup, and warm glamour lighting. | comfy_nsfw.yml |
 | :nsfw_gothic_glamour | adult gothic glamour styling, dark couture wardrobe, elegant dominance, dramatic romantic mood. | comfy_nsfw.yml |
 | :nsfw_material_focus | adult fashion material focus, glossy latex, leather straps, polished heels, clean reflective highlights. | comfy_nsfw.yml |
+| :nsfw_explicit | explicit adult content, nudity, sexually explicit detail. | comfy_nsfw.yml |
 | :qual_detail | Ultra detailed skin with visible pores. | comfy_quality.yml |
 | :qual_sharp | Extremely sharp focus. | comfy_quality.yml |
 | :qual_photo | Highly photorealistic rendering. | comfy_quality.yml |
@@ -120,7 +104,7 @@ Auto-generated documentation of available snippets.
 | :qual_sdxl_painterly | Rich painterly detail, layered atmosphere, ornate background elements, clear fantasy composition. | comfy_quality.yml |
 | :qual_flux_clean | clean photoreal rendering, accurate surface separation, stable hands, refined face detail, controlled highlights. | comfy_quality.yml |
 | :qual_face_priority | Face priority, symmetrical eyes, natural mouth, sharp eyelashes, realistic makeup detail. | comfy_quality.yml |
-| :qual_hands_priority | Hands priority, natural fingers, relaxed hand pose, no fused fingers, no distorted wrists. | comfy_quality.yml |
+| :qual_hands_priority | Hands priority, five fingers per hand, naturally curled and bent fingers, anatomically correct hand proportions, no deformities, no fused fingers, no distorted wrists. | comfy_quality.yml |
 | :qual_upscale_ready | Upscale-ready clean image, no noisy texture buildup, clear edges, balanced micro-detail. | comfy_quality.yml |
 | :qual_gothic_detail | Detailed gothic ornament, readable lace and metal accents, crisp cathedral textures, polished dark color palette. | comfy_quality.yml |
 | :scene_castle | The scene takes place inside a dark gothic castle illuminated by candlelight. | comfy_scene.yml |
@@ -173,4 +157,4 @@ Auto-generated documentation of available snippets.
 | :style_sdxl_inkwash_xianxia | ink-wash xianxia fantasy, flowing robes, winter mist, elegant brushwork, cinematic negative space. | comfy_style.yml |
 | :style_flux_clean_editorial | clean Flux editorial realism, smooth surfaces, modern fashion pose, crisp material separation, refined studio finish. | comfy_style.yml |
 | :style_qwen_precise_edit | precise object edits, clean boundaries, preserved subject identity, realistic texture continuity. | comfy_style.yml |
-| :prompt | {{prompt.model}} {{prompt.context}} {{prompt.characters}} {{prompt.scene}} {{prompt.camera}} {{prompt.lighting}} {{prompt.style}} {{prompt.quality}} {{prompt.negative}} {{prompt.nsfw}} | zz_prompt_builder.yml |
+| :prompt | {{prompt.model}} {{prompt.context}} {{prompt.scene}} {{prompt.camera}} {{prompt.lighting}} {{prompt.style}} {{prompt.quality}} {{prompt.negative}} {{prompt.nsfw}} | zz_prompt_builder.yml |

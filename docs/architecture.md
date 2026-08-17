@@ -47,8 +47,8 @@ Example:
 
 ```
 snippets/
+  comfy_model.yml
   comfy_context.yml
-  comfy_characters.yml
   comfy_scene.yml
   comfy_camera.yml
   comfy_lighting.yml

@@ -49,5 +49,24 @@ foreach ($file in $files) {
 
 }
 
+# Remove generated snippet files whose source category no longer exists
+# (e.g. after a category is deleted from the library) so Espanso doesn't
+# keep loading dead triggers from a stale comfy_*.yml left in match/.
+$sourceNames = $files | ForEach-Object { $_.Name }
+$staleFiles = Get-ChildItem $espansoMatch -Filter "comfy_*.yml" -ErrorAction SilentlyContinue |
+    Where-Object { $sourceNames -notcontains $_.Name }
+
+foreach ($stale in $staleFiles) {
+
+    if ($dryrun) {
+        Write-Host "[DRYRUN] Would remove stale $($stale.Name)"
+    }
+    else {
+        Remove-Item $stale.FullName -Force
+        Write-Host "Removed stale $($stale.Name)"
+    }
+
+}
+
 Write-Host ""
 Write-Host "Snippets processed:" $count

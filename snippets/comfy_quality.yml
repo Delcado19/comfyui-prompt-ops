@@ -42,7 +42,7 @@ matches:
   - trigger: ":qual_hands_priority"
     word: true
     replace: |
-      Hands priority, natural fingers, relaxed hand pose, no fused fingers, no distorted wrists.
+      Hands priority, five fingers per hand, naturally curled and bent fingers, anatomically correct hand proportions, no deformities, no fused fingers, no distorted wrists.
   - trigger: ":qual_upscale_ready"
     word: true
     replace: |
