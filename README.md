@@ -28,6 +28,7 @@ Instead of writing large prompts manually, prompts are built from **reusable com
 - modular **prompt components**
 - **Espanso snippet system**
 - **interactive prompt builder**
+- optional **ComfyUI custom node** (same library, inside the graph)
 - local **prompt library admin**
 - automatic **snippet documentation**
 - **duplicate trigger detection**
@@ -172,6 +173,19 @@ docs/snippets.md
 ```
 
 Use the admin for adding, editing, deleting, and generating prompt categories and snippets.
+
+---
+
+# 🧩 ComfyUI Node
+
+The same library is also available as a minimal read-only ComfyUI node: a
+dropdown over every trigger, output as a `STRING`.
+
+```powershell
+.\scripts\install_comfy_node.ps1 -ComfyUIPath "G:\ComfyUI-Easy-Install\ComfyUI"
+```
+
+See [docs/comfyui_node.md](docs/comfyui_node.md) for details and update behavior.
 
 ---
 
@@ -375,6 +389,7 @@ Pipeline steps:
 | generate_prompt_builder.ps1  | build prompt builder           |
 | install_snippets.ps1         | deploy snippets                |
 | restart_services.ps1         | restart Espanso                |
+| install_comfy_node.ps1       | deploy the ComfyUI node, not part of `dev.ps1` |
 | import_snippets_to_library.ps1 | one-off migration: rebuild the library from generated snippets, not part of `dev.ps1` |
 | export_existing_snippets.ps1 | one-off migration: pull a live Espanso install's snippets into the repo, not part of `dev.ps1` |
 
@@ -385,6 +400,11 @@ Pipeline steps:
 ```
 comfyui-prompt-ops
 │
+├ comfyui_node
+│   └ prompt_ops
+│       __init__.py
+│       nodes.py
+│
 ├ config
 │   default.yml
 │
@@ -392,6 +412,7 @@ comfyui-prompt-ops
 │   admin.md
 │   architecture.md
 │   banner.png
+│   comfyui_node.md
 │   developer_workflow.md
 │   prompt_builder.md
 │   snippets.md
@@ -446,6 +467,7 @@ docs/
 ```
 
 - architecture.md
+- comfyui_node.md
 - developer_workflow.md
 - prompt_builder.md
 - snippets.md
