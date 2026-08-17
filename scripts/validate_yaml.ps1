@@ -14,6 +14,7 @@ Set-StrictMode -Version Latest
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot   = Resolve-Path "$ScriptRoot/.."
 $SnippetDir = Join-Path $RepoRoot "snippets"
+$ConfigDir  = Join-Path $RepoRoot "config"
 
 if (-not (Test-Path $SnippetDir)) {
     throw "Snippet directory not found: $SnippetDir"
@@ -52,7 +53,11 @@ catch {
 # LOAD FILES
 # --------------------------------------------------
 
-$files = Get-ChildItem $SnippetDir -Filter "*.yml"
+$files = @(Get-ChildItem $SnippetDir -Filter "*.yml")
+
+if (Test-Path $ConfigDir) {
+    $files += Get-ChildItem $ConfigDir -Filter "*.yml"
+}
 
 if (-not $files) {
     throw "No YAML files found in $SnippetDir"

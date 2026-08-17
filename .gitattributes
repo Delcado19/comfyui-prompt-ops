@@ -1,0 +1,4 @@
+# Normalize line endings for all text files; let Git pick the checkout
+# style per platform instead of storing mixed CRLF/LF and warning on
+# every commit.
+* text=auto

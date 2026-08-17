@@ -78,6 +78,10 @@ jobs:
         shell: pwsh
         run: ./scripts/generate_prompt_builder.ps1
 
+      - name: Generate Snippet Docs
+        shell: pwsh
+        run: ./scripts/generate_snippet_docs.ps1
+
       # ----------------------------------------
       # AUTO COMMIT (SAFE)
       # ----------------------------------------
@@ -88,7 +92,10 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add snippets/zz_prompt_builder.yml
+          # All pipeline output that can drift from library/prompt_library.yml,
+          # not just the prompt builder, so a library edit without a local
+          # `dev.ps1` run doesn't leave the repo's generated files stale.
+          git add snippets/*.yml docs/snippets.md
 
           git diff --cached --quiet
           $diffExitCode = $LASTEXITCODE
@@ -96,7 +103,7 @@ jobs:
           if ($diffExitCode -eq 0) {
               echo "No changes to commit"
           } elseif ($diffExitCode -eq 1) {
-              git commit -m "ci: auto-update prompt builder"
+              git commit -m "ci: auto-update generated snippets and docs"
               git pull --rebase origin main
               git push
           } else {

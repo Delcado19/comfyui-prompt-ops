@@ -7,24 +7,27 @@ Write-Host "Installing snippets..."
 
 $root = Resolve-Path "$PSScriptRoot\.."
 $snippetDir = Join-Path $root "snippets"
+$configDir = Join-Path $root "config"
 
-# Espanso's match dir differs per OS: %APPDATA% on Windows, XDG config on Linux/macOS.
+# Espanso's dirs differ per OS: %APPDATA% on Windows, XDG config on Linux/macOS.
 if ($IsWindows) {
-    $espansoMatch = Join-Path $env:APPDATA "espanso\match"
+    $espansoRoot = Join-Path $env:APPDATA "espanso"
 }
 else {
-    $espansoMatch = Join-Path $HOME ".config/espanso/match"
+    $espansoRoot = Join-Path $HOME ".config/espanso"
 }
+$espansoMatch = Join-Path $espansoRoot "match"
+$espansoConfig = Join-Path $espansoRoot "config"
 
-if (!(Test-Path $espansoMatch)) {
-
-    if ($dryrun) {
-        Write-Host "[DRYRUN] Would create Espanso match directory"
+foreach ($dir in @($espansoMatch, $espansoConfig)) {
+    if (!(Test-Path $dir)) {
+        if ($dryrun) {
+            Write-Host "[DRYRUN] Would create $dir"
+        }
+        else {
+            New-Item -ItemType Directory -Path $dir -Force | Out-Null
+        }
     }
-    else {
-        New-Item -ItemType Directory -Path $espansoMatch | Out-Null
-    }
-
 }
 
 $files = Get-ChildItem $snippetDir -Filter *.yml
@@ -49,11 +52,37 @@ foreach ($file in $files) {
 
 }
 
-# Remove generated snippet files whose source category no longer exists
-# (e.g. after a category is deleted from the library) so Espanso doesn't
-# keep loading dead triggers from a stale comfy_*.yml left in match/.
+# config/*.yml holds Espanso's own settings (backend, shortcuts, ...), not
+# match triggers, so it's deployed to Espanso's config dir, not match/.
+if (Test-Path $configDir) {
+
+    $configFiles = Get-ChildItem $configDir -Filter *.yml
+
+    foreach ($file in $configFiles) {
+
+        if ($dryrun) {
+            Write-Host "[DRYRUN] Would copy config/$($file.Name)"
+        }
+        else {
+            Copy-Item $file.FullName $espansoConfig -Force
+            Write-Host "Copied config/$($file.Name)"
+        }
+
+        $count++
+
+    }
+
+}
+
+# Remove previously-generated files whose source no longer exists (e.g.
+# after a category is deleted from the library, or after default.yml moved
+# from snippets/ to config/) so Espanso doesn't keep loading dead triggers,
+# or a stray config file, left behind in match/. Only touches filenames this
+# script is known to have generated/copied there itself — never base.yml or
+# anything else Espanso or the user placed in match/.
 $sourceNames = $files | ForEach-Object { $_.Name }
-$staleFiles = Get-ChildItem $espansoMatch -Filter "comfy_*.yml" -ErrorAction SilentlyContinue |
+$staleFiles = Get-ChildItem $espansoMatch -Filter "*.yml" -ErrorAction SilentlyContinue |
+    Where-Object { $_.Name -eq "default.yml" -or $_.Name -like "comfy_*.yml" -or $_.Name -eq "zz_prompt_builder.yml" } |
     Where-Object { $sourceNames -notcontains $_.Name }
 
 foreach ($stale in $staleFiles) {

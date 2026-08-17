@@ -385,6 +385,9 @@ Pipeline steps:
 ```
 comfyui-prompt-ops
 │
+├ config
+│   default.yml
+│
 ├ docs
 │   admin.md
 │   architecture.md
@@ -429,7 +432,6 @@ comfyui-prompt-ops
     comfy_quality.yml
     comfy_scene.yml
     comfy_style.yml
-    default.yml
     zz_prompt_builder.yml
 ```
 
