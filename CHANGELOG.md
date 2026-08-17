@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.6.1...v1.6.2) (2026-08-17)
+
+
+### Bug Fixes
+
+* restart_services.ps1 never actually started the Espanso daemon ([17a8e27](https://github.com/Delcado19/comfyui-prompt-ops/commit/17a8e274126c31e3c9cd73bf1b148845ad04da4c))
+
 ## [1.6.1](https://github.com/Delcado19/comfyui-prompt-ops/compare/v1.6.0...v1.6.1) (2026-08-17)
 
 
