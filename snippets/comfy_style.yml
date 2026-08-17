@@ -2,83 +2,83 @@ matches:
   - trigger: ":style_realistic"
     word: true
     replace: |
-      ultra realistic, highly detailed, photorealistic, natural skin texture
+      photorealistic visual language, natural skin and materials, believable optics, restrained processing, physically plausible light response.
   - trigger: ":style_photo"
     word: true
     replace: |
-      professional photography, high dynamic range, sharp focus
+      professional photography, realistic camera response, controlled exposure, natural depth, precise focus, polished but believable finish.
   - trigger: ":style_cinematic"
     word: true
     replace: |
-      cinematic style, film still, dramatic color grading, movie lighting
+      cinematic film-still aesthetic, narrative composition, motivated lighting, controlled color palette, dimensional atmosphere.
   - trigger: ":style_film"
     word: true
     replace: |
-      35mm film photography, analog film grain, cinematic tones
+      analog film photography, organic grain, gentle highlight roll-off, subtle halation, tactile color response, restrained optical imperfection.
   - trigger: ":style_noir"
     word: true
     replace: |
-      film noir style, high contrast, dramatic shadows, black and white
+      classic film noir, monochrome tonal design, hard directional light, deep shadows, elegant negative space, tense cinematic atmosphere.
   - trigger: ":style_fantasy"
     word: true
     replace: |
-      fantasy art style, magical atmosphere, epic composition
+      fantasy visual language, imaginative worldbuilding, atmospheric depth, coherent magical elements, epic but readable composition.
   - trigger: ":style_darkfantasy"
     word: true
     replace: |
-      dark fantasy, gothic atmosphere, dramatic lighting
+      dark fantasy, gothic architecture and symbolism, ominous atmosphere, restrained palette, dramatic chiaroscuro, detailed worldbuilding.
   - trigger: ":style_scifi"
     word: true
     replace: |
-      science fiction aesthetic, futuristic environment, neon accents
+      science-fiction aesthetic, advanced materials and technology, coherent futuristic design language, clean spatial logic, cinematic scale.
   - trigger: ":style_cyberpunk"
     word: true
     replace: |
-      cyberpunk style, neon lights, futuristic city, dystopian atmosphere
+      cyberpunk aesthetic, dense urban technology, neon and practical light, wet reflective surfaces, high-tech low-life atmosphere.
   - trigger: ":style_anime"
     word: true
     replace: |
-      anime style illustration, vibrant colors, clean line art
+      anime illustration, clean intentional linework, controlled cel shading, expressive character design, coherent color styling.
   - trigger: ":style_manga"
     word: true
     replace: |
-      manga style illustration, black ink line art, expressive shading
+      manga illustration, confident black ink linework, graphic screentone shading, expressive panel-like composition.
   - trigger: ":style_comic"
     word: true
     replace: |
-      comic book illustration, bold outlines, dynamic shading
+      comic-book illustration, bold contour language, dynamic value grouping, deliberate ink and color separation, dramatic composition.
   - trigger: ":style_painterly"
     word: true
     replace: |
-      painterly style, visible brush strokes, digital painting
+      painterly rendering, visible intentional brushwork, layered color, textured edges, controlled detail hierarchy.
   - trigger: ":style_oil"
     word: true
     replace: |
-      oil painting style, rich textures, classical painting
+      traditional oil-painting aesthetic, rich pigment texture, layered brushwork, deep tonal modeling, luminous highlights.
   - trigger: ":style_watercolor"
     word: true
     replace: |
-      watercolor painting, soft color blending, artistic texture
+      watercolor painting, translucent pigment washes, soft edge blooms, paper texture, selective fine detail.
   - trigger: ":style_concept"
     word: true
     replace: |
-      concept art, highly detailed environment design, cinematic composition
+      production concept art, clear visual idea, coherent environment design, strong shape language, cinematic scale and atmosphere.
   - trigger: ":style_illustration"
     word: true
     replace: |
-      digital illustration, polished artwork, detailed shading
+      polished digital illustration, deliberate shape design, controlled line and edge treatment, detailed but readable rendering.
   - trigger: ":style_minimal"
     word: true
     replace: |
-      minimalist style, clean composition, simple shapes
+      minimalist visual design, strong negative space, limited palette, simple geometry, precise focal hierarchy.
   - trigger: ":style_surreal"
     word: true
     replace: |
-      surreal art style, dreamlike atmosphere, abstract elements
+      surrealist imagery, dream logic, unexpected juxtapositions, altered scale or physics, coherent visual symbolism.
   - trigger: ":style_vintage"
     word: true
     replace: |
-      vintage aesthetic, retro color palette, nostalgic atmosphere
+      vintage photographic aesthetic, period-appropriate color response, subtle aging, restrained contrast, authentic nostalgic mood.
   - trigger: ":style_zit_gothic_editorial"
     word: true
     replace: |
@@ -119,3 +119,47 @@ matches:
     word: true
     replace: |
       precise object edits, clean boundaries, preserved subject identity, realistic texture continuity.
+  - trigger: ":style_analog_film"
+    word: true
+    replace: |
+      analog photography, organic film grain, warm nuanced color response, subtle halation, gentle highlight roll-off, tactile imperfections.
+  - trigger: ":style_black_white_photo"
+    word: true
+    replace: |
+      black-and-white photography, rich midtones, sculpted shadows, luminous highlights, texture-focused monochrome composition.
+  - trigger: ":style_documentary_photo"
+    word: true
+    replace: |
+      documentary photography, candid observation, available-light realism, authentic environments, unposed body language, narrative detail.
+  - trigger: ":style_fashion_editorial"
+    word: true
+    replace: |
+      high-fashion editorial photography, deliberate styling, confident pose, strong silhouette, magazine-grade composition, polished controlled lighting.
+  - trigger: ":style_nordic_noir"
+    word: true
+    replace: |
+      Nordic noir photography, cold desaturated palette, dim naturalistic lighting, stark composition, restrained tension, bleak cinematic realism.
+  - trigger: ":style_goth_fashion"
+    word: true
+    replace: |
+      goth fashion editorial, black leather and lace, severe tailoring, dark romantic details, elegant macabre styling, polished magazine presentation.
+  - trigger: ":style_metal_fashion"
+    word: true
+    replace: |
+      heavy-metal fashion editorial, black leather, worn metal hardware, band-inspired attitude, dark stage-adjacent styling, gritty polished portraiture.
+  - trigger: ":style_psychobilly"
+    word: true
+    replace: |
+      psychobilly fashion, rockabilly silhouettes with punk aggression, black leather, bold retro hair, tattoo-culture attitude, high-contrast vintage styling.
+  - trigger: ":style_dreamcore"
+    word: true
+    replace: |
+      dreamcore aesthetic, nostalgic liminal imagery, soft uncanny light, familiar spaces made subtly surreal, hazy emotional atmosphere.
+  - trigger: ":style_grunge"
+    word: true
+    replace: |
+      grunge aesthetic, distressed tactile surfaces, muted dirty tones, raw imperfection, underground editorial energy, uneven texture and contrast.
+  - trigger: ":style_art_deco"
+    word: true
+    replace: |
+      Art Deco design language, elegant geometric symmetry, streamlined ornament, black-and-metallic luxury, strong graphic framing.

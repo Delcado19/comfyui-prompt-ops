@@ -2,43 +2,43 @@ matches:
   - trigger: ":cam_portrait"
     word: true
     replace: |
-      Cinematic portrait photography.
+      portrait camera framing with natural perspective and flattering subject-to-background separation.
   - trigger: ":cam_close"
     word: true
     replace: |
-      Close-up shot focusing on the face.
+      close-up framing focused on the face and expression, with precise eye focus.
   - trigger: ":cam_wide"
     word: true
     replace: |
-      Wide cinematic shot showing the environment.
+      wide shot showing the subject within a clearly readable environment.
   - trigger: ":cam_low"
     word: true
     replace: |
-      Low angle shot emphasizing dominance.
+      low-angle camera position looking upward, emphasizing height, presence, and dominance.
   - trigger: ":cam_high"
     word: true
     replace: |
-      High angle shot looking down at the character.
+      high-angle camera position looking downward, revealing spatial layout and reducing subject dominance.
   - trigger: ":cam_35mm"
     word: true
     replace: |
-      Shot on a 35mm cinematic lens.
+      35mm full-frame lens perspective, moderately wide environmental portrait, natural spatial depth.
   - trigger: ":cam_85mm"
     word: true
     replace: |
-      Shot on an 85mm portrait lens.
+      85mm portrait lens perspective, gentle facial compression, shallow depth of field, smooth background separation.
   - trigger: ":cam_film"
     word: true
     replace: |
-      Film photography aesthetic.
+      analog camera rendering with organic grain, gentle highlight roll-off, subtle optical imperfection.
   - trigger: ":cam_bokeh"
     word: true
     replace: |
-      Beautiful cinematic bokeh in the background.
+      shallow depth of field with smooth optical bokeh and a clearly isolated focal subject.
   - trigger: ":cam_depth"
     word: true
     replace: |
-      Shallow depth of field.
+      selective focus with shallow depth of field and a controlled transition from sharp subject to soft background.
   - trigger: ":cam_vertical_portrait"
     word: true
     replace: |
@@ -71,3 +71,23 @@ matches:
     word: true
     replace: |
       Close material-focused portrait showing skin texture, makeup, and glossy wardrobe highlights.
+  - trigger: ":cam_24mm"
+    word: true
+    replace: |
+      24mm wide-angle lens perspective, expansive environment, pronounced spatial depth, controlled edge distortion.
+  - trigger: ":cam_50mm"
+    word: true
+    replace: |
+      50mm normal-lens perspective, natural proportions, balanced subject and environment, restrained perspective distortion.
+  - trigger: ":cam_macro"
+    word: true
+    replace: |
+      macro lens close-up, narrow focal plane, precise micro-texture, controlled magnification and background blur.
+  - trigger: ":cam_aerial"
+    word: true
+    replace: |
+      aerial top-down or oblique viewpoint, strong geometric layout, clear scale relationships, broad environmental context.
+  - trigger: ":cam_overhead"
+    word: true
+    replace: |
+      direct overhead camera angle, flat-lay spatial organization, clean object separation, graphic composition.

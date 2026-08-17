@@ -11,35 +11,43 @@ categories:
       - id: zit
         trigger: :model_zit
         word: true
-        text: fast photorealistic rendering, natural skin and lighting response, clean editorial detail, efficient high-fidelity output.
+        text: high-fidelity Z-Image Turbo rendering, clear subject definition, coherent anatomy and perspective, precise
+          materials, controlled lighting, strong prompt adherence, fine detail without artificial oversharpening.
       - id: zbase
         trigger: :model_zbase
         word: true
-        text: high-fidelity photorealistic baseline, refined detail retention, stable proportions, rich tonal range.
+        text: high-fidelity Z-Image rendering with strong prompt adherence, coherent composition, natural anatomy, rich
+          tonal depth, detailed materials, and flexible aesthetic range.
       - id: sdxl
         trigger: :model_sdxl
         word: true
-        text: classic photorealistic SDXL rendering, natural skin texture, accurate proportions, believable studio-grade lighting.
+        text: high-quality SDXL rendering, coherent composition, detailed textures, balanced lighting, clean subject
+          separation, refined finish.
       - id: flux2
         trigger: :model_flux2
         word: true
-        text: clean glossy realism, modern editorial posing, precise material reflections, crisp object boundaries, refined studio finish.
+        text: high-fidelity FLUX.2 rendering with clearly defined subject and action, precise object relationships,
+          realistic materials, clean geometry, controlled lighting, balanced composition.
       - id: qwen_edit
         trigger: :model_qwen_edit
         word: true
-        text: clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift.
+        text: preserve subject identity and composition, apply only the requested edit, maintain accurate materials and
+          texture continuity, keep clean boundaries, avoid unrelated changes.
       - id: wan
         trigger: :model_wan
         word: true
-        text: smooth coherent motion, consistent subject identity across frames, natural temporal continuity, stable video-native detail.
+        text: cinematic video rendering, stable subject identity across frames, coherent body and object motion,
+          consistent wardrobe and materials, natural temporal continuity, controlled camera movement.
       - id: hidream
         trigger: :model_hidream
         word: true
-        text: balanced photorealistic rendering, natural color science, accurate skin and material detail, strong prompt adherence.
+        text: high-fidelity HiDream rendering, coherent composition, natural anatomy, refined materials, balanced color
+          and lighting, strong prompt adherence, rich controlled detail.
       - id: krea2
         trigger: :model_krea2
         word: true
-        text: highly photographic realism, natural camera-like light falloff, accurate skin micro-detail, clean high-fidelity output.
+        text: high-fidelity Krea 2 rendering, strong aesthetic coherence, natural light response, precise materials,
+          clean composition, nuanced textures, rich but controlled detail.
   - id: context
     label: Context
     prefix: ctx
@@ -48,55 +56,59 @@ categories:
       - id: portrait
         trigger: :ctx_portrait
         word: true
-        text: portrait, centered composition, subject facing camera
+        text: portrait composition, subject clearly framed, face readable, balanced background separation.
       - id: full
         trigger: :ctx_full
         word: true
-        text: full body shot, subject standing, balanced composition
+        text: full-body composition, complete subject visible from head to toe, natural stance, balanced framing.
       - id: close
         trigger: :ctx_close
         word: true
-        text: close-up shot, detailed facial features, shallow depth of field
+        text: close-up composition, face and expression dominant, fine facial detail, shallow depth of field.
       - id: wide
         trigger: :ctx_wide
         word: true
-        text: wide angle composition, environmental context, cinematic framing
+        text: wide environmental composition, subject integrated into the setting, clear spatial depth, cinematic
+          framing.
       - id: hero
         trigger: :ctx_hero
         word: true
-        text: hero shot, dramatic composition, subject dominant in frame
+        text: hero composition, dominant subject presence, strong silhouette, dramatic but readable framing.
       - id: studio
         trigger: :ctx_studio
         word: true
-        text: studio setup, neutral background, controlled lighting
+        text: controlled studio setup, intentional background, clean subject separation, deliberate lighting.
       - id: street
         trigger: :ctx_street
         word: true
-        text: urban street environment, natural lighting, candid composition
+        text: urban street setting, candid environmental detail, naturalistic perspective, lived-in atmosphere.
       - id: nature
         trigger: :ctx_nature
         word: true
-        text: natural environment, outdoor scenery, organic atmosphere
+        text: outdoor natural environment, organic depth, believable atmospheric perspective, environmental context.
       - id: cinematic
         trigger: :ctx_cinematic
         word: true
-        text: cinematic composition, dramatic lighting, film still aesthetic
+        text: cinematic scene composition, narrative staging, controlled depth, intentional light and color.
       - id: dramatic
         trigger: :ctx_dramatic
         word: true
-        text: dramatic scene composition, strong contrast, intense atmosphere
+        text: dramatic composition with strong visual hierarchy, tension, contrast, and a clear focal point.
       - id: editorial_fullbody
         trigger: :ctx_editorial_fullbody
         word: true
-        text: vertical full body editorial composition, subject centered, clean readable silhouette, strong fashion posture.
+        text: vertical full body editorial composition, subject centered, clean readable silhouette, strong fashion
+          posture.
       - id: seated_editorial
         trigger: :ctx_seated_editorial
         word: true
-        text: seated editorial portrait, confident posture, hands and legs clearly composed, polished fashion magazine framing.
+        text: seated editorial portrait, confident posture, hands and legs clearly composed, polished fashion magazine
+          framing.
       - id: material_showcase
         trigger: :ctx_material_showcase
         word: true
-        text: material showcase composition, glossy fabric and reflective surfaces clearly visible, controlled highlights across the outfit.
+        text: material showcase composition, glossy fabric and reflective surfaces clearly visible, controlled
+          highlights across the outfit.
       - id: gothic_portrait
         trigger: :ctx_gothic_portrait
         word: true
@@ -104,11 +116,13 @@ categories:
       - id: environmental_fantasy
         trigger: :ctx_environmental_fantasy
         word: true
-        text: environmental fantasy composition, small figure against a vast dramatic landscape, strong atmospheric depth.
+        text: environmental fantasy composition, small figure against a vast dramatic landscape, strong atmospheric
+          depth.
       - id: album_cover
         trigger: :ctx_album_cover
         word: true
-        text: album cover composition, iconic centered subject, graphic silhouette, strong negative space and readable shapes.
+        text: album cover composition, iconic centered subject, graphic silhouette, strong negative space and readable
+          shapes.
       - id: pinup_editorial
         trigger: :ctx_pinup_editorial
         word: true
@@ -117,6 +131,31 @@ categories:
         trigger: :ctx_close_material
         word: true
         text: close portrait with visible makeup, skin texture, and glossy wardrobe reflections, shallow depth of field.
+      - id: documentary
+        trigger: :ctx_documentary
+        word: true
+        text: documentary composition, candid unposed moment, authentic environment, observational storytelling, natural
+          visual imperfections.
+      - id: product
+        trigger: :ctx_product
+        word: true
+        text: commercial product composition, primary object isolated and fully readable, controlled reflections, clean
+          background, precise surface detail.
+      - id: still_life
+        trigger: :ctx_still_life
+        word: true
+        text: still-life composition, carefully arranged objects, deliberate negative space, controlled light, tactile
+          material detail.
+      - id: macro
+        trigger: :ctx_macro
+        word: true
+        text: macro composition, tiny subject or material detail filling the frame, precise focal plane, visible
+          micro-texture, controlled background falloff.
+      - id: architecture
+        trigger: :ctx_architecture
+        word: true
+        text: architectural composition, clean structural lines, readable geometry, strong perspective, clear sense of
+          scale and space.
   - id: scene
     label: Scene
     prefix: scene
@@ -169,11 +208,13 @@ categories:
       - id: luxury_interior
         trigger: :scene_luxury_interior
         word: true
-        text: The scene takes place in an elegant luxury interior with warm walls, polished furniture, and soft editorial lighting.
+        text: The scene takes place in an elegant luxury interior with warm walls, polished furniture, and soft
+          editorial lighting.
       - id: moonlit_garden
         trigger: :scene_moonlit_garden
         word: true
-        text: The scene takes place in a moonlit East Asian garden with sakura blossoms, misty water, and distant pavilions.
+        text: The scene takes place in a moonlit East Asian garden with sakura blossoms, misty water, and distant
+          pavilions.
       - id: winter_xianxia
         trigger: :scene_winter_xianxia
         word: true
@@ -181,7 +222,8 @@ categories:
       - id: gothic_throne_room
         trigger: :scene_gothic_throne_room
         word: true
-        text: The scene takes place in an ornate gothic throne room with stained glass, cold stone, and dramatic symmetry.
+        text: The scene takes place in an ornate gothic throne room with stained glass, cold stone, and dramatic
+          symmetry.
       - id: neon_alley
         trigger: :scene_neon_alley
         word: true
@@ -193,7 +235,8 @@ categories:
       - id: arcane_library
         trigger: :scene_arcane_library
         word: true
-        text: The scene takes place in a crowded arcane library with tall shelves, occult props, and warm narrow aisle lighting.
+        text: The scene takes place in a crowded arcane library with tall shelves, occult props, and warm narrow aisle
+          lighting.
       - id: waterfall_duel
         trigger: :scene_waterfall_duel
         word: true
@@ -201,7 +244,8 @@ categories:
       - id: surreal_megacity
         trigger: :scene_surreal_megacity
         word: true
-        text: The scene takes place in a surreal futuristic megacity with impossible architecture and glowing dark structures.
+        text: The scene takes place in a surreal futuristic megacity with impossible architecture and glowing dark
+          structures.
   - id: camera
     label: Camera
     prefix: cam
@@ -210,43 +254,45 @@ categories:
       - id: portrait
         trigger: :cam_portrait
         word: true
-        text: Cinematic portrait photography.
+        text: portrait camera framing with natural perspective and flattering subject-to-background separation.
       - id: close
         trigger: :cam_close
         word: true
-        text: Close-up shot focusing on the face.
+        text: close-up framing focused on the face and expression, with precise eye focus.
       - id: wide
         trigger: :cam_wide
         word: true
-        text: Wide cinematic shot showing the environment.
+        text: wide shot showing the subject within a clearly readable environment.
       - id: low
         trigger: :cam_low
         word: true
-        text: Low angle shot emphasizing dominance.
+        text: low-angle camera position looking upward, emphasizing height, presence, and dominance.
       - id: high
         trigger: :cam_high
         word: true
-        text: High angle shot looking down at the character.
+        text: high-angle camera position looking downward, revealing spatial layout and reducing subject dominance.
       - id: 35mm
         trigger: :cam_35mm
         word: true
-        text: Shot on a 35mm cinematic lens.
+        text: 35mm full-frame lens perspective, moderately wide environmental portrait, natural spatial depth.
       - id: 85mm
         trigger: :cam_85mm
         word: true
-        text: Shot on an 85mm portrait lens.
+        text: 85mm portrait lens perspective, gentle facial compression, shallow depth of field, smooth background
+          separation.
       - id: film
         trigger: :cam_film
         word: true
-        text: Film photography aesthetic.
+        text: analog camera rendering with organic grain, gentle highlight roll-off, subtle optical imperfection.
       - id: bokeh
         trigger: :cam_bokeh
         word: true
-        text: Beautiful cinematic bokeh in the background.
+        text: shallow depth of field with smooth optical bokeh and a clearly isolated focal subject.
       - id: depth
         trigger: :cam_depth
         word: true
-        text: Shallow depth of field.
+        text: selective focus with shallow depth of field and a controlled transition from sharp subject to soft
+          background.
       - id: vertical_portrait
         trigger: :cam_vertical_portrait
         word: true
@@ -279,6 +325,30 @@ categories:
         trigger: :cam_material_closeup
         word: true
         text: Close material-focused portrait showing skin texture, makeup, and glossy wardrobe highlights.
+      - id: 24mm
+        trigger: :cam_24mm
+        word: true
+        text: 24mm wide-angle lens perspective, expansive environment, pronounced spatial depth, controlled edge
+          distortion.
+      - id: 50mm
+        trigger: :cam_50mm
+        word: true
+        text: 50mm normal-lens perspective, natural proportions, balanced subject and environment, restrained
+          perspective distortion.
+      - id: macro
+        trigger: :cam_macro
+        word: true
+        text: macro lens close-up, narrow focal plane, precise micro-texture, controlled magnification and background
+          blur.
+      - id: aerial
+        trigger: :cam_aerial
+        word: true
+        text: aerial top-down or oblique viewpoint, strong geometric layout, clear scale relationships, broad
+          environmental context.
+      - id: overhead
+        trigger: :cam_overhead
+        word: true
+        text: direct overhead camera angle, flat-lay spatial organization, clean object separation, graphic composition.
   - id: lighting
     label: Lighting
     prefix: light
@@ -287,7 +357,8 @@ categories:
       - id: cinematic
         trigger: :light_cinematic
         word: true
-        text: Cinematic lighting with dramatic shadows.
+        text: motivated cinematic lighting with a clear key direction, shaped shadows, controlled fill, and readable
+          subject separation.
       - id: rim
         trigger: :light_rim
         word: true
@@ -307,15 +378,17 @@ categories:
       - id: dramatic
         trigger: :light_dramatic
         word: true
-        text: Dramatic high contrast lighting.
+        text: high-contrast directional lighting with sculpted highlights, deep but readable shadows, and a strong focal
+          hierarchy.
       - id: soft
         trigger: :light_soft
         word: true
-        text: Soft cinematic lighting.
+        text: large soft-source lighting with gentle gradients, natural skin response, and low-contrast shadow
+          transitions.
       - id: shadow
         trigger: :light_shadow
         word: true
-        text: Deep shadows enhance the dark fantasy mood.
+        text: deep sculpted shadows with retained texture and controlled black levels.
       - id: mist
         trigger: :light_mist
         word: true
@@ -356,6 +429,33 @@ categories:
         trigger: :light_gallery_softbox
         word: true
         text: Soft gallery-style lighting with smooth gradients, clean reflections, and minimal harsh shadows.
+      - id: lowkey
+        trigger: :light_lowkey
+        word: true
+        text: low-key lighting, restrained fill, deep tonal shadows, selective highlights, dark background separation.
+      - id: hard_noir
+        trigger: :light_hard_noir
+        word: true
+        text: hard directional noir lighting, sharp shadow geometry, narrow highlights, strong black-and-white tonal
+          separation.
+      - id: window
+        trigger: :light_window
+        word: true
+        text: directional window light, soft natural falloff, gentle room bounce, realistic skin and material response.
+      - id: overcast
+        trigger: :light_overcast
+        word: true
+        text: soft overcast daylight, broad diffuse illumination, low shadow contrast, natural muted color response.
+      - id: direct_flash
+        trigger: :light_direct_flash
+        word: true
+        text: direct on-camera flash, crisp frontal illumination, hard compact shadows, bright specular response, candid
+          editorial energy.
+      - id: practical
+        trigger: :light_practical
+        word: true
+        text: motivated practical lighting from visible lamps and fixtures, natural local contrast, believable ambient
+          spill.
   - id: style
     label: Style
     prefix: style
@@ -364,111 +464,137 @@ categories:
       - id: realistic
         trigger: :style_realistic
         word: true
-        text: ultra realistic, highly detailed, photorealistic, natural skin texture
+        text: photorealistic visual language, natural skin and materials, believable optics, restrained processing,
+          physically plausible light response.
       - id: photo
         trigger: :style_photo
         word: true
-        text: professional photography, high dynamic range, sharp focus
+        text: professional photography, realistic camera response, controlled exposure, natural depth, precise focus,
+          polished but believable finish.
       - id: cinematic
         trigger: :style_cinematic
         word: true
-        text: cinematic style, film still, dramatic color grading, movie lighting
+        text: cinematic film-still aesthetic, narrative composition, motivated lighting, controlled color palette,
+          dimensional atmosphere.
       - id: film
         trigger: :style_film
         word: true
-        text: 35mm film photography, analog film grain, cinematic tones
+        text: analog film photography, organic grain, gentle highlight roll-off, subtle halation, tactile color
+          response, restrained optical imperfection.
       - id: noir
         trigger: :style_noir
         word: true
-        text: film noir style, high contrast, dramatic shadows, black and white
+        text: classic film noir, monochrome tonal design, hard directional light, deep shadows, elegant negative space,
+          tense cinematic atmosphere.
       - id: fantasy
         trigger: :style_fantasy
         word: true
-        text: fantasy art style, magical atmosphere, epic composition
+        text: fantasy visual language, imaginative worldbuilding, atmospheric depth, coherent magical elements, epic but
+          readable composition.
       - id: darkfantasy
         trigger: :style_darkfantasy
         word: true
-        text: dark fantasy, gothic atmosphere, dramatic lighting
+        text: dark fantasy, gothic architecture and symbolism, ominous atmosphere, restrained palette, dramatic
+          chiaroscuro, detailed worldbuilding.
       - id: scifi
         trigger: :style_scifi
         word: true
-        text: science fiction aesthetic, futuristic environment, neon accents
+        text: science-fiction aesthetic, advanced materials and technology, coherent futuristic design language, clean
+          spatial logic, cinematic scale.
       - id: cyberpunk
         trigger: :style_cyberpunk
         word: true
-        text: cyberpunk style, neon lights, futuristic city, dystopian atmosphere
+        text: cyberpunk aesthetic, dense urban technology, neon and practical light, wet reflective surfaces, high-tech
+          low-life atmosphere.
       - id: anime
         trigger: :style_anime
         word: true
-        text: anime style illustration, vibrant colors, clean line art
+        text: anime illustration, clean intentional linework, controlled cel shading, expressive character design,
+          coherent color styling.
       - id: manga
         trigger: :style_manga
         word: true
-        text: manga style illustration, black ink line art, expressive shading
+        text: manga illustration, confident black ink linework, graphic screentone shading, expressive panel-like
+          composition.
       - id: comic
         trigger: :style_comic
         word: true
-        text: comic book illustration, bold outlines, dynamic shading
+        text: comic-book illustration, bold contour language, dynamic value grouping, deliberate ink and color
+          separation, dramatic composition.
       - id: painterly
         trigger: :style_painterly
         word: true
-        text: painterly style, visible brush strokes, digital painting
+        text: painterly rendering, visible intentional brushwork, layered color, textured edges, controlled detail
+          hierarchy.
       - id: oil
         trigger: :style_oil
         word: true
-        text: oil painting style, rich textures, classical painting
+        text: traditional oil-painting aesthetic, rich pigment texture, layered brushwork, deep tonal modeling, luminous
+          highlights.
       - id: watercolor
         trigger: :style_watercolor
         word: true
-        text: watercolor painting, soft color blending, artistic texture
+        text: watercolor painting, translucent pigment washes, soft edge blooms, paper texture, selective fine detail.
       - id: concept
         trigger: :style_concept
         word: true
-        text: concept art, highly detailed environment design, cinematic composition
+        text: production concept art, clear visual idea, coherent environment design, strong shape language, cinematic
+          scale and atmosphere.
       - id: illustration
         trigger: :style_illustration
         word: true
-        text: digital illustration, polished artwork, detailed shading
+        text: polished digital illustration, deliberate shape design, controlled line and edge treatment, detailed but
+          readable rendering.
       - id: minimal
         trigger: :style_minimal
         word: true
-        text: minimalist style, clean composition, simple shapes
+        text: minimalist visual design, strong negative space, limited palette, simple geometry, precise focal
+          hierarchy.
       - id: surreal
         trigger: :style_surreal
         word: true
-        text: surreal art style, dreamlike atmosphere, abstract elements
+        text: surrealist imagery, dream logic, unexpected juxtapositions, altered scale or physics, coherent visual
+          symbolism.
       - id: vintage
         trigger: :style_vintage
         word: true
-        text: vintage aesthetic, retro color palette, nostalgic atmosphere
+        text: vintage photographic aesthetic, period-appropriate color response, subtle aging, restrained contrast,
+          authentic nostalgic mood.
       - id: zit_gothic_editorial
         trigger: :style_zit_gothic_editorial
         word: true
-        text: dark gothic editorial realism, glossy black fashion, porcelain skin contrast, controlled high contrast shadows.
+        text: dark gothic editorial realism, glossy black fashion, porcelain skin contrast, controlled high contrast
+          shadows.
       - id: zit_latex_glamour
         trigger: :style_zit_latex_glamour
         word: true
-        text: polished latex glamour photography, black reflective wardrobe, elegant adult fashion styling, smooth studio realism.
+        text: polished latex glamour photography, black reflective wardrobe, elegant adult fashion styling, smooth
+          studio realism.
       - id: zit_cyber_gloss
         trigger: :style_zit_cyber_gloss
         word: true
-        text: biomechanical cyber glamour, polished metal accents, glossy black surfaces, sharp futuristic portrait realism.
+        text: biomechanical cyber glamour, polished metal accents, glossy black surfaces, sharp futuristic portrait
+          realism.
       - id: zit_dark_fashion
         trigger: :style_zit_dark_fashion
         word: true
-        text: dark fashion editorial, luxury magazine styling, strict black wardrobe, confident adult presence, cinematic realism.
+        text: dark fashion editorial, luxury magazine styling, strict black wardrobe, confident adult presence,
+          cinematic realism.
       - id: zbase_ink_samurai
         trigger: :style_zbase_ink_samurai
         word: true
-        text: high contrast ink samurai illustration, sweeping black brush shapes, restrained red accent, mythic graphic composition.
+        text: high contrast ink samurai illustration, sweeping black brush shapes, restrained red accent, mythic graphic
+          composition.
       - id: sdxl_moonlit_fantasy
         trigger: :style_sdxl_moonlit_fantasy
         word: true
-        text: moonlit fantasy painting, misty atmosphere, ornate architecture, poetic melancholy, detailed painterly scenery.
+        text: moonlit fantasy painting, misty atmosphere, ornate architecture, poetic melancholy, detailed painterly
+          scenery.
       - id: sdxl_surreal_dark
         trigger: :style_sdxl_surreal_dark
         word: true
-        text: surreal dark fantasy, impossible architecture, eerie scale, dreamlike symbolic details, painterly chiaroscuro.
+        text: surreal dark fantasy, impossible architecture, eerie scale, dreamlike symbolic details, painterly
+          chiaroscuro.
       - id: sdxl_inkwash_xianxia
         trigger: :style_sdxl_inkwash_xianxia
         word: true
@@ -476,11 +602,67 @@ categories:
       - id: flux_clean_editorial
         trigger: :style_flux_clean_editorial
         word: true
-        text: clean Flux editorial realism, smooth surfaces, modern fashion pose, crisp material separation, refined studio finish.
+        text: clean Flux editorial realism, smooth surfaces, modern fashion pose, crisp material separation, refined
+          studio finish.
       - id: qwen_precise_edit
         trigger: :style_qwen_precise_edit
         word: true
         text: precise object edits, clean boundaries, preserved subject identity, realistic texture continuity.
+      - id: analog_film
+        trigger: :style_analog_film
+        word: true
+        text: analog photography, organic film grain, warm nuanced color response, subtle halation, gentle highlight
+          roll-off, tactile imperfections.
+      - id: black_white_photo
+        trigger: :style_black_white_photo
+        word: true
+        text: black-and-white photography, rich midtones, sculpted shadows, luminous highlights, texture-focused
+          monochrome composition.
+      - id: documentary_photo
+        trigger: :style_documentary_photo
+        word: true
+        text: documentary photography, candid observation, available-light realism, authentic environments, unposed body
+          language, narrative detail.
+      - id: fashion_editorial
+        trigger: :style_fashion_editorial
+        word: true
+        text: high-fashion editorial photography, deliberate styling, confident pose, strong silhouette, magazine-grade
+          composition, polished controlled lighting.
+      - id: nordic_noir
+        trigger: :style_nordic_noir
+        word: true
+        text: Nordic noir photography, cold desaturated palette, dim naturalistic lighting, stark composition,
+          restrained tension, bleak cinematic realism.
+      - id: goth_fashion
+        trigger: :style_goth_fashion
+        word: true
+        text: goth fashion editorial, black leather and lace, severe tailoring, dark romantic details, elegant macabre
+          styling, polished magazine presentation.
+      - id: metal_fashion
+        trigger: :style_metal_fashion
+        word: true
+        text: heavy-metal fashion editorial, black leather, worn metal hardware, band-inspired attitude, dark
+          stage-adjacent styling, gritty polished portraiture.
+      - id: psychobilly
+        trigger: :style_psychobilly
+        word: true
+        text: psychobilly fashion, rockabilly silhouettes with punk aggression, black leather, bold retro hair,
+          tattoo-culture attitude, high-contrast vintage styling.
+      - id: dreamcore
+        trigger: :style_dreamcore
+        word: true
+        text: dreamcore aesthetic, nostalgic liminal imagery, soft uncanny light, familiar spaces made subtly surreal,
+          hazy emotional atmosphere.
+      - id: grunge
+        trigger: :style_grunge
+        word: true
+        text: grunge aesthetic, distressed tactile surfaces, muted dirty tones, raw imperfection, underground editorial
+          energy, uneven texture and contrast.
+      - id: art_deco
+        trigger: :style_art_deco
+        word: true
+        text: Art Deco design language, elegant geometric symmetry, streamlined ornament, black-and-metallic luxury,
+          strong graphic framing.
   - id: quality
     label: Quality
     prefix: qual
@@ -489,55 +671,132 @@ categories:
       - id: detail
         trigger: :qual_detail
         word: true
-        text: Ultra detailed skin with visible pores.
+        text: fine coherent detail with realistic micro-texture, clean edges, and a clear hierarchy between important
+          and secondary detail.
       - id: sharp
         trigger: :qual_sharp
         word: true
-        text: Extremely sharp focus.
+        text: precise focal sharpness on the intended subject, natural edge definition, no artificial oversharpening.
       - id: photo
         trigger: :qual_photo
         word: true
-        text: Highly photorealistic rendering.
+        text: convincing photographic realism, natural optics, believable exposure, realistic skin and material
+          response.
       - id: 8k
         trigger: :qual_8k
         word: true
-        text: Extremely high detail.
+        text: high-resolution appearance with coherent micro-detail, clean texture separation, and no synthetic detail
+          noise.
       - id: skin
         trigger: :qual_skin
         word: true
-        text: Natural skin texture and realistic shading.
+        text: natural skin texture with pores, subtle tonal variation, realistic translucency, and restrained specular
+          highlights.
       - id: zit_photo
         trigger: :qual_zit_photo
         word: true
-        text: photorealistic detail, natural body proportions, symmetrical face, sharp eyes, defined cheekbones, clean glossy material highlights.
+        text: professional photorealism with natural anatomy, sharp expressive eyes, realistic skin texture, believable
+          materials, controlled depth and lighting.
       - id: zit_material
         trigger: :qual_zit_material
         word: true
-        text: Strong latex and leather material fidelity, believable reflections, clean seams, smooth black highlights.
+        text: high material fidelity for latex, leather, metal, fabric, and skin, with physically believable
+          reflections, clean seams, and controlled highlights.
       - id: sdxl_painterly
         trigger: :qual_sdxl_painterly
         word: true
-        text: Rich painterly detail, layered atmosphere, ornate background elements, clear fantasy composition.
+        text: rich painterly detail, layered atmospheric depth, coherent ornament, readable forms, controlled edge
+          hierarchy, polished composition.
       - id: flux_clean
         trigger: :qual_flux_clean
         word: true
-        text: clean photoreal rendering, accurate surface separation, stable hands, refined face detail, controlled highlights.
+        text: clean high-fidelity rendering, precise geometry, accurate object relationships, realistic surfaces,
+          controlled lighting, coherent fine detail.
       - id: face_priority
         trigger: :qual_face_priority
         word: true
-        text: Face priority, symmetrical eyes, natural mouth, sharp eyelashes, realistic makeup detail.
+        text: well-formed facial structure, aligned expressive eyes, natural mouth and teeth, realistic eyelashes,
+          detailed skin and makeup.
       - id: hands_priority
         trigger: :qual_hands_priority
         word: true
-        text: Hands priority, five fingers per hand, naturally curled and bent fingers, anatomically correct hand proportions, no deformities, no fused fingers, no distorted wrists.
+        text: anatomically plausible hands, five distinct fingers per hand where visible, natural finger bends, clean
+          joints, realistic wrists, relaxed contact with objects.
       - id: upscale_ready
         trigger: :qual_upscale_ready
         word: true
-        text: Upscale-ready clean image, no noisy texture buildup, clear edges, balanced micro-detail.
+        text: clean upscale-ready source image with stable edges, coherent textures, restrained micro-contrast, and no
+          noisy pseudo-detail.
       - id: gothic_detail
         trigger: :qual_gothic_detail
         word: true
-        text: Detailed gothic ornament, readable lace and metal accents, crisp cathedral textures, polished dark color palette.
+        text: readable gothic ornament, distinct lace and metalwork, crisp carved architecture, controlled dark palette,
+          fine texture without clutter.
+      # Z-Image Turbo: natural-language quality anchor; designed for inline use with CFG 0 workflows.
+      - id: lazy_zit
+        trigger: :qual_lazy_zit
+        word: true
+        text: high-fidelity image with coherent anatomy and perspective, precise materials, clean surface response,
+          controlled lighting, strong focal clarity, balanced contrast, and fine detail without artificial
+          oversharpening.
+      # Z-Image base: broad quality anchor; remains style-neutral enough for photo or illustration workflows.
+      - id: lazy_zbase
+        trigger: :qual_lazy_zbase
+        word: true
+        text: high-fidelity image, strong prompt adherence, coherent anatomy and perspective, refined material textures,
+          rich tonal depth, balanced lighting, clean composition, detailed focal subject, polished finish.
+      # SDXL-family analogue of the classic LazyPositive concept; intentionally tag-friendly.
+      - id: lazy_sdxl
+        trigger: :qual_lazy_sdxl
+        word: true
+        text: masterpiece, best quality, highly detailed, very aesthetic, high resolution, clean composition, refined
+          lighting, crisp focal detail, polished finish.
+      # FLUX.2: positive-only quality anchor; official FLUX.2 prompting does not use negative prompts.
+      - id: lazy_flux2
+        trigger: :qual_lazy_flux2
+        word: true
+        text: high-fidelity image with a clearly defined main subject, precise pose and object relationships, realistic
+          materials, clean geometry, controlled lighting, balanced composition, and coherent fine detail.
+      # Krea 2: descriptive quality anchor suited to its language-rich Qwen3-VL conditioning.
+      - id: lazy_krea2
+        trigger: :qual_lazy_krea2
+        word: true
+        text: high-fidelity image with strong aesthetic coherence, nuanced natural lighting, precise surface textures,
+          clean spatial relationships, balanced composition, detailed focal features, and rich controlled micro-detail.
+      # HiDream: natural-language quality anchor for its multi-encoder conditioning stack.
+      - id: lazy_hidream
+        trigger: :qual_lazy_hidream
+        word: true
+        text: high-fidelity image with coherent anatomy and perspective, refined textures, balanced color and lighting,
+          strong subject separation, rich tonal depth, and polished controlled detail.
+      # Wan: video-focused quality anchor prioritizing temporal consistency rather than still-image keyword stacking.
+      - id: lazy_wan
+        trigger: :qual_lazy_wan
+        word: true
+        text: cinematic video quality with stable subject identity, coherent anatomy across frames, consistent wardrobe
+          and materials, natural motion, controlled camera movement, stable lighting, and clean temporal detail.
+      # Qwen image editing: conservative edit-quality anchor, not a generic text-to-image booster.
+      - id: lazy_qwen_edit
+        trigger: :qual_lazy_qwen_edit
+        word: true
+        text: preserve the original subject identity, pose, composition, lighting, and unaffected details; change only
+          the requested element, match surrounding texture and perspective, keep boundaries clean and photorealistically
+          integrated.
+      - id: material_realism
+        trigger: :qual_material_realism
+        word: true
+        text: physically believable material response with distinct roughness, gloss, translucency, texture scale,
+          seams, and contact shadows appropriate to each surface.
+      - id: tonal_range
+        trigger: :qual_tonal_range
+        word: true
+        text: balanced tonal range with retained highlight texture, readable shadow detail, natural midtone separation,
+          and controlled local contrast.
+      - id: text_rendering
+        trigger: :qual_text_rendering
+        word: true
+        text: legible intentional typography with correct spelling, clean letterforms, consistent baseline and spacing,
+          and perspective-matched placement.
   - id: negative
     label: Negative
     prefix: neg
@@ -546,111 +805,67 @@ categories:
       - id: min
         trigger: :neg_min
         word: true
-        text: worst quality, low quality, watermark
+        text: low quality, blurry, watermark, unintended text.
       - id: base
         trigger: :neg_base
         word: true
         text: |-
-          worst quality, low quality,
-          blurry, jpeg artifacts,
-          watermark, text, logo
+          low quality, blurry, compression artifacts, unintended text, watermark, logo, signature.
       - id: render
         trigger: :neg_render
         word: true
         text: |-
-          blurry, out of focus,
-          jpeg artifacts,
-          oversaturated, overexposed,
-          underexposed, noise, grain
+          out of focus, compression artifacts, clipping, posterization, color banding, accidental oversaturation, accidental underexposure, noisy digital artifacts.
       - id: anatomy
         trigger: :neg_anatomy
         word: true
         text: |-
-          bad anatomy, bad proportions,
-          malformed limbs,
-          extra limbs, missing limbs,
-          duplicate body, duplicate limbs,
-          distorted body, twisted torso
+          implausible anatomy, broken proportions, malformed limbs, extra limbs, missing limbs, duplicated body parts, twisted torso, disconnected joints.
       - id: hands
         trigger: :neg_hands
         word: true
         text: |-
-          bad hands, malformed hands,
-          extra fingers, missing fingers,
-          fused fingers, mutated fingers,
-          deformed fingers
+          malformed hands, extra fingers, missing fingers, fused fingers, duplicated fingers, broken joints, distorted wrists.
       - id: face
         trigger: :neg_face
         word: true
         text: |-
-          distorted face, asymmetrical face,
-          cross-eyed, deformed eyes,
-          malformed mouth, bad teeth
+          distorted face, misaligned eyes, malformed mouth, duplicated facial features, broken teeth, inconsistent facial anatomy.
       - id: strict
         trigger: :neg_strict
         word: true
         text: |-
-          worst quality, low quality,
-          blurry, jpeg artifacts,
-          bad anatomy, bad proportions,
-          deformed body, distorted face,
-          bad hands, malformed hands,
-          extra fingers, missing fingers, fused fingers,
-          extra limbs, missing limbs,
-          duplicate body, duplicate limbs,
-          cross-eyed, asymmetrical eyes,
-          watermark, text, logo, signature
+          low quality, blurry, compression artifacts, implausible anatomy, broken proportions, distorted face, malformed hands, extra or missing fingers, extra or missing limbs, duplicated body parts, unintended text, watermark, logo, signature.
       - id: zit_photo
         trigger: :neg_zit_photo
         word: true
         text: |-
-          low quality, blurry, flat lighting,
-          plastic skin, waxy face,
-          broken latex reflections, muddy black material,
-          bad anatomy, distorted body,
-          malformed hands, fused fingers,
-          watermark, text, logo, signature
+          flat lifeless lighting, waxy or plastic skin, broken material reflections, muddy black surfaces, implausible anatomy, malformed hands, distorted facial features, accidental text or watermark.
       - id: material
         trigger: :neg_material
         word: true
         text: |-
-          dull material, dirty reflections,
-          rubber texture artifacts,
-          melted fabric, broken seams,
-          noisy highlights, muddy shadows
+          incorrect material response, muddy reflections, melted fabric, broken seams, inconsistent roughness, noisy specular highlights, texture stretching, implausible contact shadows.
       - id: fashion_pose
         trigger: :neg_fashion_pose
         word: true
         text: |-
-          awkward pose, broken posture,
-          twisted torso, floating limbs,
-          crossed eyes, asymmetrical face,
-          cropped feet, missing shoes
+          awkward pose, broken posture, twisted torso, floating limbs, impossible joint angles, accidental crop at hands or feet, missing footwear.
       - id: sdxl_painterly
         trigger: :neg_sdxl_painterly
         word: true
         text: |-
-          muddy painting, unclear subject,
-          unreadable architecture,
-          oversaturated colors, flat composition,
-          watermark, text, logo, signature
+          muddy brushwork, unclear focal subject, unreadable architecture, accidental oversaturation, flat value structure, text, watermark, logo, signature.
       - id: cinematic_clean
         trigger: :neg_cinematic_clean
         word: true
         text: |-
-          noisy image, jpeg artifacts,
-          overexposed highlights,
-          crushed blacks, color banding,
-          motion blur, bad focus
+          digital noise, compression artifacts, clipped highlights, crushed unreadable shadows, color banding, accidental motion blur, missed focus.
       - id: face_hands_strict
         trigger: :neg_face_hands_strict
         word: true
         text: |-
-          distorted face, asymmetrical eyes,
-          malformed mouth, bad teeth,
-          bad hands, extra fingers,
-          missing fingers, fused fingers,
-          mutated fingers, distorted wrists
+          distorted facial anatomy, misaligned eyes, malformed mouth or teeth, malformed hands, extra or missing fingers, fused fingers, duplicated fingers, distorted wrists.
       - id: wet_skin
         trigger: :neg_wet_skin
         word: true
@@ -661,11 +876,31 @@ categories:
       - id: safe_minors
         trigger: :neg_safe_minors
         word: true
-        text: child-like body proportions, underage-coded appearance, immature physique, youthful facial structure inconsistent with an adult figure.
+        text: child-like body proportions, underage-coded appearance, immature physique, youthful facial structure
+          inconsistent with an adult figure.
       - id: sfw_guard
         trigger: :neg_sfw_guard
         word: true
         text: nudity, exposed genitals, explicit sexual content.
+      # SDXL-family LazyNegative-style baseline. Best for clean/photo outputs; omit style-specific terms that would fight illustration workflows.
+      - id: lazy_sdxl
+        trigger: :neg_lazy_sdxl
+        word: true
+        text: low quality, worst quality, lowres, blurry, distorted, bad anatomy, malformed hands, extra fingers,
+          missing fingers, signature, watermark, username, artist name, censor, accidental text.
+      # Z-Image base supports real negative prompting; this is the model-family baseline.
+      - id: lazy_zbase
+        trigger: :neg_lazy_zbase
+        word: true
+        text: blurred focal subject, implausible anatomy, duplicated or missing body parts, malformed hands,
+          inconsistent perspective, muddy materials, broken reflections, clipped highlights, crushed shadows, accidental
+          text, watermark, logo.
+      # Z-Image Turbo uses CFG 0 in the official workflow. Treat this as an INLINE avoidance sentence in the positive prompt, not as a separate CFG negative.
+      - id: lazy_zit
+        trigger: :neg_lazy_zit
+        word: true
+        text: Avoid blurry focus, waxy skin, implausible anatomy, malformed hands, duplicated body parts, broken
+          material reflections, muddy shadows, clipped highlights, accidental text, logos, and watermarks.
   - id: nsfw
     label: NSFW
     prefix: nsfw
@@ -674,23 +909,23 @@ categories:
       - id: sensual
         trigger: :nsfw_sensual
         word: true
-        text: sensual pose with seductive body language.
+        text: adult sensual pose with deliberate, confident body language and tasteful editorial framing.
       - id: lingerie
         trigger: :nsfw_lingerie
         word: true
-        text: wearing elegant black lingerie.
+        text: adult subject wearing elegant black lingerie with polished fashion styling.
       - id: latex
         trigger: :nsfw_latex
         word: true
-        text: wearing a glossy black latex outfit.
+        text: adult subject wearing a glossy black latex outfit with realistic material tension and reflections.
       - id: dominatrix
         trigger: :nsfw_dominatrix
         word: true
-        text: dressed as a powerful dominatrix.
+        text: adult dominatrix-inspired fashion styling with commanding posture and polished dark wardrobe.
       - id: seductive
         trigger: :nsfw_seductive
         word: true
-        text: seductive and provocative pose.
+        text: adult seductive pose with provocative but controlled fashion-editorial body language.
       - id: latex_editorial
         trigger: :nsfw_latex_editorial
         word: true
@@ -698,11 +933,13 @@ categories:
       - id: boudoir_gloss
         trigger: :nsfw_boudoir_gloss
         word: true
-        text: adult boudoir glamour mood with polished black materials, soft skin highlights, and intimate studio framing.
+        text: adult boudoir glamour mood with polished black materials, soft skin highlights, and intimate studio
+          framing.
       - id: afterdark_fashion
         trigger: :nsfw_afterdark_fashion
         word: true
-        text: after-dark adult fashion look, confident expression, black high-gloss styling, tasteful seductive atmosphere.
+        text: after-dark adult fashion look, confident expression, black high-gloss styling, tasteful seductive
+          atmosphere.
       - id: pinup_retro
         trigger: :nsfw_pinup_retro
         word: true

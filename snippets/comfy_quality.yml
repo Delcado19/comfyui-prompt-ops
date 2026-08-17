@@ -2,52 +2,96 @@ matches:
   - trigger: ":qual_detail"
     word: true
     replace: |
-      Ultra detailed skin with visible pores.
+      fine coherent detail with realistic micro-texture, clean edges, and a clear hierarchy between important and secondary detail.
   - trigger: ":qual_sharp"
     word: true
     replace: |
-      Extremely sharp focus.
+      precise focal sharpness on the intended subject, natural edge definition, no artificial oversharpening.
   - trigger: ":qual_photo"
     word: true
     replace: |
-      Highly photorealistic rendering.
+      convincing photographic realism, natural optics, believable exposure, realistic skin and material response.
   - trigger: ":qual_8k"
     word: true
     replace: |
-      Extremely high detail.
+      high-resolution appearance with coherent micro-detail, clean texture separation, and no synthetic detail noise.
   - trigger: ":qual_skin"
     word: true
     replace: |
-      Natural skin texture and realistic shading.
+      natural skin texture with pores, subtle tonal variation, realistic translucency, and restrained specular highlights.
   - trigger: ":qual_zit_photo"
     word: true
     replace: |
-      photorealistic detail, natural body proportions, symmetrical face, sharp eyes, defined cheekbones, clean glossy material highlights.
+      professional photorealism with natural anatomy, sharp expressive eyes, realistic skin texture, believable materials, controlled depth and lighting.
   - trigger: ":qual_zit_material"
     word: true
     replace: |
-      Strong latex and leather material fidelity, believable reflections, clean seams, smooth black highlights.
+      high material fidelity for latex, leather, metal, fabric, and skin, with physically believable reflections, clean seams, and controlled highlights.
   - trigger: ":qual_sdxl_painterly"
     word: true
     replace: |
-      Rich painterly detail, layered atmosphere, ornate background elements, clear fantasy composition.
+      rich painterly detail, layered atmospheric depth, coherent ornament, readable forms, controlled edge hierarchy, polished composition.
   - trigger: ":qual_flux_clean"
     word: true
     replace: |
-      clean photoreal rendering, accurate surface separation, stable hands, refined face detail, controlled highlights.
+      clean high-fidelity rendering, precise geometry, accurate object relationships, realistic surfaces, controlled lighting, coherent fine detail.
   - trigger: ":qual_face_priority"
     word: true
     replace: |
-      Face priority, symmetrical eyes, natural mouth, sharp eyelashes, realistic makeup detail.
+      well-formed facial structure, aligned expressive eyes, natural mouth and teeth, realistic eyelashes, detailed skin and makeup.
   - trigger: ":qual_hands_priority"
     word: true
     replace: |
-      Hands priority, five fingers per hand, naturally curled and bent fingers, anatomically correct hand proportions, no deformities, no fused fingers, no distorted wrists.
+      anatomically plausible hands, five distinct fingers per hand where visible, natural finger bends, clean joints, realistic wrists, relaxed contact with objects.
   - trigger: ":qual_upscale_ready"
     word: true
     replace: |
-      Upscale-ready clean image, no noisy texture buildup, clear edges, balanced micro-detail.
+      clean upscale-ready source image with stable edges, coherent textures, restrained micro-contrast, and no noisy pseudo-detail.
   - trigger: ":qual_gothic_detail"
     word: true
     replace: |
-      Detailed gothic ornament, readable lace and metal accents, crisp cathedral textures, polished dark color palette.
+      readable gothic ornament, distinct lace and metalwork, crisp carved architecture, controlled dark palette, fine texture without clutter.
+  - trigger: ":qual_lazy_zit"
+    word: true
+    replace: |
+      high-fidelity image with coherent anatomy and perspective, precise materials, clean surface response, controlled lighting, strong focal clarity, balanced contrast, and fine detail without artificial oversharpening.
+  - trigger: ":qual_lazy_zbase"
+    word: true
+    replace: |
+      high-fidelity image, strong prompt adherence, coherent anatomy and perspective, refined material textures, rich tonal depth, balanced lighting, clean composition, detailed focal subject, polished finish.
+  - trigger: ":qual_lazy_sdxl"
+    word: true
+    replace: |
+      masterpiece, best quality, highly detailed, very aesthetic, high resolution, clean composition, refined lighting, crisp focal detail, polished finish.
+  - trigger: ":qual_lazy_flux2"
+    word: true
+    replace: |
+      high-fidelity image with a clearly defined main subject, precise pose and object relationships, realistic materials, clean geometry, controlled lighting, balanced composition, and coherent fine detail.
+  - trigger: ":qual_lazy_krea2"
+    word: true
+    replace: |
+      high-fidelity image with strong aesthetic coherence, nuanced natural lighting, precise surface textures, clean spatial relationships, balanced composition, detailed focal features, and rich controlled micro-detail.
+  - trigger: ":qual_lazy_hidream"
+    word: true
+    replace: |
+      high-fidelity image with coherent anatomy and perspective, refined textures, balanced color and lighting, strong subject separation, rich tonal depth, and polished controlled detail.
+  - trigger: ":qual_lazy_wan"
+    word: true
+    replace: |
+      cinematic video quality with stable subject identity, coherent anatomy across frames, consistent wardrobe and materials, natural motion, controlled camera movement, stable lighting, and clean temporal detail.
+  - trigger: ":qual_lazy_qwen_edit"
+    word: true
+    replace: |
+      preserve the original subject identity, pose, composition, lighting, and unaffected details; change only the requested element, match surrounding texture and perspective, keep boundaries clean and photorealistically integrated.
+  - trigger: ":qual_material_realism"
+    word: true
+    replace: |
+      physically believable material response with distinct roughness, gloss, translucency, texture scale, seams, and contact shadows appropriate to each surface.
+  - trigger: ":qual_tonal_range"
+    word: true
+    replace: |
+      balanced tonal range with retained highlight texture, readable shadow detail, natural midtone separation, and controlled local contrast.
+  - trigger: ":qual_text_rendering"
+    word: true
+    replace: |
+      legible intentional typography with correct spelling, clean letterforms, consistent baseline and spacing, and perspective-matched placement.

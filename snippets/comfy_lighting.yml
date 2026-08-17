@@ -2,7 +2,7 @@ matches:
   - trigger: ":light_cinematic"
     word: true
     replace: |
-      Cinematic lighting with dramatic shadows.
+      motivated cinematic lighting with a clear key direction, shaped shadows, controlled fill, and readable subject separation.
   - trigger: ":light_rim"
     word: true
     replace: |
@@ -22,15 +22,15 @@ matches:
   - trigger: ":light_dramatic"
     word: true
     replace: |
-      Dramatic high contrast lighting.
+      high-contrast directional lighting with sculpted highlights, deep but readable shadows, and a strong focal hierarchy.
   - trigger: ":light_soft"
     word: true
     replace: |
-      Soft cinematic lighting.
+      large soft-source lighting with gentle gradients, natural skin response, and low-contrast shadow transitions.
   - trigger: ":light_shadow"
     word: true
     replace: |
-      Deep shadows enhance the dark fantasy mood.
+      deep sculpted shadows with retained texture and controlled black levels.
   - trigger: ":light_mist"
     word: true
     replace: |
@@ -71,3 +71,27 @@ matches:
     word: true
     replace: |
       Soft gallery-style lighting with smooth gradients, clean reflections, and minimal harsh shadows.
+  - trigger: ":light_lowkey"
+    word: true
+    replace: |
+      low-key lighting, restrained fill, deep tonal shadows, selective highlights, dark background separation.
+  - trigger: ":light_hard_noir"
+    word: true
+    replace: |
+      hard directional noir lighting, sharp shadow geometry, narrow highlights, strong black-and-white tonal separation.
+  - trigger: ":light_window"
+    word: true
+    replace: |
+      directional window light, soft natural falloff, gentle room bounce, realistic skin and material response.
+  - trigger: ":light_overcast"
+    word: true
+    replace: |
+      soft overcast daylight, broad diffuse illumination, low shadow contrast, natural muted color response.
+  - trigger: ":light_direct_flash"
+    word: true
+    replace: |
+      direct on-camera flash, crisp frontal illumination, hard compact shadows, bright specular response, candid editorial energy.
+  - trigger: ":light_practical"
+    word: true
+    replace: |
+      motivated practical lighting from visible lamps and fixtures, natural local contrast, believable ambient spill.

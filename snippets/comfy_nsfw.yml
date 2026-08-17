@@ -2,23 +2,23 @@ matches:
   - trigger: ":nsfw_sensual"
     word: true
     replace: |
-      sensual pose with seductive body language.
+      adult sensual pose with deliberate, confident body language and tasteful editorial framing.
   - trigger: ":nsfw_lingerie"
     word: true
     replace: |
-      wearing elegant black lingerie.
+      adult subject wearing elegant black lingerie with polished fashion styling.
   - trigger: ":nsfw_latex"
     word: true
     replace: |
-      wearing a glossy black latex outfit.
+      adult subject wearing a glossy black latex outfit with realistic material tension and reflections.
   - trigger: ":nsfw_dominatrix"
     word: true
     replace: |
-      dressed as a powerful dominatrix.
+      adult dominatrix-inspired fashion styling with commanding posture and polished dark wardrobe.
   - trigger: ":nsfw_seductive"
     word: true
     replace: |
-      seductive and provocative pose.
+      adult seductive pose with provocative but controlled fashion-editorial body language.
   - trigger: ":nsfw_latex_editorial"
     word: true
     replace: |

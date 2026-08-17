@@ -2,32 +2,32 @@ matches:
   - trigger: ":model_zit"
     word: true
     replace: |
-      fast photorealistic rendering, natural skin and lighting response, clean editorial detail, efficient high-fidelity output.
+      high-fidelity Z-Image Turbo rendering, clear subject definition, coherent anatomy and perspective, precise materials, controlled lighting, strong prompt adherence, fine detail without artificial oversharpening.
   - trigger: ":model_zbase"
     word: true
     replace: |
-      high-fidelity photorealistic baseline, refined detail retention, stable proportions, rich tonal range.
+      high-fidelity Z-Image rendering with strong prompt adherence, coherent composition, natural anatomy, rich tonal depth, detailed materials, and flexible aesthetic range.
   - trigger: ":model_sdxl"
     word: true
     replace: |
-      classic photorealistic SDXL rendering, natural skin texture, accurate proportions, believable studio-grade lighting.
+      high-quality SDXL rendering, coherent composition, detailed textures, balanced lighting, clean subject separation, refined finish.
   - trigger: ":model_flux2"
     word: true
     replace: |
-      clean glossy realism, modern editorial posing, precise material reflections, crisp object boundaries, refined studio finish.
+      high-fidelity FLUX.2 rendering with clearly defined subject and action, precise object relationships, realistic materials, clean geometry, controlled lighting, balanced composition.
   - trigger: ":model_qwen_edit"
     word: true
     replace: |
-      clean reconstruction, preserved subject identity, accurate material changes, realistic texture continuity, crisp object boundaries, no unnecessary style drift.
+      preserve subject identity and composition, apply only the requested edit, maintain accurate materials and texture continuity, keep clean boundaries, avoid unrelated changes.
   - trigger: ":model_wan"
     word: true
     replace: |
-      smooth coherent motion, consistent subject identity across frames, natural temporal continuity, stable video-native detail.
+      cinematic video rendering, stable subject identity across frames, coherent body and object motion, consistent wardrobe and materials, natural temporal continuity, controlled camera movement.
   - trigger: ":model_hidream"
     word: true
     replace: |
-      balanced photorealistic rendering, natural color science, accurate skin and material detail, strong prompt adherence.
+      high-fidelity HiDream rendering, coherent composition, natural anatomy, refined materials, balanced color and lighting, strong prompt adherence, rich controlled detail.
   - trigger: ":model_krea2"
     word: true
     replace: |
-      highly photographic realism, natural camera-like light falloff, accurate skin micro-detail, clean high-fidelity output.
+      high-fidelity Krea 2 rendering, strong aesthetic coherence, natural light response, precise materials, clean composition, nuanced textures, rich but controlled detail.

@@ -2,43 +2,43 @@ matches:
   - trigger: ":ctx_portrait"
     word: true
     replace: |
-      portrait, centered composition, subject facing camera
+      portrait composition, subject clearly framed, face readable, balanced background separation.
   - trigger: ":ctx_full"
     word: true
     replace: |
-      full body shot, subject standing, balanced composition
+      full-body composition, complete subject visible from head to toe, natural stance, balanced framing.
   - trigger: ":ctx_close"
     word: true
     replace: |
-      close-up shot, detailed facial features, shallow depth of field
+      close-up composition, face and expression dominant, fine facial detail, shallow depth of field.
   - trigger: ":ctx_wide"
     word: true
     replace: |
-      wide angle composition, environmental context, cinematic framing
+      wide environmental composition, subject integrated into the setting, clear spatial depth, cinematic framing.
   - trigger: ":ctx_hero"
     word: true
     replace: |
-      hero shot, dramatic composition, subject dominant in frame
+      hero composition, dominant subject presence, strong silhouette, dramatic but readable framing.
   - trigger: ":ctx_studio"
     word: true
     replace: |
-      studio setup, neutral background, controlled lighting
+      controlled studio setup, intentional background, clean subject separation, deliberate lighting.
   - trigger: ":ctx_street"
     word: true
     replace: |
-      urban street environment, natural lighting, candid composition
+      urban street setting, candid environmental detail, naturalistic perspective, lived-in atmosphere.
   - trigger: ":ctx_nature"
     word: true
     replace: |
-      natural environment, outdoor scenery, organic atmosphere
+      outdoor natural environment, organic depth, believable atmospheric perspective, environmental context.
   - trigger: ":ctx_cinematic"
     word: true
     replace: |
-      cinematic composition, dramatic lighting, film still aesthetic
+      cinematic scene composition, narrative staging, controlled depth, intentional light and color.
   - trigger: ":ctx_dramatic"
     word: true
     replace: |
-      dramatic scene composition, strong contrast, intense atmosphere
+      dramatic composition with strong visual hierarchy, tension, contrast, and a clear focal point.
   - trigger: ":ctx_editorial_fullbody"
     word: true
     replace: |
@@ -71,3 +71,23 @@ matches:
     word: true
     replace: |
       close portrait with visible makeup, skin texture, and glossy wardrobe reflections, shallow depth of field.
+  - trigger: ":ctx_documentary"
+    word: true
+    replace: |
+      documentary composition, candid unposed moment, authentic environment, observational storytelling, natural visual imperfections.
+  - trigger: ":ctx_product"
+    word: true
+    replace: |
+      commercial product composition, primary object isolated and fully readable, controlled reflections, clean background, precise surface detail.
+  - trigger: ":ctx_still_life"
+    word: true
+    replace: |
+      still-life composition, carefully arranged objects, deliberate negative space, controlled light, tactile material detail.
+  - trigger: ":ctx_macro"
+    word: true
+    replace: |
+      macro composition, tiny subject or material detail filling the frame, precise focal plane, visible micro-texture, controlled background falloff.
+  - trigger: ":ctx_architecture"
+    word: true
+    replace: |
+      architectural composition, clean structural lines, readable geometry, strong perspective, clear sense of scale and space.

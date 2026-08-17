@@ -2,99 +2,55 @@ matches:
   - trigger: ":neg_min"
     word: true
     replace: |
-      worst quality, low quality, watermark
+      low quality, blurry, watermark, unintended text.
   - trigger: ":neg_base"
     word: true
     replace: |
-      worst quality, low quality,
-      blurry, jpeg artifacts,
-      watermark, text, logo
+      low quality, blurry, compression artifacts, unintended text, watermark, logo, signature.
   - trigger: ":neg_render"
     word: true
     replace: |
-      blurry, out of focus,
-      jpeg artifacts,
-      oversaturated, overexposed,
-      underexposed, noise, grain
+      out of focus, compression artifacts, clipping, posterization, color banding, accidental oversaturation, accidental underexposure, noisy digital artifacts.
   - trigger: ":neg_anatomy"
     word: true
     replace: |
-      bad anatomy, bad proportions,
-      malformed limbs,
-      extra limbs, missing limbs,
-      duplicate body, duplicate limbs,
-      distorted body, twisted torso
+      implausible anatomy, broken proportions, malformed limbs, extra limbs, missing limbs, duplicated body parts, twisted torso, disconnected joints.
   - trigger: ":neg_hands"
     word: true
     replace: |
-      bad hands, malformed hands,
-      extra fingers, missing fingers,
-      fused fingers, mutated fingers,
-      deformed fingers
+      malformed hands, extra fingers, missing fingers, fused fingers, duplicated fingers, broken joints, distorted wrists.
   - trigger: ":neg_face"
     word: true
     replace: |
-      distorted face, asymmetrical face,
-      cross-eyed, deformed eyes,
-      malformed mouth, bad teeth
+      distorted face, misaligned eyes, malformed mouth, duplicated facial features, broken teeth, inconsistent facial anatomy.
   - trigger: ":neg_strict"
     word: true
     replace: |
-      worst quality, low quality,
-      blurry, jpeg artifacts,
-      bad anatomy, bad proportions,
-      deformed body, distorted face,
-      bad hands, malformed hands,
-      extra fingers, missing fingers, fused fingers,
-      extra limbs, missing limbs,
-      duplicate body, duplicate limbs,
-      cross-eyed, asymmetrical eyes,
-      watermark, text, logo, signature
+      low quality, blurry, compression artifacts, implausible anatomy, broken proportions, distorted face, malformed hands, extra or missing fingers, extra or missing limbs, duplicated body parts, unintended text, watermark, logo, signature.
   - trigger: ":neg_zit_photo"
     word: true
     replace: |
-      low quality, blurry, flat lighting,
-      plastic skin, waxy face,
-      broken latex reflections, muddy black material,
-      bad anatomy, distorted body,
-      malformed hands, fused fingers,
-      watermark, text, logo, signature
+      flat lifeless lighting, waxy or plastic skin, broken material reflections, muddy black surfaces, implausible anatomy, malformed hands, distorted facial features, accidental text or watermark.
   - trigger: ":neg_material"
     word: true
     replace: |
-      dull material, dirty reflections,
-      rubber texture artifacts,
-      melted fabric, broken seams,
-      noisy highlights, muddy shadows
+      incorrect material response, muddy reflections, melted fabric, broken seams, inconsistent roughness, noisy specular highlights, texture stretching, implausible contact shadows.
   - trigger: ":neg_fashion_pose"
     word: true
     replace: |
-      awkward pose, broken posture,
-      twisted torso, floating limbs,
-      crossed eyes, asymmetrical face,
-      cropped feet, missing shoes
+      awkward pose, broken posture, twisted torso, floating limbs, impossible joint angles, accidental crop at hands or feet, missing footwear.
   - trigger: ":neg_sdxl_painterly"
     word: true
     replace: |
-      muddy painting, unclear subject,
-      unreadable architecture,
-      oversaturated colors, flat composition,
-      watermark, text, logo, signature
+      muddy brushwork, unclear focal subject, unreadable architecture, accidental oversaturation, flat value structure, text, watermark, logo, signature.
   - trigger: ":neg_cinematic_clean"
     word: true
     replace: |
-      noisy image, jpeg artifacts,
-      overexposed highlights,
-      crushed blacks, color banding,
-      motion blur, bad focus
+      digital noise, compression artifacts, clipped highlights, crushed unreadable shadows, color banding, accidental motion blur, missed focus.
   - trigger: ":neg_face_hands_strict"
     word: true
     replace: |
-      distorted face, asymmetrical eyes,
-      malformed mouth, bad teeth,
-      bad hands, extra fingers,
-      missing fingers, fused fingers,
-      mutated fingers, distorted wrists
+      distorted facial anatomy, misaligned eyes, malformed mouth or teeth, malformed hands, extra or missing fingers, fused fingers, duplicated fingers, distorted wrists.
   - trigger: ":neg_wet_skin"
     word: true
     replace: |
@@ -107,3 +63,15 @@ matches:
     word: true
     replace: |
       nudity, exposed genitals, explicit sexual content.
+  - trigger: ":neg_lazy_sdxl"
+    word: true
+    replace: |
+      low quality, worst quality, lowres, blurry, distorted, bad anatomy, malformed hands, extra fingers, missing fingers, signature, watermark, username, artist name, censor, accidental text.
+  - trigger: ":neg_lazy_zbase"
+    word: true
+    replace: |
+      blurred focal subject, implausible anatomy, duplicated or missing body parts, malformed hands, inconsistent perspective, muddy materials, broken reflections, clipped highlights, crushed shadows, accidental text, watermark, logo.
+  - trigger: ":neg_lazy_zit"
+    word: true
+    replace: |
+      Avoid blurry focus, waxy skin, implausible anatomy, malformed hands, duplicated body parts, broken material reflections, muddy shadows, clipped highlights, accidental text, logos, and watermarks.
