@@ -8,7 +8,13 @@ Write-Host ""
 
 $root = (Resolve-Path "$PSScriptRoot\..").Path
 $snippetDir = Join-Path $root "snippets"
-$espansoDir = Join-Path $env:APPDATA "espanso"
+
+if ($IsWindows) {
+    $espansoDir = Join-Path $env:APPDATA "espanso"
+}
+else {
+    $espansoDir = Join-Path $HOME ".config/espanso"
+}
 $espansoMatch = Join-Path $espansoDir "match"
 
 # --------------------------------------------------

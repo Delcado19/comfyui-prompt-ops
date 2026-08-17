@@ -8,7 +8,13 @@ Write-Host "Installing snippets..."
 $root = Resolve-Path "$PSScriptRoot\.."
 $snippetDir = Join-Path $root "snippets"
 
-$espansoMatch = Join-Path $env:APPDATA "espanso\match"
+# Espanso's match dir differs per OS: %APPDATA% on Windows, XDG config on Linux/macOS.
+if ($IsWindows) {
+    $espansoMatch = Join-Path $env:APPDATA "espanso\match"
+}
+else {
+    $espansoMatch = Join-Path $HOME ".config/espanso/match"
+}
 
 if (!(Test-Path $espansoMatch)) {
 

@@ -5,7 +5,6 @@ $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
 $repoRoot = Resolve-Path "$PSScriptRoot\.."
-$statusFile = Join-Path $env:TEMP "comfyui_prompt_ops_install.status"
 
 $logDir = Join-Path $repoRoot "logs"
 
@@ -15,31 +14,43 @@ if (!(Test-Path $logDir)) {
 
 $logFile = Join-Path $logDir "install.log"
 
+# Must run before anything else touches pwsh-only syntax/cmdlets, and
+# before any Start-Process relaunch could be added back in.
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    Write-Host "[FAIL] PowerShell 7 or higher is required. See https://aka.ms/powershell" -ForegroundColor Red
+    exit 1
+}
+
+function Write-Log {
+    param($level, $msg)
+    # Timestamped line log, independent of Start-Transcript (which can miss
+    # host output in some hosts and never adds per-line timestamps).
+    $line = "{0} [{1}] {2}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $level, $msg
+    Add-Content -Path $logFile -Value $line -ErrorAction SilentlyContinue
+}
 
 function Write-Info {
     param($msg)
     Write-Host "[INFO] $msg" -ForegroundColor Cyan
+    Write-Log "INFO" $msg
 }
 
 function Write-Warn {
     param($msg)
     Write-Host "[WARN] $msg" -ForegroundColor Yellow
+    Write-Log "WARN" $msg
 }
 
 function Write-Ok {
     param($msg)
     Write-Host "[ OK ] $msg" -ForegroundColor Green
+    Write-Log "OK" $msg
 }
 
 function Write-Err {
     param($msg)
     Write-Host "[FAIL] $msg" -ForegroundColor Red
-}
-
-function Test-IsAdmin {
-    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-    $principal = New-Object Security.Principal.WindowsPrincipal($identity)
-    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    Write-Log "FAIL" $msg
 }
 
 function Update-SessionPath {
@@ -122,7 +133,7 @@ function Install-WithWinget {
         return $true
     }
 
-    Write-Warn "Winget failed to install $Name. Falling back to Scoop..."
+    Write-Warn "Winget failed to install $Name (exit code $LASTEXITCODE). Falling back to Scoop..."
     return $false
 }
 
@@ -179,47 +190,11 @@ function Install-DesktopPackage {
 }
 
 # --------------------------------------------------
-# Parent Process
+# Installer
 # --------------------------------------------------
-
-if (-not (Test-IsAdmin)) {
-
-    Write-Warn "Administrator privileges required"
-    Write-Host "Opening elevated installer..."
-    Write-Host ""
-
-    if (Test-Path $statusFile) {
-        Remove-Item $statusFile -Force
-    }
-
-    Start-Process pwsh `
-        -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" `
-        -Verb RunAs
-
-    Write-Host "Waiting for installer to finish..."
-    Write-Host ""
-
-    while (-not (Test-Path $statusFile)) {
-        Start-Sleep -Seconds 1
-    }
-
-    $status = Get-Content $statusFile
-
-    if ($status -eq "SUCCESS") {
-        Write-Host ""
-        Write-Ok "Installation completed successfully."
-    }
-    else {
-        Write-Host ""
-        Write-Err "Installation FAILED."
-    }
-
-    exit
-}
-
-# --------------------------------------------------
-# Elevated Installer
-# --------------------------------------------------
+# No admin elevation: nothing below needs it (snippets go to %APPDATA%,
+# Espanso/CopyQ are per-user apps), and Scoop actively refuses to run
+# elevated, which used to break the winget -> Scoop fallback.
 
 try {
 
@@ -230,16 +205,6 @@ try {
     Write-Host ""
 
     Start-Transcript -Path $logFile -Append | Out-Null
-
-    # --------------------------------------------------
-    # PowerShell Version Check
-    # --------------------------------------------------
-
-    Write-Info "Checking PowerShell version..."
-
-    if ($PSVersionTable.PSVersion.Major -lt 7) {
-        throw "PowerShell 7 or higher is required."
-    }
 
     Write-Ok "PowerShell $($PSVersionTable.PSVersion)"
 
@@ -362,16 +327,22 @@ try {
     Write-Ok "Setup completed"
     Write-Host ""
 
-    "SUCCESS" | Out-File $statusFile -Encoding ascii
+    $exitCode = 0
 
 }
 catch {
 
-    Write-Err $_
+    Write-Err "$_ (at $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber))"
+    Write-Log "FAIL" $_.ScriptStackTrace
+    Write-Host "See $logFile for the full log." -ForegroundColor Red
 
-    "FAILED" | Out-File $statusFile -Encoding ascii
+    $exitCode = 1
 }
 finally {
 
-    Stop-Transcript | Out-Null
+    # A failing Stop-Transcript (e.g. transcript never started) must not
+    # mask the real error/exit code from the try/catch above.
+    try { Stop-Transcript | Out-Null } catch {}
 }
+
+exit $exitCode
