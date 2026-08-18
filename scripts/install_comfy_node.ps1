@@ -1,10 +1,11 @@
 # install_comfy_node.ps1
 #
-# Deploys comfyui_node/prompt_ops (a read-only dropdown-to-STRING adapter
-# over library/prompt_library.yml) into a ComfyUI install's custom_nodes/.
-# Not part of scripts/dev.ps1 — this targets ComfyUI, not Espanso, and only
-# needs to run once per ComfyUI install or after the node's Python code
-# changes (library edits apply on their own, no re-install needed).
+# Deploys comfyui_node/prompt_ops (the Prompt Ops Browser node) into a
+# ComfyUI install's custom_nodes/. Not part of scripts/dev.ps1 -- this
+# targets ComfyUI, not Espanso, and only needs to run once per ComfyUI
+# install or after the node's Python/JS code changes (library edits apply
+# on their own, no re-install needed, though new/renamed triggers need a
+# ComfyUI restart/reload to show up in the node's filters).
 
 param(
     [string]$ComfyUIPath = $env:COMFYUI_PATH,
@@ -47,5 +48,5 @@ Copy-Item $sourceDir $targetDir -Recurse -Force
 
 Set-Content -Path (Join-Path $targetDir "library_path.txt") -Value $libraryFile -NoNewline -Encoding UTF8
 
-Write-Host "Installed Prompt Ops ComfyUI node to $targetDir"
+Write-Host "Installed Prompt Ops Browser node to $targetDir"
 Write-Host "Restart ComfyUI (or use its 'reload custom nodes' feature) to pick it up."

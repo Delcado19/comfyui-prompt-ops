@@ -28,7 +28,7 @@ Instead of writing large prompts manually, prompts are built from **reusable com
 - modular **prompt components**
 - **Espanso snippet system**
 - **interactive prompt builder**
-- optional **ComfyUI custom node** (same library, inside the graph)
+- **ComfyUI custom node** — filterable snippet browser inside the graph
 - local **prompt library admin**
 - automatic **snippet documentation**
 - **duplicate trigger detection**
@@ -178,14 +178,18 @@ Use the admin for adding, editing, deleting, and generating prompt categories an
 
 # 🧩 ComfyUI Node
 
-The same library is also available as a minimal read-only ComfyUI node: a
-dropdown over every trigger, output as a `STRING`.
+The same library is also available as a **Prompt Ops Browser** ComfyUI
+node: filter by polarity (positive/negative) and category, see the full
+snippet text (not just the trigger), and click to insert into a positive
+or negative prompt field. A mode switch routes negative-polarity entries
+into the positive field too, for workflows without a separate negative
+prompt (e.g. zero-out conditioning).
 
 ```powershell
 .\scripts\install_comfy_node.ps1 -ComfyUIPath "G:\ComfyUI-Easy-Install\ComfyUI"
 ```
 
-See [docs/comfyui_node.md](docs/comfyui_node.md) for details and update behavior.
+See [docs/comfyui_node.md](docs/comfyui_node.md) for the full UI and update behavior.
 
 ---
 
@@ -402,6 +406,8 @@ comfyui-prompt-ops
 │
 ├ comfyui_node
 │   └ prompt_ops
+│       js
+│           prompt_ops_browser.js
 │       __init__.py
 │       nodes.py
 │

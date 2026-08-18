@@ -1,17 +1,36 @@
-# ComfyUI Node
+# ComfyUI Node: Prompt Ops Browser
 
-A minimal, read-only adapter node: a dropdown over every snippet trigger in
-`library/prompt_library.yml`, output as a `STRING`. Wire it into any node
-that accepts text (a CLIP Text Encode, a string concat node, etc.).
+A read-only browser over every snippet in `library/prompt_library.yml`,
+built as a ComfyUI custom node so the library is usable inside a workflow
+graph without Espanso installed on the machine that opens it.
 
 This is a second way to consume the same library, not a replacement for
-Espanso. Espanso expands triggers system-wide, in any application; this node
-only exists inside a ComfyUI graph, but the selection then lives in the
-workflow JSON — reproducible and shareable without needing Espanso installed
-on the machine that opens the workflow.
+Espanso. The node never writes to the library. Edit snippets via the admin
+UI or by hand as usual, then re-run `scripts/dev.ps1`.
 
-The node never writes to the library. Edit snippets via the admin UI or by
-hand as usual, then re-run `scripts/dev.ps1`.
+---
+
+## UI
+
+The node has two editable multiline text fields, `positive_text` and
+`negative_text`, plus a filter/insert row above them:
+
+- **polarity**: Positive / Negative — everything except the "Negative"
+  category counts as positive.
+- **category**: Alle, or one category label (Scene, Camera, Lighting, …).
+- **entry**: the filtered list of matches, each shown as
+  `[Category] :trigger — full snippet text` (no guessing what an
+  abbreviation means).
+- **mode**: Getrennt / Nur ein Prompt — controls where a *negative*-polarity
+  entry gets appended. "Getrennt" sends it to `negative_text`; "Nur ein
+  Prompt" sends it to `positive_text` instead, for workflows that only have
+  a single prompt input (e.g. zero-out conditioning instead of a separate
+  negative encode).
+- **Einfügen** button: appends the selected entry's text to the target
+  field (comma-separated), keeping whatever you've already typed by hand.
+
+Wire `positive`/`negative` (the node's STRING outputs) into your
+`CLIP Text Encode` node(s) same as any other text source.
 
 ---
 
@@ -28,32 +47,31 @@ and writes a `library_path.txt` inside it pointing at this repo's
 `library/prompt_library.yml`. Restart ComfyUI (or use its "reload custom
 nodes" feature) to pick it up.
 
-Re-run the install script only when the node's Python code changes, or when
-you move/rename the repo (so `library_path.txt` points at the right file).
-Library edits (new/changed snippet text) apply automatically — no
-re-install needed.
+Re-run the install script only when the node's Python/JS code changes, or
+when you move/rename the repo (so `library_path.txt` points at the right
+file). Snippet text edits apply on the next node reload — no re-install
+needed.
 
 ---
 
 ## Behavior
 
-- **Snippet text edits** apply immediately: the node re-reads the library
-  file on every execution, and `IS_CHANGED` returns the file's mtime so
-  ComfyUI won't serve a stale cached value.
-- **Added, removed, or renamed triggers** only show up in the dropdown after
-  a ComfyUI restart/reload — the list of options is built once when ComfyUI
-  asks for the node's `INPUT_TYPES`, which the frontend caches for the
-  session.
-- Selecting a trigger that has since been deleted from the library raises a
-  clear error at run time instead of failing silently.
+- The filter/entry lists are fetched once per node instance, from a small
+  `/prompt_ops/library` route the node registers, which re-reads
+  `library/prompt_library.yml` on every request.
+- **Added, removed, or renamed triggers** only show up after a ComfyUI
+  restart/reload (or adding a fresh node instance) — the fetch happens once
+  when the node is created.
+- Text fields are plain editable widgets: you can type/delete by hand in
+  addition to using "Einfügen".
 
 ---
 
 ## Requirements
 
 `PyYAML` in ComfyUI's Python environment. ComfyUI-Easy-Install's embedded
-Python already ships it; if you're on a different ComfyUI setup and the node
-fails to load, install it into that environment:
+Python already ships it; if you're on a different ComfyUI setup and the
+node fails to load, install it into that environment:
 
 ```
 pip install pyyaml
