@@ -44,6 +44,8 @@ else {
 
 # CopyQ
 
+$copyqCmd = Get-Command copyq -ErrorAction SilentlyContinue
+
 if (!$copyq) {
 
     Write-Host "CopyQ not running."
@@ -51,8 +53,11 @@ if (!$copyq) {
     if ($dryrun) {
         Write-Host "[DRYRUN] Would start CopyQ"
     }
+    elseif ($copyqCmd) {
+        Start-Process $copyqCmd.Source
+    }
     else {
-        Start-Process copyq
+        Write-Host "CopyQ command not found, skipping."
     }
 
 }
@@ -62,3 +67,8 @@ else {
 
 Write-Host ""
 Write-Host "Service check completed."
+
+# Without this, the script's own exit code falls through to whatever the
+# last native call set $LASTEXITCODE to (e.g. a nonzero "espanso status"
+# when Espanso wasn't running yet) even though the script itself succeeded.
+exit 0

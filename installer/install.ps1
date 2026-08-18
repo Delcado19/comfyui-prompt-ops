@@ -211,8 +211,18 @@ function Install-DesktopPackage {
     }
 
     if ($FallbackPathDir -and (Test-Path $FallbackPathDir)) {
-        Write-Warn "$Name installed but not on PATH. Adding $FallbackPathDir for this session."
+        Write-Warn "$Name installed but not on PATH. Adding $FallbackPathDir."
         $env:Path = "$env:Path;$FallbackPathDir"
+
+        # Winget's own PATH update (if any) only applies to *new* processes
+        # started after install, so the addition above also has to be
+        # persisted to the user's PATH - otherwise every later script run in
+        # a fresh terminal (doctor.ps1, restart_services.ps1, ...) reports
+        # $Name as missing again even though it's installed.
+        $userPathEntries = @(([Environment]::GetEnvironmentVariable("Path", "User") -split ';') | Where-Object { $_ })
+        if ($userPathEntries -notcontains $FallbackPathDir) {
+            [Environment]::SetEnvironmentVariable("Path", (($userPathEntries + $FallbackPathDir) -join ';'), "User")
+        }
     }
 
     if (Get-Command $CommandName -ErrorAction SilentlyContinue) {

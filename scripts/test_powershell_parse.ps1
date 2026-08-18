@@ -18,10 +18,11 @@ $RepoRoot = Resolve-Path "$ScriptRoot/.."
 # COLLECT SCRIPTS
 # --------------------------------------------------
 
+# [\\/] matches both separators - Windows gives FullName with "\", Linux/macOS with "/".
 $files = Get-ChildItem $RepoRoot -Recurse -Filter "*.ps1" |
     Where-Object {
-        $_.FullName -notmatch "\\\.git\\" -and
-        $_.FullName -notmatch "\\node_modules\\"
+        $_.FullName -notmatch "[\\/]\.git[\\/]" -and
+        $_.FullName -notmatch "[\\/]node_modules[\\/]"
     } |
     Sort-Object FullName
 

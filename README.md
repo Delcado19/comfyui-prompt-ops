@@ -392,7 +392,8 @@ Pipeline steps:
 | generate_snippet_docs.ps1    | generate snippet documentation |
 | generate_prompt_builder.ps1  | build prompt builder           |
 | install_snippets.ps1         | deploy snippets                |
-| restart_services.ps1         | restart Espanso                |
+| restart_services.ps1         | start Espanso/CopyQ if not already running |
+| toggle_services.ps1          | switch Espanso/CopyQ on or off on demand (not part of `dev.ps1`) |
 | install_comfy_node.ps1       | deploy the ComfyUI node, not part of `dev.ps1` |
 | import_snippets_to_library.ps1 | one-off migration: rebuild the library from generated snippets, not part of `dev.ps1` |
 | export_existing_snippets.ps1 | one-off migration: pull a live Espanso install's snippets into the repo, not part of `dev.ps1` |
@@ -443,9 +444,11 @@ comfyui-prompt-ops
 │   generate_snippet_docs.ps1
 │   generate_snippets_from_library.ps1
 │   import_snippets_to_library.ps1
+│   install_comfy_node.ps1
 │   install_snippets.ps1
 │   restart_services.ps1
 │   test_powershell_parse.ps1
+│   toggle_services.ps1
 │   validate_snippets.ps1
 │   validate_yaml.ps1
 │

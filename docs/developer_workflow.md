@@ -107,6 +107,17 @@ If Espanso does not reload automatically, restart the services:
 .\scripts\restart_services.ps1
 ```
 
+To switch Espanso + CopyQ on or off on demand (neither is registered to
+autostart with the OS by this repo's scripts), use the toggle instead — it
+starts both if neither is running, or stops both if either is running:
+
+```powershell
+.\scripts\toggle_services.ps1
+```
+
+Both scripts are plain PowerShell and run the same way under `pwsh` on
+Linux/macOS as on Windows.
+
 ---
 
 ## YAML Support

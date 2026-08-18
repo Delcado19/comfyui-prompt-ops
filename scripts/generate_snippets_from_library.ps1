@@ -85,7 +85,6 @@ foreach ($category in $categories) {
     Assert-Id -Name "Category prefix" -Value $categoryPrefix
 
     $outputFile = Join-Path $SnippetDir "comfy_$categoryId.yml"
-    [void]$generatedFiles.Add((Resolve-Path -LiteralPath (Split-Path $outputFile -Parent)).Path + "\" + (Split-Path $outputFile -Leaf))
 
     $lines = [System.Collections.Generic.List[string]]::new()
     $lines.Add("matches:")
@@ -148,6 +147,12 @@ foreach ($category in $categories) {
     }
 
     [System.IO.File]::WriteAllLines($outputFile, $lines, (New-Object System.Text.UTF8Encoding($false)))
+
+    # Resolve after writing, and let Join-Path pick the platform separator -
+    # a hardcoded "\" here previously never matched Get-ChildItem's FullName
+    # (which uses "/" on Linux/macOS), so the stale-file cleanup below deleted
+    # every snippet file it had just generated on non-Windows.
+    [void]$generatedFiles.Add((Resolve-Path -LiteralPath $outputFile).Path)
 
     try {
         Get-Content $outputFile -Raw | ConvertFrom-Yaml -ErrorAction Stop | Out-Null
